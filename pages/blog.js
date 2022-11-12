@@ -41,7 +41,7 @@ export async function getStaticProps() {
   
   return {
     props: {
-      posts: posts: response.data.posts.nodes,
+      posts: response.data.posts.nodes,
     },
   };
 }
