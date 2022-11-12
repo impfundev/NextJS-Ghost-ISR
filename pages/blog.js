@@ -5,7 +5,7 @@ import Layout from "../components/Layout";
 import PostsList from "../components/PostsList";
 
 const GET_POSTS = gql`
-  query getPosts {
+  query getPostsA(first: 20, after: null) {
     posts {
       nodes {
         databaseId
