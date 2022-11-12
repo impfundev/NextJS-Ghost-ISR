@@ -5,8 +5,8 @@ import Layout from "../components/Layout";
 import PostsList from "../components/PostsList";
 
 const GET_POSTS = gql`
-  query getPostsA(first: 20, after: null) {
-    posts {
+  query getPosts {
+    posts(first: 20, after: null) {
       nodes {
         databaseId
         title
@@ -35,9 +35,13 @@ export default function Blog(props) {
 }
 
 export async function getStaticProps() {
+  const response = await client.query({
+    query: GET_POSTS,
+  });
+  
   return {
     props: {
-      posts: posts,
+      posts: posts: response.data.posts.nodes,
     },
   };
 }
