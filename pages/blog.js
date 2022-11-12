@@ -4,7 +4,7 @@ import { client } from "../lib/apolloClient";
 import Layout from "../components/Layout";
 import PostsList from "../components/PostsList";
 
-const GET_POST = gql`
+const GET_POSTS = gql`
   query NewQuery {
     posts {
       nodes {
