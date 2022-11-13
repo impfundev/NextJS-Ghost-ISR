@@ -21,15 +21,15 @@ export default function Header() {
             </span>
           </a>
         </Link>
-        <button className="font-bold md:hidden transition-all ease-in-out duration-300" onClick={handleClick}>
+        <button className="font-bold md:hidden" onClick={handleClick}>
           { ! navActive ? (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 active:w-0 active:h-0" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
           ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 active:w-0 active:h-0" fill="currentColor" viewBox="0 0 16 16"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="currentColor" viewBox="0 0 16 16"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/></svg>
           )}
         </button>
       </div>
-      <Nav className={`${ navActive ? 'h-screen' : 'h-0' } container mx-auto px-5 bg-white absolute overflow-hidden transition-all ease-in-out duration-300 md:block md:h-[auto] md:static md:px-4`} />
+      <Nav className={`${ navActive ? 'h-screen my-8 text-black' : 'h-0 text-white' } container mx-auto px-5 bg-white absolute overflow-hidden transition-all ease-in-out duration-300 md:block md:h-[auto] md:static md:px-4`} />
     </header>
   );
 }
