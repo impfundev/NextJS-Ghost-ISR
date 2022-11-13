@@ -9,7 +9,7 @@ export default function PostCard({ post }) {
     <article className="max-w-sm rounded overflow-hidden shadow-lg">
       {featuredImage ? (
         <>
-          <Link href={slug}>
+          <Link href={`/${slug}`}>
             <a className="w-full">
               <img
                 src={featuredImage.node.sourceUrl}
@@ -20,7 +20,7 @@ export default function PostCard({ post }) {
         </>
       ) : null}
       <h2 className="font-bold text-xl px-6 pt-4 mb-2">
-        <Link href={slug}>
+        <Link href={`/${slug}`}>
           <a>{title}</a>
         </Link>
       </h2>
