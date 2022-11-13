@@ -27,6 +27,7 @@ export default function Search(props) {
   const { posts } = props;
   
   return (
+    <>
     <Layout>
       <article className="prose lg:prose-xl">
         <h1>Temukan Berita atau Konten Menarik yang cari disini</h1>
@@ -36,6 +37,7 @@ export default function Search(props) {
       </article>
     </Layout>
     <script async src="https://cse.google.com/cse.js?cx=fd73c201cbd659445"></script>
+    </>
   );
 }
 
