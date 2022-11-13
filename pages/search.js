@@ -31,12 +31,12 @@ export default function Search(props) {
     <Layout>
       <article className="prose lg:prose-xl">
         <h1>Temukan Berita atau Konten Menarik yang cari disini</h1>
+        <script async src="https://cse.google.com/cse.js?cx=fd73c201cbd659445"></script>
         <div className="gcse-search"></div>
         <h2>Artikel Terbaru</h2>
         <PostsList posts={posts} />
       </article>
     </Layout>
-    <script async src="https://cse.google.com/cse.js?cx=fd73c201cbd659445"></script>
     </>
   );
 }
