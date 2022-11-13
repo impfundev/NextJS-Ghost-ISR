@@ -18,11 +18,9 @@ export async function Menu() {
   const response = await client.query({
     query: GET_CATEGORIES,
   });
+  const categories = response.data.categories;
   
-  return {
-    props: {
-      categories: response.data.categories,
-    },
+  return { categories },
   };
 }
 
@@ -31,6 +29,7 @@ export default function Header({ categories }) {
   const handleClick = () => {
     setNavActive(!navActive);
   };
+  const haveCategories = Boolean(categories?.nodes?.length);
 
   return (
     <header className="sticky top-0 bg-white">
@@ -60,16 +59,18 @@ export default function Header({ categories }) {
               <a>Beranda</a>
             </Link>
           </li>
-          {categories.nodes.map((category) => {
-            const { slug, name } = category;
-            return (
-              <li key={slug}>
-                <Link href={`/category/${slug}`}>
-                  <a className="font-bold">{name}</a>
-                </Link>
-              </li>
-            );
-          })}
+          {haveCategories ? (
+            {categories.nodes.map((category) => {
+              const { slug, name } = category;
+              return (
+                <li key={slug}>
+                  <Link href={`/category/${slug}`}>
+                    <a className="font-bold">{name}</a>
+                  </Link>
+                </li>
+              );
+            })}
+          ) : null}
         </ul>
       </nav>
     </header>
