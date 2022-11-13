@@ -7,9 +7,9 @@ export default function SinglePost() {
   return (
     <>
     <Layout>
-      <article className="blog-post">
+      <article className="prose lg:prose-xl">
         <h1>Privacy Policy</h1>
-        <div>{parse(content)}</div>
+        {parse(content)}
       </article>
     </Layout>
     </>
