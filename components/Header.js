@@ -13,7 +13,7 @@ export default function Header() {
       <button className="font-bold md:hidden" onClick={handleClick}>
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
       </button>
-      <Nav className={`${ navActive ? '' : 'hidden' } w-screen h-screen absolute md:block md:w-[auto] md:h-[auto] md:static`} />
+      <Nav className={`${ navActive ? '' : 'hidden' } w-screen h-screen m-4 bg-white absolute md:block md:w-[auto] md:h-[auto] md:m-auto md:static`} />
     </header>
   );
 }
