@@ -9,7 +9,7 @@ const formatDate = (date) => new Date(date).toLocaleDateString();
 
 export default function SinglePost({ post }) {
   const { date, title, content, author, featuredImage, categories, tags } = post;
-  const haveCategories = Boolean(categories?.nodes?.length);
+  const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
 
   return (
@@ -19,6 +19,23 @@ export default function SinglePost({ post }) {
         <h1 className="text-2xl md:text-4xl lg:text-6xl">
           {title}
         </h1>
+
+        {haveCategories ? (
+          <>
+            {categories.nodes.map((category) => {
+              const { slug, name } = category;
+              return (
+                <div key={slug} className="px-4 py-2 bg-black text-white font-bold rounded-full">
+                  <Link href={`/category/${slug}`}>
+                    <a>
+                      {name}
+                    </a>
+                  </Link>
+                </div>
+              );
+            })}
+          </>
+        ) : null}
 
         {featuredImage ? (
           <figure>
@@ -32,48 +49,26 @@ export default function SinglePost({ post }) {
           </figure>
         ) : null}
 
-        <p><a href={`/author/${author.node.slug}`} className="flex items-center gap-3"><img className="rounded-full" src={author.node.avatar.src} height={author.node.avatar.height} width={author.node.avatar.width} alt={author.node.name} /><span>{author.node.name}</span></a>, <time className="text-gray-500" datetime={date}>{formatDate(date)}</time></p>
+        <p>Oleh: <a href={`/author/${author.node.slug}`}>{author.node.name}</a>, Pada: <time className="text-gray-500" datetime={date}>{formatDate(date)}</time></p>
         
         {parse(content)}
 
-        {haveCategories ? (
-          <div className="flex items-center gap-4">
-            <h4>Kategori:</h4>
-            <ul className="flex gap-4 list-none">
-              {categories.nodes.map((category) => {
-                const { slug, name } = category;
-                return (
-                  <li key={slug}>
-                    <Link href={`/category/${slug}`}>
-                      <a className="px-4 py-2 bg-black text-white font-bold rounded-full">
-                        {name}
-                      </a>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        ) : null}
-
         {haveTags ? (
-          <div className="flex items-center gap-4">
-            <h4>Tag:</h4>
-            <ul className="flex gap-4 list-none">
-              {tags.nodes.map((tag) => {
-                const { slug, name } = tag;
-                return (
-                  <li key={slug}>
-                    <Link href={`/tag/${slug}`}>
-                      <a className="px-4 py-2 bg-black text-white font-bold rounded-full">
-                        {name}
-                      </a>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+          <h4>Tag:</h4>
+          <ul className="flex gap-4 list-none">
+            {tags.nodes.map((tag) => {
+              const { slug, name } = tag;
+              return (
+                <li key={slug}>
+                  <Link href={`/tag/${slug}`}>
+                    <a className="px-4 py-2 bg-black text-white font-bold rounded-full">
+                      {name}
+                    </a>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
         ) : null}
 
       </article>
@@ -99,11 +94,6 @@ const GET_POST = gql`
         node {
           name
           slug
-          avatar(size: 32) {
-            url
-            height
-            width
-          }
         }
       }
       featuredImage {
