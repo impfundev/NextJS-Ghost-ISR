@@ -30,7 +30,7 @@ const GET_TAG = gql`
           databaseId
           title
           excerpt
-          uri
+          slug
           featuredImage {
             node {
               sourceUrl
