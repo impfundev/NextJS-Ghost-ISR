@@ -54,6 +54,7 @@ export default function SinglePost({ post }) {
         {parse(content)}
 
         {haveTags ? (
+          <>
           <h4>Tag:</h4>
           <ul className="flex gap-4 list-none">
             {tags.nodes.map((tag) => {
@@ -69,6 +70,7 @@ export default function SinglePost({ post }) {
               );
             })}
           </ul>
+          </>
         ) : null}
 
       </article>
