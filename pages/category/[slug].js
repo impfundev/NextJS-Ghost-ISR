@@ -30,7 +30,7 @@ const GET_CATEGORY = gql`
           databaseId
           title
           excerpt
-          uri
+          slug
           featuredImage {
             node {
               sourceUrl
