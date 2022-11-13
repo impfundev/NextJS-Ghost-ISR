@@ -13,30 +13,32 @@ export default function SinglePost({ post }) {
 
   return (
     <Layout>
-      <article className="blog-post">
+      <article className="prose lg:prose-xl">
+
         <h1>{title}</h1>
-        <p className="post-meta">
-          ✍️ {author.node.name} on {formatDate(date)}
-        </p>
-        <div>{parse(content)}</div>
+
+        <p>Oleh: {author.node.name}, <time className="text-gray-500" datetime={date}>{formatDate(date)}</time></p>
+        
+        {parse(content)}
+
         {haveCategories ? (
-          <div className="category-list">
-            <h4>Categorized As</h4>
-            <ul>
+          <footer>
+            <h4>Kategori:</h4>
+            <ul className="flex gap-4">
               {categories.nodes.map((category) => {
                 const { slug, name } = category;
                 return (
                   <li key={slug}>
                     <Link href={`/category/${slug}`}>
-                      <a>
-                        <li>{name}</li>
+                      <a className="font-bold">
+                        {name}
                       </a>
                     </Link>
                   </li>
                 );
               })}
             </ul>
-          </div>
+          </footer>
         ) : null}
       </article>
     </Layout>
