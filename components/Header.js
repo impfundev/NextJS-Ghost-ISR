@@ -20,7 +20,7 @@ export async function Menu() {
   });
   const categories = response.data.categories;
   
-  return { categories },
+  return ({ categories }),
   };
 }
 
