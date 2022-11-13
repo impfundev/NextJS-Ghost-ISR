@@ -25,7 +25,7 @@ export default function Header() {
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
         </button>
       </div>
-      <Nav className={`${ navActive ? '' : 'hidden' } container mx-auto px-5 py-4 bg-white h-screen md:block md:h-[auto]`} />
+      <Nav className={`${ navActive ? '' : '-top-100' } container mx-auto px-5 py-4 bg-white h-screen absolute transition-all ease-in-out duration-300 md:block md:h-[auto] md:static`} />
     </header>
   );
 }
