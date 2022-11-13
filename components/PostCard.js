@@ -6,25 +6,25 @@ export default function PostCard({ post }) {
   const { title, excerpt, uri, featuredImage } = post;
 
   return (
-    <article className="post-card">
+    <article className="max-w-sm rounded overflow-hidden shadow-lg">
       {featuredImage ? (
-        <div className="post-card__featured-image">
+        <>
           <Link href={uri}>
-            <a>
+            <a className="w-full">
               <img
                 src={featuredImage.node.sourceUrl}
                 alt={featuredImage.node.altText}
               />
             </a>
           </Link>
-        </div>
+        </>
       ) : null}
-      <h2>
+      <h2 className="font-bold text-xl px-6 pt-4 mb-2">
         <Link href={uri}>
           <a>{title}</a>
         </Link>
       </h2>
-      <div>{parse(excerpt)}</div>
+      <div className="text-gray-700 text-base px-6 pb-4">{parse(excerpt)}</div>
     </article>
   );
 }
