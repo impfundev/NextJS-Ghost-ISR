@@ -6,10 +6,10 @@ export default function Layout({ children }) {
   return (
     <>
       <Head>
-        <title>Headless WP App</title>
+        <title>Fandomnesia</title>
       </Head>
       <Header />
-      <main>{children}</main>
+      <main className="container mx-auto px-5">{children}</main>
     </>
   );
 }
