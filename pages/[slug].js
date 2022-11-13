@@ -75,8 +75,8 @@ export function getStaticPaths() {
 }
 
 const GET_POST = gql`
-  query getPostBySlug($slug: ID!) {
-    post(id: $slug, idType: SLUG) {
+  query getPostBySlug($slugId: ID!) {
+    post(id: $slugId, idType: SLUG) {
       title
       date
       content
@@ -102,11 +102,11 @@ const GET_POST = gql`
 `;
 
 export async function getStaticProps(context) {
-  const slug = context.params.slug.join("/");
+  const { slug } = context.params;
 
   const response = await client.query({
     query: GET_POST,
-    variables: { slug },
+    variables: { slugId: slug },
   });
 
   const post = response?.data?.post;
