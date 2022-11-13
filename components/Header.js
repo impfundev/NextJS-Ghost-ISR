@@ -60,6 +60,7 @@ export default function Header({ categories }) {
             </Link>
           </li>
           {haveCategories ? (
+            <>
             {categories.nodes.map((category) => {
               const { slug, name } = category;
               return (
@@ -70,6 +71,7 @@ export default function Header({ categories }) {
                 </li>
               );
             })}
+            </>
           ) : null}
         </ul>
       </nav>
