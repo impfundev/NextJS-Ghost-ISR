@@ -1,35 +1,12 @@
-import { gql } from "@apollo/client";
-import { client } from "../lib/apolloClient";
 import React, { useState } from "react";
 import Link from "next/link";
-
-const GET_CATEGORIES = gql`
-  query getCategories {
-    categories {
-      nodes {
-        name
-        slug
-      }
-    }
-  }
-`;
-
-export async function Menu() {
-  const response = await client.query({
-    query: GET_CATEGORIES,
-  });
-  const categories = response.data.categories;
-  
-  return { categories };
-}
 
 export default function Header({ categories }) {
   const [navActive, setNavActive] = useState(false);
   const handleClick = () => {
     setNavActive(!navActive);
   };
-  const haveCategories = Boolean(categories?.nodes?.length);
-
+  
   return (
     <header className="sticky top-0 bg-white">
       <div className="flex items-center justify-between container mx-auto px-5 py-4">
@@ -58,20 +35,26 @@ export default function Header({ categories }) {
               <a>Beranda</a>
             </Link>
           </li>
-          {haveCategories ? (
-            <>
-            {categories.nodes.map((category) => {
-              const { slug, name } = category;
-              return (
-                <li key={slug}>
-                  <Link href={`/category/${slug}`}>
-                    <a className="font-bold">{name}</a>
-                  </Link>
-                </li>
-              );
-            })}
-            </>
-          ) : null}
+          <li>
+            <Link href="/category/budaya-populer">
+              <a>Budaya Populer</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/category/selebritis">
+              <a>Selebritis</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/category/olahraga">
+              <a>Olahraga</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/category/teknologi">
+              <a>Teknologi</a>
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>
