@@ -8,8 +8,9 @@ import Layout from "../components/Layout";
 const formatDate = (date) => new Date(date).toLocaleDateString();
 
 export default function SinglePost({ post }) {
-  const { date, title, content, author, categories } = post;
+  const { date, title, content, author, categories, tags } = post;
   const haveCategories = Boolean(categories?.nodes?.length);
+  const haveTags = Boolean(tags?.nodes?.length);
 
   return (
     <Layout>
@@ -22,7 +23,7 @@ export default function SinglePost({ post }) {
         {parse(content)}
 
         {haveCategories ? (
-          <footer>
+          <div className="flex gap-4">
             <h4>Kategori:</h4>
             <ul className="flex gap-4">
               {categories.nodes.map((category) => {
@@ -38,8 +39,29 @@ export default function SinglePost({ post }) {
                 );
               })}
             </ul>
-          </footer>
+          </div>
         ) : null}
+
+        {haveTags ? (
+          <div className="flex gap-4">
+            <h4>Tag:</h4>
+            <ul className="flex gap-4">
+              {tags.nodes.map((tag) => {
+                const { slug, name } = tag;
+                return (
+                  <li key={slug}>
+                    <Link href={`/tag/${slug}`}>
+                      <a className="font-bold">
+                        {name}
+                      </a>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ) : null}
+
       </article>
     </Layout>
   );
@@ -53,8 +75,8 @@ export function getStaticPaths() {
 }
 
 const GET_POST = gql`
-  query getPostBySlug($uri: ID!) {
-    post(id: $uri, idType: URI) {
+  query getPostBySlug($slug: ID!) {
+    post(id: $slug, idType: SLUG) {
       title
       date
       content
@@ -69,16 +91,22 @@ const GET_POST = gql`
           name
         }
       }
+      tags {
+        nodes {
+          slug
+          name
+        }
+      }
     }
   }
 `;
 
 export async function getStaticProps(context) {
-  const uri = context.params.uri.join("/");
+  const slug = context.params.slug.join("/");
 
   const response = await client.query({
     query: GET_POST,
-    variables: { uri },
+    variables: { slug },
   });
 
   const post = response?.data?.post;
