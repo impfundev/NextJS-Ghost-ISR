@@ -21,7 +21,7 @@ export default function Header() {
             </span>
           </a>
         </Link>
-        <button className="font-bold md:hidden" onClick={handleClick}>
+        <button className="font-bold md:hidden transition-all ease-in-out duration-300" onClick={handleClick}>
           { ! navActive ? (
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
           ) : (
@@ -29,7 +29,7 @@ export default function Header() {
           )}
         </button>
       </div>
-      <Nav className={`${ navActive ? 'h-screen w-screen container mx-auto px-5' : 'h-0' } flex items-center bg-white absolute overflow-hidden transition-all ease-in-out duration-300 md:block md:h-[auto] md:static md:px-4`} />
+      <Nav className={`${ navActive ? 'h-screen' : 'h-0' } container mx-auto px-5 bg-white absolute overflow-hidden transition-all ease-in-out duration-300 md:block md:h-[auto] md:static md:px-4`} />
     </header>
   );
 }
