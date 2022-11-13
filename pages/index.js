@@ -10,7 +10,7 @@ const GET_POSTS = gql`
       nodes {
         databaseId
         title
-        uri
+        slug
         excerpt
         featuredImage {
           node {
