@@ -29,7 +29,7 @@ export default function Header() {
           )}
         </button>
       </div>
-      <Nav className={`${ navActive ? 'h-screen my-8 text-black' : 'h-0 text-white' } container mx-auto px-5 bg-white absolute overflow-hidden transition-all ease-in-out duration-300 md:block md:h-[auto] md:static md:px-4`} />
+      <Nav className={`${ navActive ? 'h-screen pt-16 text-black' : 'h-0 text-white' } container mx-auto px-5 bg-white absolute overflow-hidden transition-all ease-in-out duration-300 md:block md:h-[auto] md:static md:px-4`} />
     </header>
   );
 }
