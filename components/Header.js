@@ -14,7 +14,7 @@ export default function Header() {
         <Link href="/">
           <a className="text-xl font-extrabold tracking-tight">
             <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
- className="w-9 h-[auto]" viewBox="0 0 373.000000 194.000000"
+ className="w-28" viewBox="0 0 373.000000 194.000000"
  preserveAspectRatio="xMidYMid meet"><metadata>Fandomnesia Logo</metadata><g transform="translate(0.000000,194.000000) scale(0.100000,-0.100000)"
 fill="currentColor" stroke="none"><path d="M196 1674 c-61 -19 -134 -90 -161 -159 -18 -47 -20 -79 -23 -499 -2
 -247 1 -452 5 -455 4 -3 86 -5 181 -3 l172 3 0 249 0 250 140 0 c133 0 140 1
