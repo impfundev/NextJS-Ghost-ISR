@@ -32,27 +32,27 @@ export default function Header({ categories }) {
         <ul className="flex flex-col md:flex-row gap-4 items-center justify-center">
           <li>
             <Link href="/">
-              <a>Beranda</a>
+              <a onClick={handleClick}>Beranda</a>
             </Link>
           </li>
           <li>
             <Link href="/category/budaya-populer">
-              <a>Budaya Populer</a>
+              <a onClick={handleClick}>Budaya Populer</a>
             </Link>
           </li>
           <li>
             <Link href="/category/selebritis">
-              <a>Selebritis</a>
+              <a onClick={handleClick}>Selebritis</a>
             </Link>
           </li>
           <li>
             <Link href="/category/olahraga">
-              <a>Olahraga</a>
+              <a onClick={handleClick}>Olahraga</a>
             </Link>
           </li>
           <li>
             <Link href="/category/teknologi">
-              <a>Teknologi</a>
+              <a onClick={handleClick}>Teknologi</a>
             </Link>
           </li>
         </ul>
