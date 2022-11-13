@@ -2,8 +2,8 @@ import Nav from "./Nav";
 
 export default function Header() {
   return (
-    <div className="header">
+    <header className="sticky top-0 bg-white py-4">
       <Nav />
-    </div>
+    </header>
   );
 }
