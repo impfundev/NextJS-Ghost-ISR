@@ -1,8 +1,29 @@
+import { gql } from "@apollo/client";
+import { client } from "../lib/apolloClient";
 import React, { useState } from "react";
 import Link from "next/link";
-import Nav from "./Nav";
 
-export default function Header() {
+const GET_CATEGORIES = gql`
+  query getCategories {
+    categories {
+      nodes {
+        name
+        slug
+      }
+    }
+  }
+`;
+
+export async function Menu() {
+  const response = await client.query({
+    query: GET_CATEGORIES,
+  });
+  const categories = response?.data?.categories;
+  
+  return { categories };
+}
+
+export default function Header({ categories }) {
   const [navActive, setNavActive] = useState(false);
   const handleClick = () => {
     setNavActive(!navActive);
@@ -29,7 +50,25 @@ export default function Header() {
           )}
         </button>
       </div>
-      <Nav className={`${ navActive ? 'h-screen pt-16 text-black' : 'h-0 text-white' } container mx-auto px-5 bg-white absolute overflow-hidden transition-all ease-in-out duration-300 md:block md:h-[auto] md:static md:px-4`} />
+      <nav className={`${ navActive ? 'h-screen pt-16 text-black' : 'h-0 text-white md:text-black' } container mx-auto px-5 bg-white absolute overflow-hidden transition-all ease-in-out duration-300 md:block md:h-[auto] md:static md:px-4`}>
+        <ul className="flex flex-col md:flex-row gap-4 items-center justify-center">
+          <li>
+            <Link href="/">
+              <a>Beranda</a>
+            </Link>
+          </li>
+          {categories.nodes.map((category) => {
+            const { slug, name } = category;
+            return (
+              <li key={slug}>
+                <Link href={`/category/${slug}`}>
+                  <a className="font-bold">{name}</a>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
     </header>
   );
 }
