@@ -25,9 +25,9 @@ export default function SinglePost({ post }) {
             {categories.nodes.map((category) => {
               const { slug, name } = category;
               return (
-                <div key={slug} className="px-4 py-2 bg-black text-white font-bold rounded-full">
+                <div key={slug}>
                   <Link href={`/category/${slug}`}>
-                    <a>
+                    <a className="px-4 py-2 bg-black text-white font-bold rounded-full">
                       {name}
                     </a>
                   </Link>
@@ -55,8 +55,7 @@ export default function SinglePost({ post }) {
 
         {haveTags ? (
           <>
-          <h4>Tag:</h4>
-          <ul className="flex gap-4 list-none">
+          <ul className="flex gap-4 list-none pb-5">
             {tags.nodes.map((tag) => {
               const { slug, name } = tag;
               return (
