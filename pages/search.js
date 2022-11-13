@@ -1,8 +1,31 @@
+import { gql } from "@apollo/client";
+
+import { client } from "../lib/apolloClient";
 import Layout from "../components/Layout";
 import PostsList from "../components/PostsList";
 
-export default function Search() {
+const GET_POSTS = gql`
+  query getPosts {
+    posts(first: 20, after: null) {
+      nodes {
+        databaseId
+        title
+        slug
+        excerpt
+        featuredImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+      }
+    }
+  }
+`;
 
+export default function Search(props) {
+  const { posts } = props;
+  
   return (
     <Layout>
       <article className="prose lg:prose-xl">
@@ -10,8 +33,21 @@ export default function Search() {
         <div className="gcse-search"></div>
         <h2>Artikel Terbaru</h2>
         <PostsList posts={posts} />
-        <script async src="https://cse.google.com/cse.js?cx=fd73c201cbd659445"></script>
       </article>
     </Layout>
+    <script async src="https://cse.google.com/cse.js?cx=fd73c201cbd659445"></script>
   );
+}
+
+export async function getStaticProps() {
+  const response = await client.query({
+    query: GET_POSTS,
+  });
+
+  return {
+    props: {
+      posts: response.data.posts.nodes,
+    },
+    revalidate: 10,
+  };
 }
