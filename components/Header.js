@@ -14,14 +14,15 @@ const GET_CATEGORIES = gql`
   }
 `;
 
-export async function Header() {
+export async function Menu() {
   const response = await client.query({
     query: GET_CATEGORIES,
   });
-  const categories = response?.data?.categories;
   
   return {
-    props: { categories },
+    props: {
+      categories: response.data.categories,
+    },
   };
 }
 
