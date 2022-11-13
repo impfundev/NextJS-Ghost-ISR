@@ -28,7 +28,7 @@ export default function Home(props) {
 
   return (
     <Layout>
-      <h1>Home</h1>
+      <h1>Terbaru</h1>
       <PostsList posts={posts} />
     </Layout>
   );
