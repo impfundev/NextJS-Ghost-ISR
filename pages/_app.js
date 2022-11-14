@@ -1,5 +1,5 @@
 import { ApolloProvider } from "@apollo/client";
-import client from "../lib/apolloClient";
+import { client } from "../lib/apolloClient";
 import Head from 'next/head'
 import "../styles/globals.css";
 
