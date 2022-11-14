@@ -1,3 +1,5 @@
+import { ApolloProvider } from "@apollo/client";
+import client from "../lib/apolloClient";
 import Head from 'next/head'
 import "../styles/globals.css";
 
@@ -7,7 +9,9 @@ function MyApp({ Component, pageProps }) {
     <Head>
       <meta name="robots" content="noindex" />
     </Head>
-    <Component {...pageProps} />
+    <ApolloProvider client={client}>
+      <Component {...pageProps} />
+    </ApolloProvider>
     </>
   );
 }
