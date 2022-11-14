@@ -125,13 +125,11 @@ export async function getStaticPaths() {
     variables: { slugId: slug },
   });
 
-  const slug = data?.posts.nodes.map((post) => {
-    return ({ post.slug })
-  });
+  const path = data?.posts.nodes.map((post) => `/${post.slug}`);
 
   return {
-    paths: slug || [],
-    fallback: "blocking",
+    paths: path || [],
+    fallback: true,
   };
 }
 
