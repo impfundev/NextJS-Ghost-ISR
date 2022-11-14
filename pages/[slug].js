@@ -122,7 +122,6 @@ const GET_SLUG = gql`
 export async function getStaticPaths() {
   const { data } = await client.query({
     query: GET_SLUG,
-    variables: { slugId: slug },
   });
 
   const path = data?.posts.nodes.map((post) => `/${post.slug}`);
