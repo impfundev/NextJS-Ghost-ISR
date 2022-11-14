@@ -13,12 +13,18 @@ export default function SinglePost({ post }) {
   const haveTags = Boolean(tags?.nodes?.length);
 
   if (router.isFallback) {
-    return <div className="text-3xl text-center font-extrabold"><h1>Loading...</h1></div>
+    return (
+      <Layout>
+        <div className="prose lg:prose-xl">
+          <h1>Loading...</h1>
+        </div>
+      </Layout>
+    );
   };
 
   return (
     <Layout>
-      <article className="prose lg:prose-xl sm:max-w-screen-sm md:max-w-screen-md">
+      <article className="prose lg:prose-xl">
 
         <h1 className="text-2xl md:text-4xl lg:text-6xl">
           {title}
