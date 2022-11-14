@@ -14,7 +14,7 @@ export default function SingleTag({ tag }) {
   );
 }
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
   const GET_TAGSLUG = gql`
     query getTagSlug {
       tags {
