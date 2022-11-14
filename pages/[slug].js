@@ -12,6 +12,10 @@ export default function SinglePost({ post }) {
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
 
+  if (router.isFallback) {
+    return <div className="text-3xl text-center font-extrabold"><h1>Loading...</h1></div>
+  };
+
   return (
     <Layout>
       <article className="prose lg:prose-xl sm:max-w-screen-sm md:max-w-screen-md">
@@ -94,7 +98,7 @@ export async function getStaticPaths() {
 
   return {
     paths: data?.posts.nodes.map((post) => `/${post.slug}` ) || [],
-    fallback: false,
+    fallback: true,
   };
 }
 
