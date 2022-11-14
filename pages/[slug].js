@@ -14,7 +14,7 @@ export default function SinglePost({ post }) {
 
   return (
     <Layout>
-      <article className="prose lg:prose-xl">
+      <article className="prose lg:prose-xl max-w-screen">
 
         <h1 className="text-2xl md:text-4xl lg:text-6xl">
           {title}
@@ -43,6 +43,9 @@ export default function SinglePost({ post }) {
               src={featuredImage.node.sourceUrl}
               alt={featuredImage.node.altText}
             />
+            {featuredImage.node.caption ? (
+              <figcaption>{featuredImage.node.caption}</figcaption>
+            ) : null}
           </figure>
         ) : null}
 
@@ -112,6 +115,7 @@ const GET_POST = gql`
         node {
           sourceUrl
           altText
+          caption
         }
       }
       categories {
