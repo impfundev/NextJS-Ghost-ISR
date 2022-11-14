@@ -31,7 +31,7 @@ export async function getStaticPaths() {
 
   return {
     paths: data?.tags.nodes.map((tag) => `/tag/${tag.slug}` ) || [],
-    fallback: false,
+    fallback: "blocking",
   };
 }
 
@@ -73,5 +73,6 @@ export async function getStaticProps(context) {
 
   return {
     props: { tag },
+    revalidate: 60,
   };
 }
