@@ -14,7 +14,7 @@ export default function SinglePost({ post }) {
 
   return (
     <Layout>
-      <article className="prose lg:prose-xl max-w-screen">
+      <article className="prose lg:prose-xl sm:max-w-screen-sm md:max-w-screen-md">
 
         <h1 className="text-2xl md:text-4xl lg:text-6xl">
           {title}
