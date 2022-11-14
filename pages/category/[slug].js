@@ -30,7 +30,7 @@ export async function getStaticPaths() {
 
   return {
     paths: data?.categories.nodes.map((category) => `/category/${category.slug}` ) || [],
-    fallback: false,
+    fallback: "blocking",
   };
 }
 
@@ -72,5 +72,6 @@ export async function getStaticProps(context) {
 
   return {
     props: { category },
+    revalidate: 60,
   };
 }
