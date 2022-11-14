@@ -43,9 +43,6 @@ export default function SinglePost({ post }) {
               src={featuredImage.node.sourceUrl}
               alt={featuredImage.node.altText}
             />
-            {featuredImage.node.caption ? (
-              <figcaption>{featuredImage.node.caption}</figcaption>
-            ) : null}
           </figure>
         ) : null}
 
@@ -77,13 +74,6 @@ export default function SinglePost({ post }) {
   );
 }
 
-export function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: "blocking",
-  };
-}
-
 const GET_POST = gql`
   query getPostBySlug($slugId: ID!) {
     post(id: $slugId, idType: SLUG) {
@@ -101,9 +91,6 @@ const GET_POST = gql`
         node {
           sourceUrl
           altText
-          caption
-          sizes
-          srcSet
         }
       }
       categories {
@@ -121,6 +108,32 @@ const GET_POST = gql`
     }
   }
 `;
+
+const GET_SLUG = gql`
+  query getPosts {
+    posts(first: 9999, after: null) {
+      nodes {
+        slug
+      }
+    }
+  }
+`;
+
+export function getStaticPaths() {
+  const { data } = await client.query({
+    query: GET_SLUG,
+    variables: { slugId: slug },
+  });
+
+  const slug = data?.posts.nodes.map((post) => {
+    return ({ post.slug })
+  });
+
+  return {
+    paths: slug || [],
+    fallback: "blocking",
+  };
+}
 
 export async function getStaticProps(context) {
   const { slug } = context.params;
