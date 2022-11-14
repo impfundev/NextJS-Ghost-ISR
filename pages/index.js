@@ -23,8 +23,7 @@ const GET_POSTS = gql`
   }
 `;
 
-export default function Home(props) {
-  const { posts } = props;
+export default function Home({ posts }) {
 
   return (
     <Layout>
