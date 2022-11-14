@@ -1,6 +1,5 @@
 import { gql } from "@apollo/client";
 import parse from "html-react-parser";
-
 import { client } from "../../lib/apolloClient";
 import Layout from "../../components/Layout";
 import PostsList from "../../components/PostsList";
