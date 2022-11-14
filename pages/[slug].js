@@ -6,8 +6,6 @@ import Link from "next/link";
 import { client } from "../lib/apolloClient";
 import Layout from "../components/Layout";
 
-const formatDate = (date) => new Date(date).toLocaleDateString();
-
 export default function SinglePost({ post }) {
   const { date, title, content, author, featuredImage, categories, tags } = post;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
@@ -63,7 +61,7 @@ export default function SinglePost({ post }) {
 
         <p>
           Oleh: <a href={`/author/${author.node.slug}`}>{author.node.name}</a>,
-          Pada: {date ? (<time className="text-gray-500" datetime={date}>{formatDate(date)}</time>) : null}
+          Pada: <time className="text-gray-500" datetime={date}>{date}</time>
         </p>
         
         {parse(content)}
