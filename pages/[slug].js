@@ -119,7 +119,7 @@ const GET_SLUG = gql`
   }
 `;
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
   const { data } = await client.query({
     query: GET_SLUG,
     variables: { slugId: slug },
