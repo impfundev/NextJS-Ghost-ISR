@@ -17,7 +17,7 @@ export default function SingleCategory({ category }) {
 export function getStaticPaths() {
   return {
     paths: [],
-    fallback: "blocking",
+    fallback: false,
   };
 }
 
