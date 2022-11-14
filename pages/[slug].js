@@ -74,6 +74,13 @@ export default function SinglePost({ post }) {
   );
 }
 
+export function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: "blocking",
+  };
+}
+
 const GET_POST = gql`
   query getPostBySlug($slugId: ID!) {
     post(id: $slugId, idType: SLUG) {
@@ -108,29 +115,6 @@ const GET_POST = gql`
     }
   }
 `;
-
-const GET_SLUG = gql`
-  query getPosts {
-    posts(first: 9999, after: null) {
-      nodes {
-        slug
-      }
-    }
-  }
-`;
-
-export async function getStaticPaths() {
-  const { data } = await client.query({
-    query: GET_SLUG,
-  });
-
-  const path = data?.posts.nodes.map((post) => `/${post.slug}`);
-
-  return {
-    paths: path || [],
-    fallback: true,
-  };
-}
 
 export async function getStaticProps(context) {
   const { slug } = context.params;
