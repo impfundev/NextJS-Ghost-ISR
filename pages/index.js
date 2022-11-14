@@ -43,6 +43,5 @@ export async function getStaticProps() {
     props: {
       posts: response.data.posts.nodes,
     },
-    revalidate: 10,
   };
 }
