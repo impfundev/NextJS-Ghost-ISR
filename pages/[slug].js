@@ -10,17 +10,6 @@ export default function SinglePost({ post }) {
   const { date, title, content, author, featuredImage, categories, tags } = post;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
-  const router = useRouter();
-
-  if (router.isFallback) {
-    return (
-      <Layout>
-        <div className="prose lg:prose-xl">
-          <h1>Loading...</h1>
-        </div>
-      </Layout>
-    );
-  };
 
   return (
     <Layout>
@@ -107,7 +96,7 @@ export async function getStaticPaths() {
 
   return {
     paths: data?.posts.nodes.map((post) => `/${post.slug}` ) || [],
-    fallback: true,
+    fallback: "blocking",
   };
 }
 
