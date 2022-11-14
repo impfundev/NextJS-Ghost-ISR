@@ -17,7 +17,7 @@ export default function SingleTag({ tag }) {
 export function getStaticPaths() {
   return {
     paths: [],
-    fallback: "blocking",
+    fallback: false,
   };
 }
 
