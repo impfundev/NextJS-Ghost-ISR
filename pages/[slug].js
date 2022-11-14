@@ -74,9 +74,23 @@ export default function SinglePost({ post }) {
   );
 }
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const GET_SLUG = gql`
+    query getPosts {
+      posts {
+        nodes {
+          slug
+        }
+      }
+    }
+  `;
+
+  const { data } = await client.query({
+    query: GET_SLUG,
+  });
+
   return {
-    paths: [],
+    paths: data?.posts.nodes.map((post) => `/${post.slug}` ) || [],
     fallback: false,
   };
 }
