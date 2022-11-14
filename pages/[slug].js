@@ -1,4 +1,5 @@
 import { gql } from "@apollo/client";
+import { useRouter } from "next/router";
 import parse from "html-react-parser";
 import Link from "next/link";
 
@@ -11,6 +12,7 @@ export default function SinglePost({ post }) {
   const { date, title, content, author, featuredImage, categories, tags } = post;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
+  const router = useRouter();
 
   if (router.isFallback) {
     return (
