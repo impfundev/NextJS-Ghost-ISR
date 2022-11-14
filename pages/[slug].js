@@ -61,7 +61,10 @@ export default function SinglePost({ post }) {
           </figure>
         ) : null}
 
-        <p>Oleh: <a href={`/author/${author.node.slug}`}>{author.node.name}</a>, Pada: <time className="text-gray-500" datetime={date}>{formatDate(date)}</time></p>
+        <p>
+          Oleh: <a href={`/author/${author.node.slug}`}>{author.node.name}</a>,
+          Pada: {date ? (<time className="text-gray-500" datetime={date}>{formatDate(date)}</time>) : null}
+        </p>
         
         {parse(content)}
 
