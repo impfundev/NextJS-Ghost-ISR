@@ -13,9 +13,23 @@ export default function SingleCategory({ category }) {
   );
 }
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const GET_CATSLUG = gql`
+    query getCatSlug {
+      categories {
+        nodes {
+          slug
+        }
+      }
+    }
+  `;
+
+  const { data } = await client.query({
+    query: GET_CATSLUG,
+  });
+
   return {
-    paths: [],
+    paths: data?.categories.nodes.map((category) => `/category/${category.slug}` ) || [],
     fallback: false,
   };
 }
