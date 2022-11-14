@@ -15,8 +15,22 @@ export default function SingleTag({ tag }) {
 }
 
 export function getStaticPaths() {
+  const GET_TAGSLUG = gql`
+    query getTagSlug {
+      tags {
+        nodes {
+          slug
+        }
+      }
+    }
+  `;
+
+  const { data } = await client.query({
+    query: GET_TAGSLUG,
+  });
+
   return {
-    paths: [],
+    paths: data?.tags.nodes.map((tag) => `/tag/${tag.slug}` ) || [],
     fallback: false,
   };
 }
