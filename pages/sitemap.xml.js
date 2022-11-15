@@ -1,12 +1,12 @@
 import { gql } from "@apollo/client";
 import { client } from "../lib/apolloClient";
 
-function generateSiteMap(posts) {
+function generateSiteMap({ posts }) {
 
   return (
     <?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-      ${posts.map((post) => {
+      {posts.map((post) => {
         return (
           <url key={post.slug}>
             <loc>{post.slug}</loc>
