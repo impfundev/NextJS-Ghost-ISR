@@ -1,6 +1,7 @@
 import { gql } from "@apollo/client";
 
 import { client } from "../lib/apolloClient";
+import generateFeed from "../lib/generateFeed";
 import Layout from "../components/Layout";
 import PostsList from "../components/PostsList";
 
