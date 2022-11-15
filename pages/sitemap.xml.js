@@ -8,6 +8,7 @@ function generateSiteMap({ posts }) {
     <>
     <xmlHeader />
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      <>
       {posts.map((post) => {
         return (
           <url key={post.slug}>
@@ -15,6 +16,7 @@ function generateSiteMap({ posts }) {
           <url>
         );
       })}
+      </>
     </urlset>
     </>
   );
