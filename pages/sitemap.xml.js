@@ -2,9 +2,10 @@ import { gql } from "@apollo/client";
 import { client } from "../lib/apolloClient";
 
 function generateSiteMap({ posts }) {
+  const xmlHeader = `<?xml version="1.0" encoding="UTF-8"?>`;
 
   return (
-    <?xml version="1.0" encoding="UTF-8"?>
+    <xmlHeader />
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       {posts.map((post) => {
         return (
