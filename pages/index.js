@@ -24,7 +24,7 @@ const GET_POSTS = gql`
   }
 `;
 
-export default function Home({ posts, feed }) {
+export default function Home({ posts }) {
 
   return (
     <Layout>
@@ -39,7 +39,7 @@ export async function getStaticProps() {
     query: GET_POSTS,
   });
   const posts = response.data?.posts?.nodes;
-  const feed = await generateFeed({ posts });
+  await generateFeed({ posts });
 
   return {
     props: {
