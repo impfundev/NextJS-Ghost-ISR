@@ -85,12 +85,14 @@ export default function SinglePost({ item }) {
       return (
         <ul className="m-0 p-0 list-none grid grid-cols-2 gap-4">
           {posts.nodes.map((post) => {
+            const { featuredImage } = post;
+            const haveImage = Boolean(featuredImage?.node?.length);
             return (
               <li key={post.slug} className="m-0 p-0">
-                {post.featuredImage ? (
+                {haveImage ? (
                   <>
                     <a href={post.slug}>
-                      <img src={post.featuredImage.node.sourceUrl} alt={post.featuredImage.node.altText} />
+                      <img src={featuredImage.node.sourceUrl} alt={featuredImage.node.altText} />
                     </a>
                   </>
                 ) : null}
