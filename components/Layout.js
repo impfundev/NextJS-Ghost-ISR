@@ -9,10 +9,10 @@ export default function Layout({ children }) {
         <title>Fandomnesia</title>
       </Head>
       <Header />
-      <main className="container mx-auto px-5">
+      <main className="container mx-auto px-5 pb-8">
         {children}
       </main>
-<footer className="bg-gray-600 pt-8">
+<footer className="bg-gray-800">
     <div className="grid grid-cols-2 gap-8 py-8 px-6 md:grid-cols-4">
         <div>
             <h2 className="mb-6 text-sm font-semibold uppercase text-gray-400">Situs</h2>
