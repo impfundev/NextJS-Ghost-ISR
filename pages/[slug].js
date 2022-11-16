@@ -6,7 +6,7 @@ import Link from "next/link";
 import { client } from "../lib/apolloClient";
 import Layout from "../components/Layout";
 
-export default function SinglePost({ item, recentPosts }) {
+export default function SinglePost({ item }) {
   const { date, title, content, author, featuredImage, categories, tags } = item;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
@@ -32,7 +32,7 @@ export default function SinglePost({ item, recentPosts }) {
                   </Link>
                 </div>
               );
-            }).slice(0,1)}
+            })}
           </>
         ) : null}
 
@@ -77,24 +77,32 @@ export default function SinglePost({ item, recentPosts }) {
           </>
         ) : null}
     
-    <h3 className="py-6 font-bold">Artikel Terbaru</h3>
-      <ul className="m-0 p-0 list-none grid grid-cols-2 gap-4">
-        {recentPosts.map((recent) => {
-          const { title, slug, featuredImage } = recent;
-          return (
-            <li key={slug} className="m-0 p-0">
-              {featuredImage ? (
-                <>
-                  <a href={slug}>
-                    <img src={featuredImage.node.sourceUrl} alt={featuredImage.node.altText} />
-                  </a>
-                </>
-              ) : null}
-              <h2 className="text-xl font-bold"><a href={slug}>{title}</a></h2>
-            </li>
-          );
-        })}
-      </ul>
+{haveCategories ? (
+  <>
+    <h3 className="py-6 font-bold">Artikel Terkait</h3>
+    {categories.nodes.map((category) => {
+      const { posts } = category;
+      return (
+        <ul className="m-0 p-0 list-none grid grid-cols-2 gap-4">
+          {posts.nodes.map((post) => {
+            return (
+              <li key={post.slug} className="m-0 p-0">
+                {post.featuredImage ? (
+                  <>
+                    <a href={post.slug}>
+                      <img src={post.featuredImage.node.sourceUrl} alt={post.featuredImage.node.altText} />
+                    </a>
+                  </>
+                ) : null}
+                <h2 className="text-xl font-bold"><a href={post.slug}>{post.title}</a></h2>
+              </li>
+            );
+          })}
+        </ul>
+      );
+    })}
+  </>
+) : null}
 
     </Layout>
   );
@@ -141,10 +149,20 @@ const GET_POST = gql`
           caption
         }
       }
-      categories {
+      categories(first: 1) {
         nodes {
           slug
           name
+          posts(first: 6) {
+            nodes {
+              title
+              slug
+              featuredImage {
+                sourceUrl
+                altText
+              }
+            }
+          }
         }
       }
       tags {
@@ -174,34 +192,5 @@ export async function getStaticProps(context) {
   return {
     props: { item },
     revalidate: 60,
-  };
-}
-
-export async function getServerSideProps() {
-  const GET_RECENT = gql`
-    query getRecent {
-      posts(first: 6, after: null) {
-        nodes {
-          title
-          slug
-          featuredImage {
-            node {
-              sourceUrl
-              altText
-            }
-          }
-        }
-      }
-    }
-  `;
-
-  const itemposts = await client.query({
-    query: GET_RECENT,
-  });
-  
-  const recentPosts = itemposts?.data?.posts;
-  
-  return {
-    props: { recentPosts },
   };
 }
