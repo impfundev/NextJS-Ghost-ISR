@@ -28,10 +28,12 @@ const GET_POSTS = gql`
 export default function Home({ posts }) {
 
   return (
+    <>
     <Head>
       <title>Fandomnesia</title>
       <meta name="description" content="Fandomnesia Site" />
     </Head>
+    </>
     <Layout>
       <h1>Terbaru</h1>
       <PostsList posts={posts} />
