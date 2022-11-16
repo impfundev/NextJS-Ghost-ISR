@@ -29,15 +29,14 @@ export default function Home({ posts }) {
 
   return (
     <>
-    <Head>
-      <title>Fandomnesia</title>
-      <meta name="description" content="Fandomnesia Site" />
-    </Head>
+      <Head>
+        <title>Fandomnesia</title>
+        <meta name="description" content="Fandomnesia Site" />
+      </Head>
+      <Layout>
+        <PostsList posts={posts} />
+      </Layout>
     </>
-    <Layout>
-      <h1>Terbaru</h1>
-      <PostsList posts={posts} />
-    </Layout>
   );
 }
 
