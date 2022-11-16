@@ -8,6 +8,10 @@ iframe {
   min-height: 300px;
 }
 
+a {
+  @apply no-underline
+}
+
 .has-text-align-left {
   @apply text-left;
 }
