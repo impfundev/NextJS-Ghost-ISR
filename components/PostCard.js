@@ -6,8 +6,8 @@ export default function PostCard({ post }) {
   const { title, excerpt, slug, featuredImage } = post;
 
   return (
-    <article className="max-w-sm border-t-2 border-inherit">
-      <h2 className="font-bold md:text-xl py-4">
+    <article className="max-w-sm border-t border-inherit">
+      <h2 className="font-bold text-lg md:text-xl pb-4">
         <Link href={`/${slug}`}>
           <a>{title}</a>
         </Link>
