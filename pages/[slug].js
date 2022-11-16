@@ -7,8 +7,8 @@ import { client } from "../lib/apolloClient";
 import Layout from "../components/Layout";
 import PostsList from "../components/PostsList";
 
-export default function SinglePost({ post, posts }) {
-  const { date, title, content, author, featuredImage, categories, tags } = post;
+export default function SinglePost({ item, recentPosts }) {
+  const { date, title, content, author, featuredImage, categories, tags } = item;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
 
@@ -79,7 +79,7 @@ export default function SinglePost({ post, posts }) {
         ) : null}
     
     <h3 className="py-4 font-bold">Artikel Terbaru</h3>
-    <PostsList posts={posts} />
+    <PostsList posts={recentPosts} />
 
     </Layout>
   );
@@ -142,25 +142,6 @@ const GET_POST = gql`
   }
 `;
 
-const GET_POSTS = gql`
-  query getPosts {
-    posts(first: 6, after: null) {
-      nodes {
-        databaseId
-        title
-        slug
-        excerpt
-        featuredImage {
-          node {
-            sourceUrl
-            altText
-          }
-        }
-      }
-    }
-  }
-`;
-
 export async function getStaticProps(context) {
   const { slug } = context.params;
 
@@ -169,22 +150,41 @@ export async function getStaticProps(context) {
     variables: { slugId: slug },
   });
 
-  const post = response?.data?.post;
+  const item = response?.data?.post;
 
-  if (!post) {
+  if (!item) {
     return { notFound: true };
-  }
+  };
 
-  const recentposts = await client.query({
-    query: GET_POSTS,
+  const GET_RECENT = gql`
+    query getPosts {
+      posts(first: 6, after: null) {
+        nodes {
+          databaseId
+          title
+          slug
+          excerpt
+          featuredImage {
+            node {
+              sourceUrl
+              altText
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const itemposts = await client.query({
+    query: GET_RECENT,
   });
   
-  const posts = recentposts?.data?.posts;
+  const recentPosts = itemposts?.data?.posts;
 
   return {
     props: {
-      post,
-      posts,
+      item,
+      recentPosts,
     },
     revalidate: 60,
   };
