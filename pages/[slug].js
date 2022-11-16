@@ -28,7 +28,7 @@ export default function SinglePost({ item }) {
             {categories.nodes.map((category) => {
               const { slug, name } = category;
               return (
-                <div key={slug}>
+                <div className="py-4" key={slug}>
                   <Link href={`/category/${slug}`}>
                     <a className="px-3 py-1 bg-black text-white text-sm font-bold rounded-full">
                       {name}
@@ -87,7 +87,7 @@ export default function SinglePost({ item }) {
         <div className="fb-comments" data-href={slug} data-width="100%" data-numposts="4" data-lazy="true"></div>
       </div>
       <div id="fb-root"></div>
-      <script defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0" nonce="AWqiHwIe"></script>
+      <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0" nonce="AWqiHwIe"></script>
     </Layout>
     </>
   );
