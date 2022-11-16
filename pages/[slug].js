@@ -200,10 +200,6 @@ export async function getServerSideProps() {
   });
   
   const recentPosts = itemposts?.data?.posts;
-
-  if (!recentPosts) {
-    return { null };
-  };
   
   return {
     props: { recentPosts },
