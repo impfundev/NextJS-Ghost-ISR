@@ -13,7 +13,8 @@ export default function SinglePost({ item }) {
   const { title, content, author, featuredImage, categories, tags } = item;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
-  const dateFormated = date.format(item.date, 'dddd, DD MMMM YYYY Jam HH:mm').locale(id);
+  const datePublish = new Date({item.date});
+  const dateFormated = date.format(datePublish, 'dddd, DD MMMM YYYY Jam HH:mm').locale(id);
 
   return (
     <Layout>
