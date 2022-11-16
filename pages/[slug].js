@@ -9,7 +9,7 @@ import Layout from "../components/Layout";
 import PostsList from "../components/PostsList";
 
 export default function SinglePost({ item }) {
-  const { title, content, author, featuredImage, categories, tags } = item;
+  const { title, content, slug, author, featuredImage, categories, tags } = item;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
@@ -59,7 +59,7 @@ export default function SinglePost({ item }) {
       <>
         {haveTags ? (
           <>
-          <ul className="m-0 p-0 flex flex-wrap gap-1 list-none py-5">
+          <ul className="m-0 p-0 flex flex-wrap gap-1 list-none py-3">
             {tags.nodes.map((tag) => {
               const { slug, name } = tag;
               return (
@@ -76,6 +76,11 @@ export default function SinglePost({ item }) {
           </>
         ) : null}
       </>
+      <div className="py-5">
+        <div className="fb-comments" data-href={slug} data-width="100%" data-numposts="4" data-lazy="true"></div>
+      </div>
+      <div id="fb-root"></div>
+      <script defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0" nonce="AWqiHwIe"></script>
     </Layout>
   );
 }
@@ -106,6 +111,7 @@ const GET_POST = gql`
     post(id: $slugId, idType: SLUG) {
       title
       date
+      slug
       modified
       content
       author {
