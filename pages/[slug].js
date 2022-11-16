@@ -16,6 +16,7 @@ export default function SinglePost({ item }) {
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
 
   return (
+    <>
     <Head>
       <title>{title}</title>
       <meta name="description" content={excerpt} />
@@ -88,6 +89,7 @@ export default function SinglePost({ item }) {
       <div id="fb-root"></div>
       <script defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0" nonce="AWqiHwIe"></script>
     </Layout>
+    </>
   );
 }
 
