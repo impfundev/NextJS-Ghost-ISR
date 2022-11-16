@@ -10,7 +10,6 @@ export default function SinglePost({ item, recentPosts }) {
   const { date, title, content, author, featuredImage, categories, tags } = item;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
-  const haveRecent = Boolean(recentPosts?.length);
 
   return (
     <Layout>
@@ -79,8 +78,6 @@ export default function SinglePost({ item, recentPosts }) {
         ) : null}
     
     <h3 className="py-6 font-bold">Artikel Terbaru</h3>
-    {haveRecent ? (
-      <>
       <ul className="m-0 p-0 list-none grid grid-cols-2 gap-4">
         {recentPosts.map((recent) => {
           const { title, slug, featuredImage } = recent;
@@ -98,8 +95,6 @@ export default function SinglePost({ item, recentPosts }) {
           );
         })}
       </ul>
-      </>
-    ) : null}
 
     </Layout>
   );
@@ -177,7 +172,7 @@ export async function getStaticProps(context) {
   };
 
   const GET_RECENT = gql`
-    query getPosts {
+    query getRecent {
       posts(first: 6, after: null) {
         nodes {
           title
