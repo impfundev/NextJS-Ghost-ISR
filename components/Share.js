@@ -2,15 +2,14 @@ import parse from "html-react-parser";
 
 export default function Share({ title, slug, excerpt }) {
   const url = `https://www.fandomnesia.com/${slug}`;
-  const desk = parse(excerpt);
   const handleShare = () => {
     navigator.share({
       title: title,
-      text: desk,
+      text: title,
       url: url,
     }).then(() => console.log('Successful share')).catch((error) => console.log('Error sharing', error));
   };
-  const tweet = `https://twitter.com/intent/tweet?text=${desk}&url=${url}`;
+  const tweet = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
 
   return (
     <div className="flex flex-wrap gap-3 py-4">
@@ -21,5 +20,6 @@ export default function Share({ title, slug, excerpt }) {
         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="currentColor" viewBox="0 0 16 16"><path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z"/></svg>
       </button>
     </div>
+    <div className="text-sm">{parse(excerpt)}</div>
   );
 }
