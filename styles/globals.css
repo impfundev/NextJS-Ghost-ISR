@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+iframe {
+  width: 100%;
+  height: auto;
+}
+
 .has-text-align-left {
   @apply text-left;
 }
