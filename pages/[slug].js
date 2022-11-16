@@ -55,14 +55,16 @@ export default function SinglePost({ post }) {
         
         {parse(content)}
 
+      </article>
+
         <h5>Tag:</h5>
         {haveTags ? (
           <>
-          <ul className="flex flex-wrap gap-1 list-none py-5">
+          <ul className="m-0 p-0 flex flex-wrap gap-1 list-none py-5">
             {tags.nodes.map((tag) => {
               const { slug, name } = tag;
               return (
-                <li key={slug}>
+                <li key={slug} className="m-0 p-0">
                   <Link href={`/tag/${slug}`}>
                     <a className="px-3 py-1 bg-black text-white text-sm font-bold rounded-full">
                       {name}
@@ -75,7 +77,6 @@ export default function SinglePost({ post }) {
           </>
         ) : null}
 
-      </article>
     </Layout>
   );
 }
