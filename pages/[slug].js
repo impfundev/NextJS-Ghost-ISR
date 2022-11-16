@@ -55,15 +55,16 @@ export default function SinglePost({ post }) {
         
         {parse(content)}
 
+        <h5>Tag:</h5>
         {haveTags ? (
           <>
-          <ul className="flex flex-wrap gap-4 list-none pb-5">
+          <ul className="flex flex-wrap gap-4 list-none py-5">
             {tags.nodes.map((tag) => {
               const { slug, name } = tag;
               return (
                 <li key={slug}>
                   <Link href={`/tag/${slug}`}>
-                    <a className="px-4 py-2 bg-black text-white font-bold rounded-full">
+                    <a className="px-3 py-1 bg-black text-white text-sm font-bold rounded-full">
                       {name}
                     </a>
                   </Link>
