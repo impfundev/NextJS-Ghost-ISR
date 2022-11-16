@@ -1,4 +1,5 @@
 import { gql } from "@apollo/client";
+import Head from "next/head";
 
 import { client } from "../lib/apolloClient";
 import generateFeed from "../lib/generateFeed";
