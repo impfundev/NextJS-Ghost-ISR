@@ -5,12 +5,12 @@ import Link from "next/link";
 
 import { client } from "../lib/apolloClient";
 import Layout from "../components/Layout";
-import PostsList from "../components/PostsList";
 
 export default function SinglePost({ item, recentPosts }) {
   const { date, title, content, author, featuredImage, categories, tags } = item;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
+  const haveRecent = Boolean(recentPosts?.length);
 
   return (
     <Layout>
@@ -78,8 +78,28 @@ export default function SinglePost({ item, recentPosts }) {
           </>
         ) : null}
     
-    <h3 className="py-4 font-bold">Artikel Terbaru</h3>
-    <PostsList posts={recentPosts} />
+    <h3 className="py-6 font-bold">Artikel Terbaru</h3>
+    {haveRecent ? (
+      <>
+      <ul className="m-0 p-0 list-none grid grid-cols-2 gap-4">
+        {recentPosts.map((recent) => {
+          const { title, slug, featuredImage } = recent;
+          return (
+            <li key={slug} className="m-0 p-0">
+              {featuredImage ? (
+                <>
+                  <a href={slug}>
+                    <img src={featuredImage.node.sourceUrl} alt={featuredImage.node.altText} />
+                  </a>
+                </>
+              ) : null}
+              <h2 className="text-xl font-bold"><a href={slug}>{title}</a></h2>
+            </li>
+          );
+        })}
+      </ul>
+      </>
+    ) : null}
 
     </Layout>
   );
@@ -160,10 +180,8 @@ export async function getStaticProps(context) {
     query getPosts {
       posts(first: 6, after: null) {
         nodes {
-          databaseId
           title
           slug
-          excerpt
           featuredImage {
             node {
               sourceUrl
