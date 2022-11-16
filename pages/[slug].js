@@ -12,16 +12,11 @@ export default function SinglePost({ item }) {
   const { title, content, author, featuredImage, categories, tags } = item;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
-  const dateFormated = date.format(new Date(item.date), 'dddd, DD MMMM YYYY Jam HH:mm');
+  const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
 
   return (
     <Layout>
-      <article className="prose lg:prose-xl">
-
-        <h1 className="text-2xl md:text-4xl lg:text-6xl">
-          {title}
-        </h1>
-
+      <>
         {haveCategories ? (
           <>
             {categories.nodes.map((category) => {
@@ -29,7 +24,7 @@ export default function SinglePost({ item }) {
               return (
                 <div key={slug}>
                   <Link href={`/category/${slug}`}>
-                    <a className="px-4 py-2 bg-black text-white font-bold rounded-full">
+                    <a className="px-3 py-1 bg-black text-white text-sm font-bold rounded-full">
                       {name}
                     </a>
                   </Link>
@@ -38,7 +33,11 @@ export default function SinglePost({ item }) {
             })}
           </>
         ) : null}
-
+      </>
+      <article className="prose lg:prose-xl">
+        <h1 className="text-2xl md:text-4xl lg:text-6xl">
+          {title}
+        </h1>
         {featuredImage ? (
           <figure>
             <img
@@ -50,16 +49,13 @@ export default function SinglePost({ item }) {
             ) : null}
           </figure>
         ) : null}
-
         <p>
-          Oleh: <a href={`/author/${author.node.slug}`}>{author.node.name}</a><hr />
+          Oleh: <a href={`/author/${author.node.slug}`}>{author.node.name}</a><br />
           <time className="text-gray-500 text-sm" datetime={item.date}>{dateFormated}</time>
         </p>
-        
+        <hr />
         {parse(content)}
-
       </article>
-
       <>
         {haveTags ? (
           <>
