@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import { client } from "../lib/apolloClient";
 import Layout from "../components/Layout";
+import PostsList from "../components/PostsList";
 
 export default function SinglePost({ item }) {
   const { date, title, content, author, featuredImage, categories, tags } = item;
@@ -83,24 +84,7 @@ export default function SinglePost({ item }) {
     {categories.nodes.map((category) => {
       const { posts } = category;
       return (
-        <ul className="m-0 p-0 list-none grid grid-cols-2 gap-4">
-          {posts.nodes.map((post) => {
-            const { featuredImage } = post;
-            const haveImage = Boolean(featuredImage?.node?.length);
-            return (
-              <li key={post.slug} className="m-0 p-0">
-                {haveImage ? (
-                  <>
-                    <a href={post.slug}>
-                      <img src={featuredImage.node.sourceUrl} alt={post.title} />
-                    </a>
-                  </>
-                ) : null}
-                <h2 className="text-xl font-bold"><a href={post.slug}>{post.title}</a></h2>
-              </li>
-            );
-          })}
-        </ul>
+        <PostsList posts={posts} />
       );
     })}
   </>
@@ -157,10 +141,13 @@ const GET_POST = gql`
           name
           posts(first: 6) {
             nodes {
+              databaseId
               title
               slug
+              excerpt
               featuredImage {
                 sourceUrl
+                altText
               }
             }
           }
