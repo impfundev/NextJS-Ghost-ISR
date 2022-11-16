@@ -92,7 +92,7 @@ export default function SinglePost({ item }) {
                 {haveImage ? (
                   <>
                     <a href={post.slug}>
-                      <img src={featuredImage.node.sourceUrl} alt={featuredImage.node.altText} />
+                      <img src={featuredImage.node.sourceUrl} alt={post.title} />
                     </a>
                   </>
                 ) : null}
@@ -161,7 +161,6 @@ const GET_POST = gql`
               slug
               featuredImage {
                 sourceUrl
-                altText
               }
             }
           }
