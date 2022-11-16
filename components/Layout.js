@@ -12,7 +12,7 @@ export default function Layout({ children }) {
       <main className="container mx-auto px-5">
         {children}
       </main>
-<footer className="bg-gray-900">
+<footer className="bg-gray-600 pt-8">
     <div className="grid grid-cols-2 gap-8 py-8 px-6 md:grid-cols-4">
         <div>
             <h2 className="mb-6 text-sm font-semibold uppercase text-gray-400">Situs</h2>
@@ -57,7 +57,7 @@ export default function Layout({ children }) {
             </ul>
         </div>
     </div>
-    <div className="py-6 px-4 bg-gray-700 md:flex md:items-center md:justify-between">
+    <div className="py-6 px-4 md:flex md:items-center md:justify-between">
         <span className="text-sm text-gray-300 sm:text-center">© 2022 <a href="/">Fandomnesia</a>. All Rights Reserved.
         </span>
     </div>
