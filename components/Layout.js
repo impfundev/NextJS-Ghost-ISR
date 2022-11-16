@@ -12,11 +12,11 @@ export default function Layout({ children }) {
       <main className="container mx-auto px-5 pb-8">
         {children}
       </main>
-<footer className="bg-gray-800">
+<footer className="bg-gray-300">
     <div className="grid grid-cols-2 gap-8 py-8 px-6 md:grid-cols-4">
         <div>
-            <h2 className="mb-6 text-sm font-semibold uppercase text-gray-400">Situs</h2>
-            <ul className="text-gray-400">
+            <h2 className="mb-6 text-sm font-semibold uppercase text-gray-500">Situs</h2>
+            <ul>
                 <li className="mb-4">
                     <a href="#" className="hover:underline">Tentang Kami</a>
                 </li>
@@ -26,8 +26,8 @@ export default function Layout({ children }) {
             </ul>
         </div>
         <div>
-            <h2 className="mb-6 text-sm font-semibold uppercase text-gray-400">Channel</h2>
-            <ul className="text-gray-400">
+            <h2 className="mb-6 text-sm font-semibold uppercase text-gray-500">Channel</h2>
+            <ul>
                 <li className="mb-4">
                     <a href="#" className="hover:underline">YouTube</a>
                 </li>
@@ -43,8 +43,8 @@ export default function Layout({ children }) {
             </ul>
         </div>
         <div>
-            <h2 className="mb-6 text-sm font-semibold uppercase text-gray-400">Legal</h2>
-            <ul className="text-gray-400">
+            <h2 className="mb-6 text-sm font-semibold uppercase text-gray-500">Legal</h2>
+            <ul>
                 <li className="mb-4">
                     <a href="#" className="hover:underline">Disclaimer</a>
                 </li>
@@ -58,7 +58,7 @@ export default function Layout({ children }) {
         </div>
     </div>
     <div className="py-6 px-4 md:flex md:items-center md:justify-between">
-        <span className="text-sm text-gray-300 sm:text-center">© 2022 <a href="/">Fandomnesia</a>. All Rights Reserved.
+        <span className="text-sm text-gray-500 text-center">© 2022 <a href="/">Fandomnesia</a>. All Rights Reserved.
         </span>
     </div>
 </footer>
