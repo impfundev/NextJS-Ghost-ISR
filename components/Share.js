@@ -2,14 +2,15 @@ import parse from "html-react-parser";
 
 export default function Share({ title, slug, excerpt }) {
   const url = `https://www.fandomnesia.com/${slug}`;
+  const desk = parse(excerpt);
   const handleShare = () => {
     navigator.share({
       title: title,
-      text: parse(excerpt),
+      text: desk,
       url: url,
     }).then(() => console.log('Successful share')).catch((error) => console.log('Error sharing', error));
   };
-  const tweet = `https://twitter.com/intent/tweet?text=${parse(excerpt)}&url=${url}`;
+  const tweet = `https://twitter.com/intent/tweet?text=${desk}&url=${url}`;
 
   return (
     <div className="flex flex-wrap gap-3 py-4">
