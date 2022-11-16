@@ -5,8 +5,9 @@ import Link from "next/link";
 
 import { client } from "../lib/apolloClient";
 import Layout from "../components/Layout";
+import PostsList from "../components/PostsList";
 
-export default function SinglePost({ post }) {
+export default function SinglePost({ post, posts }) {
   const { date, title, content, author, featuredImage, categories, tags } = post;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
@@ -57,7 +58,7 @@ export default function SinglePost({ post }) {
 
       </article>
 
-        <h5>Tag:</h5>
+        <h5 className="font-bold">Tag</h5>
         {haveTags ? (
           <>
           <ul className="m-0 p-0 flex flex-wrap gap-1 list-none py-5">
@@ -76,6 +77,9 @@ export default function SinglePost({ post }) {
           </ul>
           </>
         ) : null}
+    
+    <h3 className="py-4 font-bold">Artikel Terbaru</h3>
+    <PostsList posts={posts} />
 
     </Layout>
   );
@@ -138,6 +142,25 @@ const GET_POST = gql`
   }
 `;
 
+const GET_POSTS = gql`
+  query getPosts {
+    posts(first: 6, after: null) {
+      nodes {
+        databaseId
+        title
+        slug
+        excerpt
+        featuredImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+      }
+    }
+  }
+`;
+
 export async function getStaticProps(context) {
   const { slug } = context.params;
 
@@ -152,8 +175,17 @@ export async function getStaticProps(context) {
     return { notFound: true };
   }
 
+  const recentposts = await client.query({
+    query: GET_POSTS,
+  });
+  
+  const posts = recentposts?.data?.posts;
+
   return {
-    props: { post },
-    revalidate: 1,
+    props: {
+      post,
+      posts,
+    },
+    revalidate: 60,
   };
 }
