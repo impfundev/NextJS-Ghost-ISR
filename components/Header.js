@@ -29,7 +29,7 @@ export default function Header({ categories }) {
         </button>
       </div>
       <nav className={`${ navActive ? 'h-screen pt-16 md:pt-0 text-black' : 'h-0 text-white md:text-black' } container mx-auto px-5 md:px-4 bg-white absolute overflow-hidden transition-all ease-in-out duration-300 md:block md:h-[auto] md:static`}>
-        <ul className="flex flex-col md:flex-row gap-4 items-center justify-center">
+        <ul className="flex flex-col md:flex-row gap-4 items-center sm:justify-center">
           <li>
             <Link href="/">
               <a onClick={handleClick}>Beranda</a>
