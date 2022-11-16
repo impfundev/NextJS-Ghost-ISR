@@ -9,7 +9,7 @@ iframe {
 }
 
 a {
-  @apply no-underline
+  @apply no-underline;
 }
 
 .has-text-align-left {
