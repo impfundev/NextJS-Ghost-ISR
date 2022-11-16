@@ -3,18 +3,23 @@ import { useRouter } from "next/router";
 import parse from "html-react-parser";
 import date from "date-and-time";
 import Link from "next/link";
+import Head from "next/head";
 
 import { client } from "../lib/apolloClient";
 import Layout from "../components/Layout";
-import PostsList from "../components/PostsList";
+import Share from "../components/Share";
 
 export default function SinglePost({ item }) {
-  const { title, content, slug, author, featuredImage, categories, tags } = item;
+  const { title, excerpt, content, slug, author, featuredImage, categories, tags } = item;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
 
   return (
+    <Head>
+      <title>{title}</title>
+      <meta name="description" content={excerpt} />
+    </Head>
     <Layout>
       <>
         {haveCategories ? (
@@ -53,6 +58,7 @@ export default function SinglePost({ item }) {
           Oleh: <a href={`/author/${author.node.slug}`}>{author.node.name}</a><br />
           <time className="text-gray-500 text-sm" datetime={item.date}>{dateFormated}</time>
         </p>
+        <Share title={title} slug={slug} excerpt={excerpt} />
         <hr />
         {parse(content)}
       </article>
@@ -112,7 +118,7 @@ const GET_POST = gql`
       title
       date
       slug
-      modified
+      excerpt
       content
       author {
         node {
