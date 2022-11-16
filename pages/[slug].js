@@ -10,9 +10,10 @@ import Layout from "../components/Layout";
 import PostsList from "../components/PostsList";
 
 export default function SinglePost({ item }) {
-  const { date, title, content, author, featuredImage, categories, tags } = item;
+  const { title, content, author, featuredImage, categories, tags } = item;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
+  const dateFormated = date.format(item.date, 'dddd, DD MMMM YYYY [Jam] HH:mm').locale(id);
 
   return (
     <Layout>
@@ -53,7 +54,7 @@ export default function SinglePost({ item }) {
 
         <p>
           Oleh: <a href={`/author/${author.node.slug}`}>{author.node.name}</a><hr />
-          <time className="text-gray-500 text-sm" datetime={date}>{date.format(date, 'dddd, DD MMMM YYYY [Jam] HH:mm').locale(id)}</time>
+          <time className="text-gray-500 text-sm" datetime={item.date}>{dateFormated}</time>
         </p>
         
         {parse(content)}
