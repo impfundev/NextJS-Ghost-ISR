@@ -1,13 +1,13 @@
-export default function Share({ title, slug }) {
+export default function Share({ title, slug, excerpt }) {
   const url = `https://www.fandomnesia.com/${slug}`;
   const handleShare = () => {
     navigator.share({
       title: title,
-      text: title,
+      text: excerpt,
       url: url,
     }).then(() => console.log('Successful share')).catch((error) => console.log('Error sharing', error));
   };
-  const tweet = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
+  const tweet = `https://twitter.com/intent/tweet?text=${excerpt}&url=${url}`;
 
   return (
     <div className="flex flex-wrap gap-3 py-4">
