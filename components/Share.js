@@ -9,7 +9,7 @@ export default function Share({ title, slug }) {
   };
 
   return (
-    <div className="flex flex-wrap gap-3">
+    <div className="flex flex-wrap gap-3 py-4">
       <a
         href=`https://twitter.com/intent/tweet?text=${title}&url=${url}`
         className="py-1 px-3 bg-cyan-300 text-white rounded-xl"
