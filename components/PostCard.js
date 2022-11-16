@@ -24,7 +24,7 @@ export default function PostCard({ post }) {
           </Link>
         </>
       ) : null}
-      <div className="text-gray-700 text-sm md:text-base px-6 pb-4">{parse(excerpt)}</div>
+      <div className="text-gray-700 text-sm md:text-base px-6 pt-4 mb-2">{parse(excerpt)}</div>
     </article>
   );
 }
