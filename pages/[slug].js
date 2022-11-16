@@ -58,7 +58,8 @@ export default function SinglePost({ item }) {
 
       </article>
 
-        <h5 className="font-bold">Tag</h5>
+      <h5 className="font-bold">Tag</h5>
+      <>
         {haveTags ? (
           <>
           <ul className="m-0 p-0 flex flex-wrap gap-1 list-none py-5">
@@ -77,19 +78,7 @@ export default function SinglePost({ item }) {
           </ul>
           </>
         ) : null}
-    
-{haveCategories ? (
-  <>
-    <h3 className="py-6 font-bold">Artikel Terkait</h3>
-    {categories.nodes.map((category) => {
-      const { posts } = category;
-      return (
-        <PostsList posts={posts} />
-      );
-    })}
-  </>
-) : null}
-
+      </>
     </Layout>
   );
 }
@@ -139,18 +128,6 @@ const GET_POST = gql`
         nodes {
           slug
           name
-          posts(first: 6) {
-            nodes {
-              databaseId
-              title
-              slug
-              excerpt
-              featuredImage {
-                sourceUrl
-                altText
-              }
-            }
-          }
         }
       }
       tags {
