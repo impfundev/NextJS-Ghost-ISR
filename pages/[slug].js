@@ -58,7 +58,7 @@ export default function SinglePost({ post }) {
         <h5>Tag:</h5>
         {haveTags ? (
           <>
-          <ul className="flex flex-wrap gap-4 list-none py-5">
+          <ul className="flex flex-wrap gap-1 list-none py-5">
             {tags.nodes.map((tag) => {
               const { slug, name } = tag;
               return (
