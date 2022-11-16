@@ -32,7 +32,7 @@ export default function SinglePost({ post }) {
                   </Link>
                 </div>
               );
-            })}
+            }).slice(0,1)}
           </>
         ) : null}
 
@@ -57,7 +57,7 @@ export default function SinglePost({ post }) {
 
         {haveTags ? (
           <>
-          <ul className="flex gap-4 list-none pb-5">
+          <ul className="flex flex-wrap gap-4 list-none pb-5">
             {tags.nodes.map((tag) => {
               const { slug, name } = tag;
               return (
