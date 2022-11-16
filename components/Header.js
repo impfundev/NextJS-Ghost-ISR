@@ -8,7 +8,7 @@ export default function Header({ categories }) {
   };
   
   return (
-    <header className="sticky top-0 bg-white">
+    <header className="sticky top-0 bg-white/75 backdrop-blur-sm">
       <div className="flex items-center justify-between container mx-auto px-5 py-4">
         <Link href="/">
           <a className="flex items-center gap-4">
