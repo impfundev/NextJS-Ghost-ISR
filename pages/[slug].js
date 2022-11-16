@@ -1,6 +1,8 @@
 import { gql } from "@apollo/client";
 import { useRouter } from "next/router";
 import parse from "html-react-parser";
+import date from "date-and-time";
+import id from "date-and-time/locale/id";
 import Link from "next/link";
 
 import { client } from "../lib/apolloClient";
@@ -44,21 +46,20 @@ export default function SinglePost({ item }) {
               alt={featuredImage.node.altText}
             />
             {featuredImage.node.caption ? (
-              <figcaption>{featuredImage.node.caption}</figcaption>
+              <figcaption>{parse(featuredImage.node.caption)}</figcaption>
             ) : null}
           </figure>
         ) : null}
 
         <p>
-          Oleh: <a href={`/author/${author.node.slug}`}>{author.node.name}</a>,
-          Pada: <time className="text-gray-500" datetime={date}>{date}</time>
+          Oleh: <a href={`/author/${author.node.slug}`}>{author.node.name}</a><hr />
+          <time className="text-gray-500 text-sm" datetime={date}>{date.format(date, 'dddd, DD MMMM YYYY [Jam] HH:mm').locale(id)}</time>
         </p>
         
         {parse(content)}
 
       </article>
 
-      <h5 className="font-bold">Tag</h5>
       <>
         {haveTags ? (
           <>
