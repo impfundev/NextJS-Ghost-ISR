@@ -171,6 +171,13 @@ export async function getStaticProps(context) {
     return { notFound: true };
   };
 
+  return {
+    props: { item },
+    revalidate: 60,
+  };
+}
+
+export async function getServerSideProps() {
   const GET_RECENT = gql`
     query getRecent {
       posts(first: 6, after: null) {
@@ -194,11 +201,11 @@ export async function getStaticProps(context) {
   
   const recentPosts = itemposts?.data?.posts;
 
+  if (!recentPosts) {
+    return { null };
+  };
+  
   return {
-    props: {
-      item,
-      recentPosts,
-    },
-    revalidate: 60,
+    props: { recentPosts },
   };
 }
