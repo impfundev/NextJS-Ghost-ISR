@@ -7,7 +7,7 @@ export default function PostCard({ post }) {
 
   return (
     <article className="max-w-sm border-t border-inherit">
-      <h2 className="font-bold text-lg md:text-xl pb-4">
+      <h2 className="font-bold text-lg md:text-xl pt-1 pb-4">
         <Link href={`/${slug}`}>
           <a>{title}</a>
         </Link>
