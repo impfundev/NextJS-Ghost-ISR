@@ -8,7 +8,7 @@ export default function Header({ categories }) {
   };
   
   return (
-    <header className="sticky top-0 bg-white/75 backdrop-blur-xl">
+    <header className="sticky top-0 bg-white/75 backdrop-blur-3xl">
       <div className="flex items-center justify-between container mx-auto px-5 py-4">
         <Link href="/">
           <a className="flex items-center gap-4">
@@ -28,7 +28,7 @@ export default function Header({ categories }) {
           )}
         </button>
       </div>
-      <nav className={`${ navActive ? 'h-screen pt-16 md:pt-0 text-black' : 'h-0 text-white md:text-black' } container mx-auto px-5 md:px-4 bg-white/75 backdrop-blur-xl absolute overflow-hidden transition-all ease-in-out duration-300 md:block md:h-[auto] md:static`}>
+      <nav className={`${ navActive ? 'h-screen pt-16 md:pt-0 text-black' : 'h-0 text-white md:text-black' } container mx-auto px-5 md:px-4 bg-white absolute overflow-hidden transition-all ease-in-out duration-300 md:block md:h-[auto] md:static`}>
         <ul className="flex flex-col md:flex-row gap-4 items-center sm:justify-center">
           <li>
             <Link href="/">
