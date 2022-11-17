@@ -29,7 +29,7 @@ export default function SinglePost({ item }) {
         "author": {
           "@type": "Person",
           "name": author.node.name,
-          "url": `${siteUrl}/author/${author.node.slug}`
+          "url": "https://www.fandomnesia.com/#author"
         },
       }`;
     };
