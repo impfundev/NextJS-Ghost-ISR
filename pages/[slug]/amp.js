@@ -19,7 +19,7 @@ export default function SinglePost({ item }) {
     <Head>
       <title>{title}</title>
       <meta name="description" content={parse(excerpt)} />
-<style jsx global>
+<style amp-custom="amp-custom" jsx global>
 .header {
 position: sticky; 
 top: 0; 
