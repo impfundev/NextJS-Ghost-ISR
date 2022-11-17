@@ -13,7 +13,6 @@ export default function SinglePost({ item }) {
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
-  const isAmp = useAmp();
 
   return (
     <>
