@@ -14,32 +14,12 @@ export default function SinglePost({ item }) {
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
-  const siteUrl = "https://www.fandomnesia.com";
-
-  const articleJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "NewsArticle",
-    "headline": title,
-    "image": featuredImage.node.sourceUrl,
-    "datePublished": item.date,
-    "dateModified": item.date,
-    "author": {
-      "@type": "Person",
-      "name": author.node.name,
-      "url": "https://www.fandomnesia.com/#author"
-    },
-  };
 
   return (
     <>
     <Head>
       <title>{title}</title>
       <meta name="description" content={parse(excerpt)} />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={articleJsonLd}
-        key="article-jsonld"
-      />
     </Head>
     <Layout>
       <>
