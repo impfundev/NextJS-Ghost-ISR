@@ -109,7 +109,7 @@ export async function getStaticPaths() {
   });
 
   return {
-    paths: data?.posts.nodes.map((post) => (post.slug)) || [],
+    paths: data?.posts.nodes.map((post) => `/${post.slug}`) || [],
     fallback: "blocking",
   };
 }
