@@ -3,10 +3,8 @@ import { useRouter } from "next/router";
 import parse from "html-react-parser";
 import date from "date-and-time";
 import Head from "next/head";
-import { useAmp } from "next/amp";
 
 import { client } from "../../lib/apolloClient";
-import AMPCSS from "../../components/AMPCSS";
 
 export const config = { amp: true }
 
@@ -22,11 +20,6 @@ export default function SinglePost({ item }) {
     <Head>
       <title>{title}</title>
       <meta name="description" content={parse(excerpt)} />
-      {isAmp ? (
-        <>
-          <AMPCSS />
-        </>
-      ) : null }
     </Head>
     <header className="header">
       <div className="header-wrapper">
