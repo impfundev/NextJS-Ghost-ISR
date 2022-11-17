@@ -19,7 +19,7 @@ export default function SinglePost({ item }) {
     <Head>
       <title>{title}</title>
       <meta name="description" content={parse(excerpt)} />
-<>
+
 <style amp-custom="amp-custom" jsx global>{`
 .header {
 position: sticky; 
@@ -263,7 +263,7 @@ padding-top: 1.25rem;
 padding-bottom: 1.25rem; 
 }
 `}</style>
-</>
+
     </Head>
     <header className="header">
       <div className="header-wrapper">
