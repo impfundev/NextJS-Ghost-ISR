@@ -20,7 +20,7 @@ export default function SinglePost({ item }) {
     <>
     <Head>
       <title>{title}</title>
-      <meta name="description" content={excerpt} />
+      <meta name="description" content={parse(excerpt)} />
     </Head>
     <Layout>
       <>
