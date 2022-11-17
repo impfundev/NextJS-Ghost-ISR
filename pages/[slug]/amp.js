@@ -19,6 +19,7 @@ export default function SinglePost({ item }) {
     <Head>
       <title>{title}</title>
       <meta name="description" content={parse(excerpt)} />
+<>
 <style amp-custom="amp-custom" jsx global>
 .header {
 position: sticky; 
@@ -92,8 +93,14 @@ iframe {
   min-height: 300px;
 }
 
+img {
+  width: 100%;
+  height: auto;
+}
+
 a {
   text-decoration: none;
+  font-weight: 700;
 }
 
 .has-text-align-left {
@@ -204,7 +211,59 @@ grid-template-columns: repeat(2, minmax(0, 1fr));
 gap: 1rem;
 }
 
+.main-title {
+font-size: 1.5rem;
+line-height: 2rem;
+}
+
+@media only screen (min-width: 768px) { 
+  .main-title {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+}
+
+.main-date {
+color: #6B7280; 
+font-size: 0.875rem;
+line-height: 1.25rem;
+}
+
+.tag-wrapper {
+display: flex; 
+padding: 0; 
+padding-top: 0.75rem;
+padding-bottom: 0.75rem; 
+margin: 0; 
+list-style-type: none; 
+flex-wrap: wrap; 
+gap: 0.25rem;
+}
+
+.tag-list {
+padding: 0; 
+margin: 0;
+}
+
+.tag {
+padding-top: 0.25rem;
+padding-bottom: 0.25rem; 
+padding-left: 0.75rem;
+padding-right: 0.75rem; 
+background-color: #000000; 
+color: #ffffff; 
+font-size: 0.875rem;
+line-height: 1.25rem; 
+font-weight: 700; 
+border-radius: 9999px; 
+}
+
+.comment-wrapper {
+padding-top: 1.25rem;
+padding-bottom: 1.25rem; 
+}
 </style>
+</>
     </Head>
     <header className="header">
       <div className="header-wrapper">
@@ -269,7 +328,7 @@ gap: 1rem;
         ) : null}
       </>
       <article className="prose lg:prose-xl">
-        <h1 className="text-2xl md:text-4xl lg:text-6xl">
+        <h1 className="main-title">
           {title}
         </h1>
         {featuredImage ? (
@@ -285,7 +344,7 @@ gap: 1rem;
         ) : null}
         <p>
           Oleh: <a href={`/author/${author.node.slug}`}>{author.node.name}</a><br />
-          <time className="text-gray-500 text-sm" datetime={item.date}>{dateFormated}</time>
+          <time className="main-date" datetime={item.date}>{dateFormated}</time>
         </p>
         <hr />
         {parse(content)}
@@ -293,12 +352,12 @@ gap: 1rem;
       <>
         {haveTags ? (
           <>
-          <ul className="m-0 p-0 flex flex-wrap gap-1 list-none py-3">
+          <ul className="tag-wrapper">
             {tags.nodes.map((tag) => {
               const { slug, name } = tag;
               return (
-                <li key={slug} className="m-0 p-0">
-                  <a href={`/tag/${slug}`} className="px-3 py-1 bg-black text-white text-sm font-bold rounded-full">
+                <li key={slug} className="tag-list">
+                  <a href={`/tag/${slug}`} className="tag">
                     {name}
                   </a>
                   </Link>
@@ -309,60 +368,10 @@ gap: 1rem;
           </>
         ) : null}
       </>
-      <div className="py-5">
-        <div className="fb-comments" data-href={slug} data-width="100%" data-numposts="4" data-lazy="true"></div>
+      <div className="comment-wrapper">
+        Komentar
       </div>
     </main>
-<footer className="bg-gray-300">
-    <div className="grid grid-cols-2 gap-8 py-8 px-6 md:grid-cols-4">
-        <div>
-            <h2 className="mb-6 text-sm font-semibold uppercase text-gray-500">Situs</h2>
-            <ul>
-                <li className="mb-4">
-                    <a href="#" className="hover:underline">Tentang Kami</a>
-                </li>
-                <li className="mb-4">
-                    <a href="#" className="hover:underline">Kontak Kami</a>
-                </li>
-            </ul>
-        </div>
-        <div>
-            <h2 className="mb-6 text-sm font-semibold uppercase text-gray-500">Channel</h2>
-            <ul>
-                <li className="mb-4">
-                    <a href="#" className="hover:underline">YouTube</a>
-                </li>
-                <li className="mb-4">
-                    <a href="#" className="hover:underline">Twitter</a>
-                </li>
-                <li className="mb-4">
-                    <a href="#" className="hover:underline">Facebook</a>
-                </li>
-                <li className="mb-4">
-                    <a href="#" className="hover:underline">Google News</a>
-                </li>
-            </ul>
-        </div>
-        <div>
-            <h2 className="mb-6 text-sm font-semibold uppercase text-gray-500">Legal</h2>
-            <ul>
-                <li className="mb-4">
-                    <a href="#" className="hover:underline">Disclaimer</a>
-                </li>
-                <li className="mb-4">
-                    <a href="#" className="hover:underline">Kebijakan Privasi</a>
-                </li>
-                <li className="mb-4">
-                    <a href="#" className="hover:underline">Pedoman Media Siber</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div className="py-6 px-4 md:flex md:items-center md:justify-between">
-        <span className="text-sm text-gray-500 text-center">© 2022 <a href="/">Fandomnesia</a>. All Rights Reserved.
-        </span>
-    </div>
-</footer>
     </>
   );
 }
