@@ -5,9 +5,9 @@ import date from "date-and-time";
 import Link from "next/link";
 import Head from "next/head";
 
-import { client } from "../lib/apolloClient";
-import Layout from "../components/Layout";
-import Share from "../components/Share";
+import { client } from "../../lib/apolloClient";
+import Layout from "../../components/Layout";
+import Share from "../../components/Share";
 
 export default function SinglePost({ item }) {
   const { title, excerpt, content, slug, author, featuredImage, categories, tags } = item;
