@@ -16,7 +16,7 @@ export default function SinglePost({ item }) {
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
 
-  function ArticleJsonLd() {
+  const ArticleJsonLd = () => {
     return {
       __html: `{
         "@context": "https://schema.org",
@@ -42,7 +42,7 @@ export default function SinglePost({ item }) {
       <meta name="description" content={parse(excerpt)} />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={ArticleJsonLd()}
+        dangerouslySetInnerHTML={ArticleJsonLd}
         key="article-jsonld"
       />
     </Head>
