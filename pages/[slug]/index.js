@@ -16,11 +16,35 @@ export default function SinglePost({ item }) {
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
 
+  function ArticleJsonLd() {
+    return {
+      __html: `{
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "headline": title,
+        "image": featuredImage.node.sourceUrl,
+        "description": `${parse(excerpt)}`,
+        "datePublished": item.date,
+        "dateModified": item.date,
+        "author": {
+          "@type": "Person",
+          "name": author.node.name,
+          "url": `https://www.fandomnesia.com/author/${author.node.slug}`,
+        },
+      }`;
+    };
+  };
+
   return (
     <>
     <Head>
       <title>{title}</title>
       <meta name="description" content={parse(excerpt)} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={ArticleJsonLd()}
+        key="article-jsonld"
+      />
     </Head>
     <Layout>
       <>
