@@ -4,7 +4,6 @@ import parse from "html-react-parser";
 import date from "date-and-time";
 import Link from "next/link";
 import Head from "next/head";
-import Script from "next/script";
 
 import { client } from "../lib/apolloClient";
 import Layout from "../components/Layout";
@@ -108,7 +107,7 @@ export default function SinglePost({ item }) {
         <div className="fb-comments" data-href={slug} data-width="100%" data-numposts="4" data-lazy="true"></div>
       </div>
       <div id="fb-root"></div>
-      <Script src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0" />
+      <script src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0"></script>
     </Layout>
     </>
   );
