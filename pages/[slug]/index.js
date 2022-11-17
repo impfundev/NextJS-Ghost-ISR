@@ -15,6 +15,7 @@ export default function SinglePost({ item }) {
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
+  const siteUrl = "https://www.fandomnesia.com";
 
   const ArticleJsonLd = () => {
     return {
@@ -23,13 +24,12 @@ export default function SinglePost({ item }) {
         "@type": "NewsArticle",
         "headline": title,
         "image": featuredImage.node.sourceUrl,
-        "description": `${parse(excerpt)}`,
         "datePublished": item.date,
         "dateModified": item.date,
         "author": {
           "@type": "Person",
           "name": author.node.name,
-          "url": `https://www.fandomnesia.com/author/${author.node.slug}`,
+          "url": `${siteUrl}/author/${author.node.slug}`,
         },
       }`;
     };
