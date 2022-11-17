@@ -1,7 +1,7 @@
 export default function AMPCSS() {
   return (
     <>
-<style jsx global amp-custom="">`
+<style jsx global amp-custom="">{`
 .header {
 position: sticky; 
 top: 0; 
@@ -243,7 +243,7 @@ border-radius: 9999px;
 padding-top: 1.25rem;
 padding-bottom: 1.25rem; 
 }
-`</style>
+`}</style>
     </>
   );
 }
