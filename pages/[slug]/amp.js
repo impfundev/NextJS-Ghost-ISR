@@ -660,7 +660,10 @@ export async function getStaticProps({ params }) {
     return { notFound: true };
   };
 
-  const ampContent = await ampify(item.content);
+  const ampContent = await ampify(item.content, {
+    cwd: 'amp',
+    canonicalURL: 'https://your-canoncial-url',
+  });
 
   return {
     props: { item, ampContent },
