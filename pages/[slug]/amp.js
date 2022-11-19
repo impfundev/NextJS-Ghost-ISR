@@ -5,7 +5,7 @@ import date from "date-and-time";
 import Head from "next/head";
 
 import { client } from "../../lib/apolloClient";
-import ampCSS from "../../aaa/ampCSS";
+import ampCSS from "../../components/ampCSS";
 
 export const config = { amp: true }
 
