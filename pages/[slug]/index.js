@@ -56,7 +56,7 @@ export default function SinglePost({ item }) {
               priority={true}
             />
             {featuredImage.node.caption ? (
-              <figcaption className="py-0" dangerouslySetInnerHTML={__html:{featuredImage.node.caption}} />
+              <figcaption className="py-0" dangerouslySetInnerHTML={{ __html: featuredImage.node.caption }} />
             ) : null}
           </figure>
         ) : null}
