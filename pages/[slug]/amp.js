@@ -18,7 +18,8 @@ export default function SinglePost({ item }) {
     <>
     <Head>
       <title>{title}</title>
-      <meta name="description" content={parse(excerpt)} />
+      <meta name="description" content={excerpt} />
+      <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
     </Head>
     <header className="header">
       <div className="header-wrapper">
@@ -34,7 +35,7 @@ export default function SinglePost({ item }) {
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="menu-icon"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path></svg>
         </button>
       </div>
-      <nav className="navigasi" hidden [hidden]="hideGreeting">
+      <nav className="navigasi" hidden="hideGreeting">
         <ul>
           <li>
             <a href="/">Beranda</a>
