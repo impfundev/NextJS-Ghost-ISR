@@ -20,8 +20,8 @@ export default function SinglePost({ item }) {
     <Head>
       <title>{title}</title>
       <meta name="description" content={parse(excerpt)} />
-      <ampCSS />
     </Head>
+    <ampCSS />
     <header className="header">
       <div className="header-wrapper">
         <a href="/" className="logo-wrapper">
