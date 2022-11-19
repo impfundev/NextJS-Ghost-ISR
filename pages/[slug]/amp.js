@@ -7,8 +7,6 @@ import Head from "next/head";
 import { client } from "../../lib/apolloClient";
 import ampCSS from "../../components/ampCSS";
 
-export const config = { amp: true }
-
 export default function SinglePost({ item }) {
   const { title, excerpt, content, slug, author, featuredImage, categories, tags } = item;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
@@ -20,8 +18,8 @@ export default function SinglePost({ item }) {
     <Head>
       <title>{title}</title>
       <meta name="description" content={parse(excerpt)} />
+      <ampCSS />
     </Head>
-    <ampCSS />
     <header className="header">
       <div className="header-wrapper">
         <a href="/" className="logo-wrapper">
