@@ -11,7 +11,7 @@ import Layout from "../../components/Layout";
 import Share from "../../components/Share";
 
 export default function SinglePost({ item }) {
-  const { title, excerpt, content, slug, author, featuredImage, categories, tags } = item;
+  const { title, excerpt, content, slug, author, featuredImage, categories, tags, seo } = item;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
@@ -20,6 +20,7 @@ export default function SinglePost({ item }) {
     <>
     <Head>
       <title>{title}</title>
+      {parse(seo.fullHead)}
     </Head>
     <Layout>
       <>
@@ -150,6 +151,9 @@ const GET_POST = gql`
           slug
           name
         }
+      }
+      seo {
+        fullHead
       }
     }
   }
