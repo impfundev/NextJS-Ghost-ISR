@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import parse from "html-react-parser";
 import date from "date-and-time";
 import Head from "next/head";
-import ampify from "ampify";
+import html2amp from "html2amp";
 
 import { client } from "../../lib/apolloClient";
 
@@ -660,10 +660,7 @@ export async function getStaticProps({ params }) {
     return { notFound: true };
   };
 
-  const ampContent = await ampify(item.content, {
-    cwd: 'amp',
-    canonicalURL: 'https://your-canoncial-url',
-  });
+  const ampContent = await html2amp(item.content)
 
   return {
     props: { item, ampContent },
