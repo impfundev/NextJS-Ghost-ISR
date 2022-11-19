@@ -5,6 +5,7 @@ import date from "date-and-time";
 import Head from "next/head";
 
 import { client } from "../../lib/apolloClient";
+import ampCSS from "../../aaa/ampCSS";
 
 export const config = { amp: true }
 
@@ -19,6 +20,7 @@ export default function SinglePost({ item }) {
     <Head>
       <title>{title}</title>
       <meta name="description" content={parse(excerpt)} />
+      <ampCSS />
     </Head>
     <header className="header">
       <div className="header-wrapper">
@@ -145,7 +147,7 @@ export async function getStaticPaths() {
 
   return {
     paths: data?.posts.nodes.map((post) => `/${post.slug}/amp`) || [],
-    fallback: "blocking",
+    fallback: "false",
   };
 }
 
