@@ -20,7 +20,7 @@ export default function SinglePost({ item }) {
     <>
     <Head>
       <title>{title}</title>
-      <meta name="description" content={parse(excerpt)} />
+      <meta name="description" content={excerpt} />
     </Head>
     <Layout>
       <>
@@ -56,7 +56,7 @@ export default function SinglePost({ item }) {
               priority={true}
             />
             {featuredImage.node.caption ? (
-              <figcaption className="py-0">{parse(featuredImage.node.caption)}</figcaption>
+              <figcaption className="py-0">{featuredImage.node.caption.remove("<p></p>\n")}</figcaption>
             ) : null}
           </figure>
         ) : null}
