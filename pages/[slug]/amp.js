@@ -236,13 +236,6 @@ font-size: 1.5rem;
 line-height: 2rem;
 }
 
-@media only screen (min-width: 768px) { 
-  .main-title {
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-  }
-}
-
 .main-date {
 color: #6B7280; 
 font-size: 0.875rem;
