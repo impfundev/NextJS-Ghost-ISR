@@ -200,17 +200,6 @@ img {
   height: auto;
 }
 
-figure {
-  display: block;
-  width: 100%;
-}
-
-a {
-  text-decoration: none;
-  font-weight: 700;
-  color: #000000;
-}
-
 .main-title {
 font-size: 1.5rem;
 line-height: 2rem;
@@ -262,6 +251,25 @@ border-radius: 9999px;
 padding-top: 1.25rem;
 padding-bottom: 1.25rem; 
 }
+
+/* Typography */
+
+:root {
+  --tw-prose-body: #374151;
+  --tw-prose-headings: #111827;
+  --tw-prose-lead: #4B5563;
+  --tw-prose-links: #111827;
+  --tw-prose-bold: #111827;
+  --tw-prose-counters: #6B7280;
+  --tw-prose-bullets: #D1D5DB;
+  --tw-prose-hr: #E5E7EB;
+  --tw-prose-quotes: #111827;
+  --tw-prose-quote-borders: #E5E7EB;
+  --tw-prose-captions: #6B7280;
+  --tw-prose-th-borders: #D1D5DB;
+  --tw-prose-td-borders: #E5E7EB;
+}
+
 `}</style>
     </>
   );
