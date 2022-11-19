@@ -53,7 +53,7 @@ export default function SinglePost({ item }) {
               alt={featuredImage.node.altText}
               width={1200}
               height={800}
-              priority={true}
+              priority
             />
             {featuredImage.node.caption ? (
               <figcaption>{parse(featuredImage.node.caption)}</figcaption>
