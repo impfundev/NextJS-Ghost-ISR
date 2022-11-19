@@ -1,0 +1,5 @@
+experimental: {
+  amp: {
+    skipValidation: true
+  }
+}
