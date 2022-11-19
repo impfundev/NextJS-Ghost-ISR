@@ -1,4 +1,4 @@
-export default function AmpCSS() {
+export default function ampCSS() {
   return (
     <>
 <style jsx global amp-custom="">{`
