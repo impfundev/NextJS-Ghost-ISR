@@ -284,7 +284,14 @@ padding-bottom: 1.25rem;
 }
 
 body {
+  font-size: 14px;
+  line-height: 24px;
   color: var(--tw-prose-body);
+}
+
+p {
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 a {
@@ -302,6 +309,12 @@ a strong {
   color: inherit;
 }
 
+blockquote {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  padding-left: 20px;
+}
+
 blockquote strong {
   color: inherit;
 }
@@ -311,11 +324,26 @@ thead th strong {
 }
 
 ol {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding-left: 22px;
   list-style-type: decimal;
 }
 
 ul {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding-left: 22px;
   list-style-type: disc;
+}
+
+li {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+ol > li {
+  padding-left: 6px;
 }
 
 ol > li::marker {
@@ -323,12 +351,60 @@ ol > li::marker {
   color: var(--tw-prose-counters);
 }
 
+ul > li {
+  padding-left: 6px;
+}
+
 ul > li::marker {
   color: var(--tw-prose-bullets);
 }
 
+> ul > li p {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+> ul > li *:first-child {
+  margin-top: 16px;
+}
+
+> ul > li *:last-child {
+  margin-bottom: 16px;
+}
+
+> ol > li *:first-child {
+  margin-top: 16px;
+}
+
+> ol > li *:last-child {
+  margin-bottom: 16px;
+}
+
+ul ul, ul ol, ol ul, ol ol {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
 hr {
+  margin-top: 24px;
+  margin-bottom: 24px;
   border-color: var(--tw-prose-hr);
+}
+
+hr + * {
+  margin-top: 0;
+}
+
+h2 + * {
+  margin-top: 0;
+}
+
+h3 + * {
+  margin-top: 0;
+}
+
+h4 + * {
+  margin-top: 0;
 }
 
 blockquote {
@@ -349,8 +425,12 @@ blockquote p:last-of-type::after {
 }
 
 h1 {
+  font-size: 30px;
   font-weight: 800;
+  line-height: 36px;
   color: var(--tw-prose-headings);
+  padding-top: 0;
+  padding-bottom: 24px;
 }
 
 h1 strong {
@@ -359,6 +439,10 @@ h1 strong {
 }
 
         h2 {
+          font-size: 20px;
+          margin-top: 32px;
+          margin-bottom: 16px;
+          line-height: 28px;
           color: var(--tw-prose-headings);
           font-weight: 700;
         }
@@ -367,6 +451,10 @@ h1 strong {
           color: inherit;
         }
         h3 {
+          font-size: 18px;
+          margin-top: 28px;
+          margin-bottom: 8px;
+          line-height: 28px;
           color: var(--tw-prose-headings);
           font-weight: 600;
         }
@@ -375,6 +463,9 @@ h1 strong {
           color: inherit;
         }
         h4 {
+          margin-top: 20px;
+          margin-bottom: 8px;
+          line-height: 20px;
           color: var(--tw-prose-headings);
           font-weight: 600;
         }
@@ -382,12 +473,31 @@ h1 strong {
           font-weight: 700;
           color: inherit;
         }
-        img {}
-        figure > * {}
+        img {
+          margin-top: 24px;
+          margin-bottom: 24px;
+        }
+        figure {
+          margin-top: 24px;
+          margin-bottom: 24px;
+        }
+        video {
+          margin-top: 24px;
+          margin-bottom: 24px;
+        }
+        figure > * {
+          margin-top: 0;
+          margin-bottom: 0;
+        }
         figcaption {
+          font-size: 12px;
+          line-height: 16px;
+          margin-top: 8px;
           color: var(--tw-prose-captions);
         }
         table {
+          font-size: 12px;
+          line-height: 18px;
           width: 100%;
           table-layout: auto;
           text-align: left;
@@ -399,9 +509,18 @@ h1 strong {
           border-bottom-color: var(--tw-prose-th-borders);
         }
         thead th {
+          padding-right: 12px;
+          padding-left: 12px;
+          padding-bottom: 8px;
           color: var(--tw-prose-headings);
           font-weight: 600;
           vertical-align: bottom;
+        }
+        thead th:first-child {
+          padding-left: 0;
+        }
+        thead th:last-child {
+          padding-right: 0;
         }
         tbody tr {
           border-bottom-width: 1px;
@@ -419,6 +538,24 @@ h1 strong {
         }
         tfoot td {
           vertical-align: top;
+        }
+        tbody td, tfoot td {
+          padding-top: 8px;
+          padding-right: 12px;
+          padding-bottom: 8px;
+          padding-left: 12px;
+        }
+        tbody td:first-child, tfoot td:first-child {
+          padding-left: 0;
+        }
+        tbody td:last-child, tfoot td:last-child {
+          padding-right: 0;
+        }
+        > :first-child {
+          margin-top: 0;
+        }
+        > :last-child {
+          margin-bottom: 0;
         }
 `}</style>
     </>
