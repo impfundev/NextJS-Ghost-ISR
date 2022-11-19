@@ -30,11 +30,11 @@ export default function SinglePost({ item }) {
             Fandomnesia
           </span>
         </a>
-        <button on='tap:sidebar1.toggle'>
+        <button on='tap:AMP.setState({ hideGreeting: false })'>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="menu-icon"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path></svg>
         </button>
       </div>
-      <amp-sidebar id="sidebar1" layout="nodisplay" side="right">
+      <nav className="navigasi" hidden [hidden]="hideGreeting">
         <ul>
           <li>
             <a href="/">Beranda</a>
@@ -60,7 +60,7 @@ export default function SinglePost({ item }) {
             </a>
           </li>
         </ul>
-      </amp-sidebar>
+      </nav>
     </header>
 
     <main className="main-wrapper">
@@ -164,6 +164,24 @@ height: 1.5rem;
 stroke: currentColor;
 }
 
+.navigasi {
+overflow: hidden; 
+position: absolute; 
+padding-left: 1.25rem;
+padding-right: 1.25rem; 
+padding-top: 4rem; 
+background-color: #ffffff; 
+height: 100vh;
+}
+
+.navigasi ul {
+display: flex; 
+flex-direction: column; 
+justify-content: center; 
+align-items: center; 
+gap: 1rem;
+}
+
 .main-wrapper {
 padding-left: 1.25rem;
 padding-right: 1.25rem; 
@@ -198,6 +216,17 @@ iframe {
 img {
   width: 100%;
   height: auto;
+}
+
+figure {
+  width: 100%;
+  height: auto;
+}
+
+button {
+  border: 0;
+  color: inherit;
+  background-color: inherit;
 }
 
 .main-title {
@@ -284,6 +313,7 @@ padding-bottom: 1.25rem;
 }
 
 body {
+  font-family: sans-serif;
   font-size: 14px;
   line-height: 24px;
   color: var(--tw-prose-body);
