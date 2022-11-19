@@ -9,8 +9,8 @@ import { client } from "../../lib/apolloClient";
 
 export const config = { amp: true };
 
-export default function SinglePost({ item }) {
-  const { title, excerpt, content, slug, author, featuredImage, categories, tags } = item;
+export default function SinglePost({ item, ampContent }) {
+  const { title, excerpt, slug, author, featuredImage, categories, tags } = item;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
@@ -100,7 +100,7 @@ export default function SinglePost({ item }) {
           <time className="main-date" datetime={item.date}>{dateFormated}</time>
         </p>
         <hr />
-        {ampify(parse(content))}
+        {parse(ampContent)}
       </article>
       <>
         {haveTags ? (
@@ -660,8 +660,10 @@ export async function getStaticProps({ params }) {
     return { notFound: true };
   };
 
+  const ampContent = await ampify(item.content);
+
   return {
-    props: { item },
+    props: { item, ampContent },
     revalidate: 60,
   };
 }
