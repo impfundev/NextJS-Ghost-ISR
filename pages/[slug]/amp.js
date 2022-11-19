@@ -19,7 +19,6 @@ export default function SinglePost({ item }) {
     <Head>
       <title>{title}</title>
       <meta name="description" content={excerpt} />
-      <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
     </Head>
     <header className="header">
       <div className="header-wrapper">
@@ -31,12 +30,12 @@ export default function SinglePost({ item }) {
             Fandomnesia
           </span>
         </a>
-        <button on='tap:AMP.setState({ hideGreeting: false })'>
+        <button on="tap:sidebar.toggle">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="menu-icon"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path></svg>
         </button>
       </div>
-      <nav className="navigasi" hidden="hideGreeting">
-        <ul>
+      <amp-sidebar className="navigasi" id="sidebar" layout="nodisplay" side="right">
+        <ul className="menu">
           <li>
             <a href="/">Beranda</a>
           </li>
@@ -61,7 +60,7 @@ export default function SinglePost({ item }) {
             </a>
           </li>
         </ul>
-      </nav>
+      </amp-sidebar>
     </header>
 
     <main className="main-wrapper">
@@ -175,12 +174,13 @@ background-color: #ffffff;
 height: 100vh;
 }
 
-.navigasi ul {
+.menu {
 display: flex; 
 flex-direction: column; 
 justify-content: center; 
 align-items: center; 
 gap: 1rem;
+z-index: 500;
 }
 
 .main-wrapper {
@@ -221,7 +221,9 @@ img {
 
 figure {
   width: 100%;
-  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 button {
