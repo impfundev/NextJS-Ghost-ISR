@@ -5,6 +5,9 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
+    <Head>
+      <meta name="robots" content="noindex" />
+    </Head>
     <Component {...pageProps} />
     </>
   );
