@@ -20,7 +20,6 @@ export default function SinglePost({ item }) {
     <>
     <Head>
       <title>{title}</title>
-      <meta name="description" content={excerpt} />
     </Head>
     <Layout>
       <>
@@ -60,7 +59,7 @@ export default function SinglePost({ item }) {
             ) : null}
           </figure>
         ) : null}
-        <div className="flex items-center justify-between py-4">
+        <div className="flex items-center justify-between">
           <span>Oleh: <a href={`/author/${author.node.slug}`}>{author.node.name}</a></span>
           <Share title={title} slug={slug} />
         </div>
