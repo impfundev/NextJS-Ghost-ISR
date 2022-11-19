@@ -5,7 +5,6 @@ import date from "date-and-time";
 import Link from "next/link";
 import Head from "next/head";
 import Image from "next/image";
-
 import { client } from "../../lib/apolloClient";
 import Layout from "../../components/Layout";
 import Share from "../../components/Share";
