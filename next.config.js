@@ -3,9 +3,9 @@ module.exports = {
     domains: ['cmsnya.fandomnesia.com'],
     formats: ['image/avif', 'image/webp'],
   },
-  experimental {
+  experimental: {
     amp: {
       skipValidation: true
     }
-  }
+  },
 }
