@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import parse from "html-react-parser";
 import date from "date-and-time";
 import Head from "next/head";
+import ampify from "ampify";
 
 import { client } from "../../lib/apolloClient";
 
@@ -99,7 +100,7 @@ export default function SinglePost({ item }) {
           <time className="main-date" datetime={item.date}>{dateFormated}</time>
         </p>
         <hr />
-        {parse(content)}
+        {ampify(parse(content))}
       </article>
       <>
         {haveTags ? (
