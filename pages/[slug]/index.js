@@ -53,18 +53,18 @@ export default function SinglePost({ item }) {
               alt={featuredImage.node.altText}
               width={1200}
               height={800}
-              priority
+              priority={true}
             />
             {featuredImage.node.caption ? (
-              <figcaption>{parse(featuredImage.node.caption)}</figcaption>
+              <figcaption className="py-0">{parse(featuredImage.node.caption)}</figcaption>
             ) : null}
           </figure>
         ) : null}
-        <p>
-          Oleh: <a href={`/author/${author.node.slug}`}>{author.node.name}</a><br />
-          <time className="text-gray-500 text-sm" datetime={item.date}>{dateFormated}</time>
-        </p>
-        <Share title={title} slug={slug} excerpt={excerpt} />
+        <div className="flex items-center justify-between py-4">
+          <span>Oleh: <a href={`/author/${author.node.slug}`}>{author.node.name}</a></span>
+          <Share title={title} slug={slug} />
+        </div>
+        <p><time className="text-gray-500 text-sm" datetime={item.date}>{dateFormated}</time></p>
         <hr />
         {parse(content)}
       </article>
