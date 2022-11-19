@@ -4,6 +4,7 @@ import parse from "html-react-parser";
 import date from "date-and-time";
 import Link from "next/link";
 import Head from "next/head";
+import Image from "next/image";
 
 import { client } from "../../lib/apolloClient";
 import Layout from "../../components/Layout";
@@ -46,9 +47,13 @@ export default function SinglePost({ item }) {
         </h1>
         {featuredImage ? (
           <figure>
-            <img
+            <Image
+              className="object-cover"
               src={featuredImage.node.sourceUrl}
               alt={featuredImage.node.altText}
+              width={1200}
+              height={800}
+              priority={true}
             />
             {featuredImage.node.caption ? (
               <figcaption>{parse(featuredImage.node.caption)}</figcaption>
