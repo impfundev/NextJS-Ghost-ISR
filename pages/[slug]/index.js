@@ -15,6 +15,7 @@ export default function SinglePost({ item }) {
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
+  let captionImg = parse(featuredImage.node.caption);
 
   return (
     <>
@@ -56,7 +57,7 @@ export default function SinglePost({ item }) {
               priority={true}
             />
             {featuredImage.node.caption ? (
-              <figcaption className="py-0">{parse(featuredImage.node.caption).replace(/<p>|</p>/g)}</figcaption>
+              <figcaption className="py-0">{captionImg.replace(/<p>|</p>/g, "")}</figcaption>
             ) : null}
           </figure>
         ) : null}
