@@ -205,14 +205,9 @@ export async function getStaticProps({ params }) {
 
   const { categories } = item;
 
-  const categoryName = categories.nodes.map((category) => {
-    const { name } = category;
-    return { name };
-  });
-
   const secresponse = await client.query({
     query: GET_RELATED,
-    variables: { catName: categoryName.name },
+    variables: { catName: categories.nodes.map((category) => (category.name)); },
   });
 
   const related = secresponse?.data?.category;
