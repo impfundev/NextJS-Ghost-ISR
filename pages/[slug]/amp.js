@@ -129,6 +129,7 @@ export default function SinglePost({ item, ampContent }) {
 position: sticky; 
 top: 0; 
 background-color: #ffffff;
+z-index: 100;
 }
 
 .header-wrapper {
@@ -214,7 +215,7 @@ iframe {
   min-height: 300px;
 }
 
-img {
+amp-img img {
   width: 100%;
   height: auto;
 }
@@ -310,7 +311,7 @@ padding-bottom: 1.25rem;
 
 body {
   font-family: sans-serif;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 24px;
   color: var(--tw-prose-body);
 }
