@@ -98,6 +98,10 @@ export default function SinglePost({ item, ampContent }) {
           Oleh: <a href={`/author/${author.node.slug}`}>{author.node.name}</a><br />
           <time className="main-date" datetime={item.date}>{dateFormated}</time>
         </p>
+        <div className="social-share">
+          <amp-social-share type="twitter" aria-label="Share on Twitter"></amp-social-share>
+          <amp-social-share type="system" aria-label="Share on Other"></amp-social-share>
+        </div>
         <hr />
         {parse(ampContent)}
       </article>
@@ -188,6 +192,13 @@ justify-content: center;
 align-items: center; 
 gap: 1rem;
 z-index: 500;
+}
+
+.social-share {
+display: flex; 
+flex-wrap: wrap; 
+align-items: center; 
+gap: 0.75rem; 
 }
 
 .main-wrapper {
