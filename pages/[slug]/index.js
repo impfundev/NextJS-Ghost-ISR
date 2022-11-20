@@ -205,9 +205,9 @@ export async function getStaticProps({ params }) {
 
   const { categories } = item;
 
-  await categories.nodes.map((category) => {
+  const categoryName = categories.nodes.map((category) => {
     const { name } = category;
-    return { name: categoryName };
+    return { name };
   });
 
   const secresponse = await client.query({
