@@ -13,10 +13,10 @@ export default function Layout({ children }) {
             <h2 className="mb-6 text-sm font-semibold uppercase text-gray-500">Situs</h2>
             <ul>
                 <li className="mb-4">
-                    <a href="#" className="hover:underline">Tentang Kami</a>
+                    <a href="/tentang-kami/" className="hover:underline">Tentang Kami</a>
                 </li>
                 <li className="mb-4">
-                    <a href="#" className="hover:underline">Kontak Kami</a>
+                    <a href="/tentang-kami/" className="hover:underline">Kontak Kami</a>
                 </li>
             </ul>
         </div>
@@ -27,13 +27,13 @@ export default function Layout({ children }) {
                     <a href="#" className="hover:underline">YouTube</a>
                 </li>
                 <li className="mb-4">
-                    <a href="#" className="hover:underline">Twitter</a>
+                    <a href="https://twitter.com/fandomnesia_com" className="hover:underline">Twitter</a>
                 </li>
                 <li className="mb-4">
                     <a href="#" className="hover:underline">Facebook</a>
                 </li>
                 <li className="mb-4">
-                    <a href="#" className="hover:underline">Google News</a>
+                    <a href="https://news.google.com/publications/CAAqBwgKMK2zowsw8L27Aw" className="hover:underline">Google News</a>
                 </li>
             </ul>
         </div>
@@ -41,13 +41,13 @@ export default function Layout({ children }) {
             <h2 className="mb-6 text-sm font-semibold uppercase text-gray-500">Legal</h2>
             <ul>
                 <li className="mb-4">
-                    <a href="#" className="hover:underline">Disclaimer</a>
+                    <a href="/disclaimer/" className="hover:underline">Disclaimer</a>
                 </li>
                 <li className="mb-4">
-                    <a href="#" className="hover:underline">Kebijakan Privasi</a>
+                    <a href="/privacy-policy/" className="hover:underline">Kebijakan Privasi</a>
                 </li>
                 <li className="mb-4">
-                    <a href="#" className="hover:underline">Pedoman Media Siber</a>
+                    <a href="/pedoman-media-siber/" className="hover:underline">Pedoman Media Siber</a>
                 </li>
             </ul>
         </div>
