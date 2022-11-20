@@ -215,7 +215,8 @@ export async function getStaticProps({ params }) {
   });
 
   const allPosts = secresponse?.data?.category;
-  const related = allPosts.posts.nodes.filter((post) => (post.slug !== slug));
+  const { posts } = allPosts;
+  const related = posts.nodes.filter((post) => ((post.slug) !== slug));
 
   if (!related) {
     return null;
