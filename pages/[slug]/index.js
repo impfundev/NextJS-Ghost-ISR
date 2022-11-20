@@ -172,7 +172,7 @@ const GET_POST = gql`
 `;
 
 const GET_RELATED = gql`
-  query getRelated($catName: ID!) {
+  query getRelated($catSlug: ID!) {
     category(id: $catSlug, idType: SLUG) {
       posts {
         nodes {
