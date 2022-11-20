@@ -88,25 +88,26 @@ export default function SinglePost({ item, related }) {
           </>
         ) : null}
       </>
-      <div className="py-4">
-        <>
-        {posts.nodes.filter((post) => post.slug !== slug).map((post) => {
-          return (
-            <article className="py-6" key={post.slug}>
-              <a className="flex flex-col gap-4" href={post.slug}>
-                <Image className="object-cover" src={post.featuredImage.node.sourceUrl} width={1200} height={800} alt={post.title} />
-                <h3 className="text-xl font-bold">{post.title}</h3>
-              </a>
-            </article>
-          );
-        })}
-        </>
-      </div>
       <div className="py-5">
         <div className="fb-comments" data-href={`https://fandomnesia-react.vercel.app/${slug}`} data-width="100%" data-numposts="4" data-lazy="true"></div>
       </div>
       <div id="fb-root"></div>
       <script async src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0"></script>
+      <div className="py-4">
+        <h3 className="text-xl font-bold">Artikel Terkait</h3>
+          <>
+            {posts.nodes.filter((post) => post.slug !== slug).map((post) => {
+              return (
+                <article className="py-6" key={post.slug}>
+                  <a className="flex flex-col gap-4" href={post.slug}>
+                    <Image className="object-cover" src={post.featuredImage.node.sourceUrl} width={1200} height={800} alt={post.title} />
+                    <h3 className="text-xl font-bold">{post.title}</h3>
+                 </a>
+               </article>
+             );
+           })}
+        </>
+      </div>
     </Layout>
     </>
   );
