@@ -1,6 +1,6 @@
 import Layout from "../components/Layout";
 
-export default function SinglePost() {
+export default function Disclaimer() {
   
   return (
     <>
