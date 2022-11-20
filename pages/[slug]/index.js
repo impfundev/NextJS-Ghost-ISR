@@ -16,6 +16,8 @@ export default function SinglePost({ item, related }) {
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
   const { posts } = related;
+  const allPosts = posts.map((post) => (post));
+  const relatedPosts = post.filter((post) => ((post.slug) !== slug));
 
   return (
     <>
@@ -90,16 +92,14 @@ export default function SinglePost({ item, related }) {
       </>
       <div className="py-4">
         <>
-        {posts.nodes.map((post) => {
-          return (
-            <article className="py-6" key={post.slug}>
-              <a className="flex flex-col gap-4" href={post.slug}>
-                <Image src={post.featuredImage.node.sourceUrl} width={1200} height={800} alt={post.title} />
-                <h3 className="text-xl font-bold">{post.title}</h3>
+        {relatedPosts && (
+            <article className="py-6" key={relatedPosts.slug}>
+              <a className="flex flex-col gap-4" href={relatedPosts.slug}>
+                <Image className="object-cover" src={relatedPosts.featuredImage.node.sourceUrl} width={1200} height={800} alt={relatedPosts.title} />
+                <h3 className="text-xl font-bold">{relatedPosts.title}</h3>
               </a>
             </article>
-          );
-        })}
+        )}
         </>
       </div>
       <div className="py-5">
@@ -136,7 +136,6 @@ export async function getStaticPaths() {
 const GET_POST = gql`
   query getPostBySlug($slugId: ID!) {
     post(id: $slugId, idType: SLUG) {
-      databaseId
       title
       date
       slug
@@ -175,9 +174,9 @@ const GET_POST = gql`
 `;
 
 const GET_RELATED = gql`
-  query getRelated($catSlug: ID!, $postId: ID!) {
+  query getRelated($catSlug: ID!) {
     category(id: $catSlug, idType: SLUG) {
-      posts(where: { notIn: $postId }) {
+      posts {
         nodes {
           title
           slug
@@ -206,13 +205,12 @@ export async function getStaticProps({ params }) {
     return { notFound: true };
   };
 
-  const { categories, databaseId } = item;
+  const { categories } = item;
   
   const secresponse = await client.query({
     query: GET_RELATED,
     variables: {
       catSlug: categories.nodes[0]?.slug,
-      postId: databaseId,
     },
   });
 
