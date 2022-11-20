@@ -88,10 +88,10 @@ export default function SinglePost({ item }) {
         ) : null}
       </>
       <div className="py-5">
-        <div className="fb-comments" data-href={slug} data-width="100%" data-numposts="4" data-lazy="true"></div>
+        <div className="fb-comments" data-href={`https://fandomnesia-react.vercel.app/${slug}`} data-width="100%" data-numposts="4" data-lazy="true"></div>
       </div>
       <div id="fb-root"></div>
-      <script src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0"></script>
+      <script async src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0"></script>
     </Layout>
     </>
   );
