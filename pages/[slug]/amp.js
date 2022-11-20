@@ -10,7 +10,7 @@ import { client } from "../../lib/apolloClient";
 export const config = { amp: true };
 
 export default function SinglePost({ item, ampContent }) {
-  const { title, excerpt, slug, author, featuredImage, categories, tags } = item;
+  const { title, excerpt, slug, author, featuredImage, categories, tags, seo } = item;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
@@ -18,8 +18,7 @@ export default function SinglePost({ item, ampContent }) {
   return (
     <>
     <Head>
-      <title>{title}</title>
-      <meta name="description" content={excerpt} />
+      {parse(seo.fullHead)}
     </Head>
     <header className="header">
       <div className="header-wrapper">
@@ -121,7 +120,14 @@ export default function SinglePost({ item, ampContent }) {
         ) : null}
       </>
       <div className="comment-wrapper">
-        Komentar
+        <amp-facebook-comments
+          width="486"
+          height="657"
+          layout="responsive"
+          data-numposts="5"
+          data-href={`https://fandomnesia-react.vercel.app/${slug}/amp`}
+        >
+        </amp-facebook-comments>
       </div>
     </main>
 <style jsx global>{`
@@ -643,6 +649,9 @@ const GET_POST = gql`
           slug
           name
         }
+      }
+      seo {
+        fullHead
       }
     }
   }
