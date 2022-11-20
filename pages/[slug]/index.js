@@ -204,10 +204,10 @@ export async function getStaticProps({ params }) {
   };
 
   const { categories } = item;
-
+  
   const secresponse = await client.query({
     query: GET_RELATED,
-    variables: { catSlug: categories.nodes.map((category) => `${category.slug}`).replace(/[\[\]]+/g,'') },
+    variables: { catSlug: categories.nodes.map((category) => (category.slug[0])), },
   });
 
   const related = secresponse?.data?.category;
