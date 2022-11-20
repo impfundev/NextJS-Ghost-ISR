@@ -92,14 +92,14 @@ export default function SinglePost({ item, related }) {
         <>
         {posts.nodes.map((post) => {
           return (
-            <article key={post.slug}>
-              <a href={post.slug}>
+            <article className="py-6" key={post.slug}>
+              <a className="flex flex-col gap-4" href={post.slug}>
                 <Image src={post.featuredImage.node.sourceUrl} width={1200} height={800} alt={post.title} />
-                <h3>{post.title}</h3>
+                <h3 className="text-xl font-bold">{post.title}</h3>
               </a>
             </article>
           );
-        }).filter((post) => ((post.slug) !== slug))}
+        })}
         </>
       </div>
       <div className="py-5">
