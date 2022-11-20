@@ -99,7 +99,7 @@ export default function SinglePost({ item, related }) {
               </a>
             </article>
           );
-        })}
+        }).filter((post) => ((post.slug) !== slug))}
         </>
       </div>
       <div className="py-5">
