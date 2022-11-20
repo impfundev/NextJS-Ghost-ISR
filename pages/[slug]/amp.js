@@ -85,10 +85,13 @@ export default function SinglePost({ item, ampContent }) {
         </h1>
         {featuredImage ? (
           <figure>
-            <img
+            <amp-img
               src={featuredImage.node.sourceUrl}
               alt={featuredImage.node.altText}
-            />
+              width="1200"
+              height="800"
+              layout="responsive"
+            ></amp-img>
             {featuredImage.node.caption ? (
               <figcaption>{parse(featuredImage.node.caption)}</figcaption>
             ) : null}
@@ -99,8 +102,8 @@ export default function SinglePost({ item, ampContent }) {
           <time className="main-date" datetime={item.date}>{dateFormated}</time>
         </p>
         <div className="social-share">
-          <amp-social-share type="twitter" aria-label="Share on Twitter"></amp-social-share>
-          <amp-social-share type="system" aria-label="Share on Other"></amp-social-share>
+          <amp-social-share className="share-icon" type="twitter" aria-label="Share on Twitter"></amp-social-share>
+          <amp-social-share className="share-icon" type="system" aria-label="Share on Other"></amp-social-share>
         </div>
         <hr />
         {parse(ampContent)}
@@ -124,14 +127,7 @@ export default function SinglePost({ item, ampContent }) {
         ) : null}
       </>
       <div className="comment-wrapper">
-        <amp-facebook-comments
-          width="486"
-          height="657"
-          layout="responsive"
-          data-numposts="5"
-          data-href={`https://fandomnesia-react.vercel.app/${slug}/amp`}
-        >
-        </amp-facebook-comments>
+        <a href={slug} className="category">Komentar</a>
       </div>
     </main>
 <style jsx global>{`
@@ -225,6 +221,12 @@ font-weight: 700;
 border-radius: 9999px;
 }
 
+.share-icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+}
+
 /* Main Content */
 iframe {
   width: 100%;
@@ -235,6 +237,10 @@ iframe {
 amp-img img {
   width: 100%;
   height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  object-fit: cover;
 }
 
 figure {
@@ -328,10 +334,9 @@ padding-bottom: 1.25rem;
 
 body {
   font-family: sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 24px;
   color: var(--tw-prose-body);
-  text-decoration: none;
 }
 
 p {
@@ -341,7 +346,7 @@ p {
 
 a {
   color: var(--tw-prose-links);
-  text-decoration: underline;
+  text-decoration: none;
   font-weight: 500;
 }
 
@@ -518,7 +523,7 @@ h1 strong {
           font-weight: 700;
           color: inherit;
         }
-        img {
+        amp-img img {
           margin-top: 24px;
           margin-bottom: 24px;
         }
