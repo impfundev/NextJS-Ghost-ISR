@@ -211,7 +211,7 @@ export async function getStaticProps({ params }) {
   const related = secresponse?.data?.category;
 
   if (!related) {
-    return { "<p>No Related Posts</p>" };
+    return null;
   };
 
   return {
