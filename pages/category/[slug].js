@@ -1,5 +1,4 @@
 import { gql } from "@apollo/client";
-import parse from "html-react-parser";
 import { client } from "../../lib/apolloClient";
 import Layout from "../../components/Layout";
 import PostsList from "../../components/PostsList";
@@ -7,7 +6,7 @@ import PostsList from "../../components/PostsList";
 export default function SingleCategory({ category }) {
   return (
     <Layout>
-      <h1>{parse(category.name)}</h1>
+      <h1 className="py-6 text-lg font-bold">{category.name}</h1>
       <PostsList posts={category.posts.nodes} />
     </Layout>
   );
