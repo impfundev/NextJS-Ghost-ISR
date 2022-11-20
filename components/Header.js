@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Link from "next/link";
 
 export default function Header({ categories }) {
   const [navActive, setNavActive] = useState(false);
@@ -34,29 +33,19 @@ export default function Header({ categories }) {
       <nav className={`${ navActive ? 'h-screen pt-16 text-black' : 'h-0 text-white' } container mx-auto px-5 bg-white absolute overflow-hidden transition-all ease-in-out duration-300`}>
         <ul className="flex flex-col gap-4 items-center sm:justify-center">
           <li>
-            <Link href="/">
-              <a onClick={handleClick}>Beranda</a>
-            </Link>
+            <a href="/" onClick={handleClick}>Beranda</a>
           </li>
           <li>
-            <Link href="/category/budaya-populer">
-              <a onClick={handleClick}>Budaya Populer</a>
-            </Link>
+            <a href="/category/budaya-populer" onClick={handleClick}>Budaya Populer</a>
           </li>
           <li>
-            <Link href="/category/selebritis">
-              <a onClick={handleClick}>Selebritis</a>
-            </Link>
+            <a href="/category/selebritis" onClick={handleClick}>Selebritis</a>
           </li>
           <li>
-            <Link href="/category/olahraga">
-              <a onClick={handleClick}>Olahraga</a>
-            </Link>
+            <a href="/category/olahraga" onClick={handleClick}>Olahraga</a>
           </li>
           <li>
-            <Link href="/category/teknologi">
-              <a onClick={handleClick}>Teknologi</a>
-            </Link>
+            <a href="/category/teknologi" onClick={handleClick}>Teknologi</a>
           </li>
         </ul>
       </nav>
