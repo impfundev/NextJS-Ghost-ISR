@@ -16,8 +16,7 @@ export default function SinglePost({ item, related }) {
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
   const { posts } = related;
-  const allPosts = posts.nodes.map((post) => (post)).filter(({post}) => (({post.slug}) !== slug));
-
+  
   return (
     <>
     <Head>
@@ -91,14 +90,16 @@ export default function SinglePost({ item, related }) {
       </>
       <div className="py-4">
         <>
-        {allPosts && (
-            <article className="py-6" key={allPosts.slug}>
-              <a className="flex flex-col gap-4" href={allPosts.slug}>
-                <Image className="object-cover" src={allPosts.featuredImage.node.sourceUrl} width={1200} height={800} alt={allPosts.title} />
-                <h3 className="text-xl font-bold">{allPosts.title}</h3>
+        {posts.nodes.map((post) => {
+          return (
+            <article className="py-6" key={post.slug}>
+              <a className="flex flex-col gap-4" href={post.slug}>
+                <Image className="object-cover" src={post.featuredImage.node.sourceUrl} width={1200} height={800} alt={post.title} />
+                <h3 className="text-xl font-bold">{post.title}</h3>
               </a>
             </article>
-        )}
+          );
+        })}
         </>
       </div>
       <div className="py-5">
@@ -213,7 +214,8 @@ export async function getStaticProps({ params }) {
     },
   });
 
-  const related = secresponse?.data?.category;
+  const allPosts = secresponse?.data?.category;
+  const related = allPosts.posts.nodes.filter((post) => (post.slug !== slug));
 
   if (!related) {
     return null;
