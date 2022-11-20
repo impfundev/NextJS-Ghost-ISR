@@ -10,11 +10,12 @@ import { client } from "../../lib/apolloClient";
 import Layout from "../../components/Layout";
 import Share from "../../components/Share";
 
-export default function SinglePost({ item }) {
+export default function SinglePost({ item, related }) {
   const { title, excerpt, content, slug, author, featuredImage, categories, tags, seo } = item;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
+  const { posts } = related;
 
   return (
     <>
@@ -87,6 +88,18 @@ export default function SinglePost({ item }) {
           </>
         ) : null}
       </>
+      <div className="py-4">
+        <>
+        {posts.map((post) => {
+          <article key={post.slug}>
+            <a href={post.slug}>
+              <Image src={post.featuredImage.node.sourceUrl} width={1200} height={800} alt={post.title} />
+              <h3>{post.title}</h3>
+            </a>
+          </article>
+        })}
+        </>
+      </div>
       <div className="py-5">
         <div className="fb-comments" data-href={`https://fandomnesia-react.vercel.app/${slug}`} data-width="100%" data-numposts="4" data-lazy="true"></div>
       </div>
@@ -158,6 +171,24 @@ const GET_POST = gql`
   }
 `;
 
+const GET_RELATED = gql`
+  query getRelated($catName: ID!) {
+    category(id: $catName, idType: NAME) {
+      posts {
+        nodes {
+          title
+          slug
+          featuredImage {
+            node {
+              sourceUrl
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 export async function getStaticProps({ params }) {
   const { slug } = params;
 
@@ -172,8 +203,19 @@ export async function getStaticProps({ params }) {
     return { notFound: true };
   };
 
+  const secresponse = await client.query({
+    query: GET_RELATED,
+    variables: { catName: item.categories.nodes.name },
+  });
+
+  const related = secresponse?.data?.category;
+
+  if (!related) {
+    return { "<p>No Related Posts</p>" };
+  };
+
   return {
-    props: { item },
+    props: { item, related },
     revalidate: 60,
   };
 }
