@@ -90,14 +90,14 @@ export default function SinglePost({ item, related }) {
       </>
       <div className="py-4">
         <>
-        {posts.map((post) => {
+        {posts && (
           <article key={post.slug}>
             <a href={post.slug}>
               <Image src={post.featuredImage.node.sourceUrl} width={1200} height={800} alt={post.title} />
               <h3>{post.title}</h3>
             </a>
           </article>
-        })}
+        )}
         </>
       </div>
       <div className="py-5">
