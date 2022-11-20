@@ -90,7 +90,7 @@ export default function SinglePost({ item, related }) {
       </>
       <div className="py-4">
         <>
-        {posts.nodes.map((post) => {
+        {posts.nodes.filter((post) => post.slug !== slug).map((post) => {
           return (
             <article className="py-6" key={post.slug}>
               <a className="flex flex-col gap-4" href={post.slug}>
@@ -214,10 +214,8 @@ export async function getStaticProps({ params }) {
     },
   });
 
-  const allPosts = secresponse?.data?.category;
-  const { posts } = allPosts;
-  const related = posts.nodes.filter((post) => ((post.slug) !== slug));
-
+  const related = secresponse?.data?.category;
+  
   if (!related) {
     return null;
   };
