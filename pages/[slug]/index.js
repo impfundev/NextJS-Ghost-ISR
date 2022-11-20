@@ -175,7 +175,7 @@ const GET_POST = gql`
 `;
 
 const GET_RELATED = gql`
-  query getRelated($catSlug: ID!, $postId: PostObjects!) {
+  query getRelated($catSlug: ID!, $postId: TermObjects) {
     category(id: $catSlug, idType: SLUG) {
       posts(where: { notIn: $postId }) {
         nodes {
