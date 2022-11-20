@@ -136,6 +136,7 @@ export async function getStaticPaths() {
 const GET_POST = gql`
   query getPostBySlug($slugId: ID!) {
     post(id: $slugId, idType: SLUG) {
+      databaseId
       title
       date
       slug
@@ -174,9 +175,9 @@ const GET_POST = gql`
 `;
 
 const GET_RELATED = gql`
-  query getRelated($catSlug: ID!) {
+  query getRelated($catSlug: ID!, $postId: ID!) {
     category(id: $catSlug, idType: SLUG) {
-      posts {
+      posts(where: { notIn: $postId }) {
         nodes {
           title
           slug
@@ -205,11 +206,14 @@ export async function getStaticProps({ params }) {
     return { notFound: true };
   };
 
-  const { categories } = item;
+  const { categories, databaseId } = item;
   
   const secresponse = await client.query({
     query: GET_RELATED,
-    variables: { catSlug: categories.nodes[0]?.slug, },
+    variables: {
+      catSlug: categories.nodes[0]?.slug,
+      postId: databaseId,
+    },
   });
 
   const related = secresponse?.data?.category;
