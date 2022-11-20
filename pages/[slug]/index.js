@@ -203,9 +203,16 @@ export async function getStaticProps({ params }) {
     return { notFound: true };
   };
 
+  const { categories } = item;
+
+  await categories.nodes.map((category) => {
+    const { name } = category;
+    return { name: categoryName };
+  });
+
   const secresponse = await client.query({
     query: GET_RELATED,
-    variables: { catName: item.categories.nodes.name },
+    variables: { catName: categoryName },
   });
 
   const related = secresponse?.data?.category;
