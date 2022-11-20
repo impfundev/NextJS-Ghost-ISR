@@ -16,8 +16,8 @@ export default function SinglePost({ item, related }) {
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
   const { posts } = related;
-  const allPosts = posts.map((post) => (post));
-  const relatedPosts = post.filter((post) => ((post.slug) !== slug));
+  const allPosts = posts.nodes.map((post) => (post));
+  const relatedPosts = allPosts.filter((post) => ((post.slug) !== slug));
 
   return (
     <>
