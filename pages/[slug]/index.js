@@ -173,7 +173,7 @@ const GET_POST = gql`
 
 const GET_RELATED = gql`
   query getRelated($catName: ID!) {
-    category(id: $catName, idType: NAME) {
+    category(id: $catSlug, idType: SLUG) {
       posts {
         nodes {
           title
@@ -207,7 +207,7 @@ export async function getStaticProps({ params }) {
 
   const secresponse = await client.query({
     query: GET_RELATED,
-    variables: { catName: categories.nodes.map((category) => (category.name)), },
+    variables: { catSlug: categories.nodes.map((category) => (category.slug)) },
   });
 
   const related = secresponse?.data?.category;
