@@ -16,8 +16,7 @@ export default function SinglePost({ item, related }) {
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
   const { posts } = related;
-  const allPosts = posts.nodes.map((post) => (post));
-  const relatedPosts = allPosts.filter((post) => ((post.slug) !== slug));
+  const allPosts = posts.nodes.map((post) => (post)).filter(({post}) => (({post.slug}) !== slug));
 
   return (
     <>
@@ -92,11 +91,11 @@ export default function SinglePost({ item, related }) {
       </>
       <div className="py-4">
         <>
-        {relatedPosts && (
-            <article className="py-6" key={relatedPosts.slug}>
-              <a className="flex flex-col gap-4" href={relatedPosts.slug}>
-                <Image className="object-cover" src={relatedPosts.featuredImage.node.sourceUrl} width={1200} height={800} alt={relatedPosts.title} />
-                <h3 className="text-xl font-bold">{relatedPosts.title}</h3>
+        {allPosts && (
+            <article className="py-6" key={allPosts.slug}>
+              <a className="flex flex-col gap-4" href={allPosts.slug}>
+                <Image className="object-cover" src={allPosts.featuredImage.node.sourceUrl} width={1200} height={800} alt={allPosts.title} />
+                <h3 className="text-xl font-bold">{allPosts.title}</h3>
               </a>
             </article>
         )}
