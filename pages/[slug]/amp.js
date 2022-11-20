@@ -314,6 +314,7 @@ body {
   font-size: 18px;
   line-height: 24px;
   color: var(--tw-prose-body);
+  text-decoration: none;
 }
 
 p {
