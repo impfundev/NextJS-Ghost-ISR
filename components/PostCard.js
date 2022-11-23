@@ -1,18 +1,21 @@
 import parse from "html-react-parser";
 import { gql } from "@apollo/client";
+import Image from "next/image";
 
 export default function PostCard({ post }) {
   const { title, excerpt, slug, featuredImage } = post;
 
   return (
     <article className="max-w-sm rounded-2xl shadow-lg overflow-hidden border border-black text-black hover:border-yellow-500 hover:text-yellow-500 transition-all duration-300">
-      <a href={`/${slug}`}>
+      <a className="relative" href={`/${slug}`} aria-label={title}>
         {featuredImage ? (
           <>
-            <img
-              className="w-full rounded-xl"
+            <Image
+              className="w-full object-cover h-60"
               src={featuredImage.node.sourceUrl}
               alt={featuredImage.node.altText}
+              layout="fill"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </>
         ) : null}
