@@ -15,6 +15,7 @@
     "html-react-parser": "^1.2.6",
     "html2amp": "1.4.2",
     "next": "^13.0.3",
+    "@next/font": "latest",
     "react": "^18.1.0",
     "react-dom": "^18.1.0"
   },
