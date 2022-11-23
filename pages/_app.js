@@ -9,7 +9,9 @@ const rubik = Rubik({
   variable: '--rubik-font',
 })
 
-function MyApp({ Component, pageProps, rubik.variable }) {
+const fontSite = rubik.variable;
+
+function MyApp({ Component, pageProps, fontSite }) {
 
   return (
     <>
