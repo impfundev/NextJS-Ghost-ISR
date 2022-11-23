@@ -40,7 +40,7 @@ export default function Home({ posts }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const response = await client.query({
     query: GET_POSTS,
   });
@@ -51,6 +51,5 @@ export async function getStaticProps() {
     props: {
       posts,
     },
-    revalidate: 10,
   };
 }
