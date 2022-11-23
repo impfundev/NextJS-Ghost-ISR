@@ -7,7 +7,7 @@ export default function Header({ categories }) {
   };
   
   return (
-    <header className="sticky top-0 bg-yellow-500 border-b border-black">
+    <header className="sticky top-0 bg-yellow-400 border-b border-black">
       <div className="flex items-center justify-between container mx-auto px-5 py-4">
           <a href="/" className="flex items-center gap-4">
             <svg className="rounded-full" version="1.0" xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 152.000000 152.000000" preserveAspectRatio="xMidYMid meet">
