@@ -3,7 +3,13 @@
 @tailwind utilities;
 
 body {
-  @apply font-mabry
+  font-family: var(--rubik-font);
+  font-weight: 400;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--rubik-font);
+  font-weight: 700;
 }
 
 iframe {
