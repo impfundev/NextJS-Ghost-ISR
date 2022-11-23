@@ -1,6 +1,5 @@
 import { gql } from "@apollo/client";
 import Head from "next/head";
-import { RetryLink } from "@apollo/client/link/retry";
 
 import { client } from "../lib/apolloClient";
 import generateFeed from "../lib/generateFeed";
@@ -26,11 +25,7 @@ const GET_POSTS = gql`
   }
 `;
 
-export default function Home({ posts, errorCode }) {
-  const reTry = new RetryLink();
-  if (errorCode) {
-    return reTry;
-  };
+export default function Home({ posts }) {
 
   return (
     <>
@@ -45,18 +40,17 @@ export default function Home({ posts, errorCode }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const response = await client.query({
     query: GET_POSTS,
   });
-  const errorCode = response.ok ? false : response.status;
   const posts = response.data.posts.nodes;
   await generateFeed({ posts });
 
   return {
     props: {
       posts,
-      errorCode,
     },
+    revalidate: 1,
   };
 }
