@@ -34,7 +34,7 @@ module.exports = {
       typography: {
         DEFAULT: {
           css: {
-            font-family: theme('font.mabry'),
+            fontFamily: theme('font.mabry'),
           },
         },
       },
