@@ -1,7 +1,15 @@
 import Head from 'next/head';
+import { Rubik } from '@next/font/google';
 import '../styles/globals.css';
 
-function MyApp({ Component, pageProps }) {
+const rubik = Rubik({
+  display: 'swap',
+  weight: ['400','700'],
+  fallback: 'sans-serif',
+  variable: '--rubik-font',
+})
+
+function MyApp({ Component, pageProps, rubik }) {
 
   return (
     <>
