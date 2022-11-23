@@ -3,13 +3,13 @@ import { Rubik } from '@next/font/google';
 import '../styles/globals.css';
 
 const rubik = Rubik({
-  display: 'swap',
-  weight: ['400','700'],
-  fallback: 'sans-serif',
+  weight: ['400', '700'],
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
   variable: '--rubik-font',
 })
 
-function MyApp({ Component, pageProps, rubik }) {
+function MyApp({ Component, pageProps, rubik.variable }) {
 
   return (
     <>
