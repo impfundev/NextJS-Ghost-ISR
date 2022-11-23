@@ -7,10 +7,10 @@ export default function Layout({ children }) {
       <main className="container mx-auto px-5 pb-8">
         {children}
       </main>
-<footer className="bg-yellow-200 border-t border-black">
+<footer className="bg-black text-white">
     <div className="grid grid-cols-2 gap-8 py-8 px-6 md:grid-cols-4">
         <div>
-            <h2 className="mb-6 text-sm font-semibold uppercase text-gray-500">Situs</h2>
+            <h2 className="mb-6 text-sm font-semibold uppercase">Situs</h2>
             <ul>
                 <li className="mb-4">
                     <a href="/tentang-kami/" className="hover:font-bold transition-all duration-300">Tentang Kami</a>
@@ -21,7 +21,7 @@ export default function Layout({ children }) {
             </ul>
         </div>
         <div>
-            <h2 className="mb-6 text-sm font-semibold uppercase text-gray-500">Channel</h2>
+            <h2 className="mb-6 text-sm font-semibold uppercase">Channel</h2>
             <ul>
                 <li className="mb-4">
                     <a href="#" className="hover:font-bold transition-all duration-300">YouTube</a>
@@ -38,7 +38,7 @@ export default function Layout({ children }) {
             </ul>
         </div>
         <div>
-            <h2 className="mb-6 text-sm font-semibold uppercase text-gray-500">Legal</h2>
+            <h2 className="mb-6 text-sm font-semibold uppercase">Legal</h2>
             <ul>
                 <li className="mb-4">
                     <a href="/disclaimer/" className="hover:font-bold transition-all duration-300">Disclaimer</a>
@@ -52,8 +52,8 @@ export default function Layout({ children }) {
             </ul>
         </div>
     </div>
-    <div className="py-6 px-4 md:flex md:items-center md:justify-between">
-        <span className="text-sm text-gray-500 text-center">© 2022 <a href="/">Fandomnesia</a>. All Rights Reserved.
+    <div className="py-6 px-4 text-center">
+        <span className="text-sm">© 2022 <a href="/">Fandomnesia</a>. All Rights Reserved.
         </span>
     </div>
 </footer>
