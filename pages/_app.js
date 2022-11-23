@@ -2,16 +2,13 @@ import Head from 'next/head';
 import { Rubik } from '@next/font/google';
 import '../styles/globals.css';
 
-const rubik = Rubik({
-  weight: ['400', '700'],
-  style: ['normal', 'italic'],
-  subsets: ['latin'],
-  variable: '--rubik-font',
-})
-
-const fontSite = rubik.variable;
-
-function MyApp({ Component, pageProps, fontSite }) {
+function MyApp({ Component, pageProps, Rubik }) {
+  const rubik = Rubik({
+    weight: ['400', '700'],
+    style: ['normal', 'italic'],
+    subsets: ['latin'],
+    variable: '--rubik-font',
+  }) { return rubik.variable };
 
   return (
     <>
