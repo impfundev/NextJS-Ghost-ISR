@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply font-mabry
+}
+
 iframe {
   width: 100%;
   height: auto;
