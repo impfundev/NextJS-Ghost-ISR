@@ -31,13 +31,6 @@ module.exports = {
       fontFamily: {
         mabry: ["Mabry pro", "sans-serif"],
       },
-      typography: {
-        DEFAULT: {
-          css: {
-            fontFamily: theme('font.mabry'),
-          },
-        },
-      },
     },
   },
   plugins: [require('@tailwindcss/typography'),],
