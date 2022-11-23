@@ -8,14 +8,14 @@ function MyApp({ Component, pageProps, Rubik }) {
     style: ['normal', 'italic'],
     subsets: ['latin'],
     variable: '--rubik-font',
-  }) { return rubik.variable };
+  });
 
   return (
     <>
     <Head>
       <meta name="robots" content="noindex" />
     </Head>
-    <Component {...pageProps} />
+    <Component {...pageProps} className={rubik.variable} />
     </>
   );
 }
