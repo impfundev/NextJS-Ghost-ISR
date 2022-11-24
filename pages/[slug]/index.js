@@ -4,7 +4,6 @@ import parse from "html-react-parser";
 import date from "date-and-time";
 import Link from "next/link";
 import Head from "next/head";
-import Image from "next/image";
 
 import { client } from "../../lib/apolloClient";
 import Layout from "../../components/Layout";
@@ -48,13 +47,12 @@ export default function SinglePost({ item, related }) {
         </h1>
         {featuredImage ? (
           <figure>
-            <Image
+            <img
               className="object-cover"
               src={featuredImage.node.sourceUrl}
               alt={featuredImage.node.altText}
-              width={1200}
-              height={800}
-              priority={true}
+              srcSet={featuredImage.node.srcSet}
+              sizes={featuredImage.node.sizes}
             />
             {featuredImage.node.caption ? (
               <figcaption className="py-0" dangerouslySetInnerHTML={{ __html: featuredImage.node.caption }} />
@@ -151,6 +149,8 @@ const GET_POST = gql`
           sourceUrl
           altText
           caption
+          sizes
+          srcSet
         }
       }
       categories(first: 1) {
@@ -184,6 +184,8 @@ const GET_RELATED = gql`
             node {
               sourceUrl
               altText
+              sizes
+              srcSet
             }
           }
         }
