@@ -48,6 +48,8 @@ const GET_USER = gql`
             node {
               sourceUrl
               altText
+              sizes
+              srcSet
             }
           }
         }
