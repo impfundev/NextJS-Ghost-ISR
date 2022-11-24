@@ -5,10 +5,10 @@ import date from "date-and-time";
 import Link from "next/link";
 import Head from "next/head";
 
-import { client } from "../lib/apolloClient";
-import Layout from "../components/Layout";
-import Share from "../components/Share";
-import PostCard from "../components/PostCard";
+import { client } from "../../lib/apolloClient";
+import Layout from "../../components/Layout";
+import Share from "../../components/Share";
+import PostCard from "../../components/PostCard";
 
 export default function SinglePost({ item, related }) {
   const { title, excerpt, content, slug, author, featuredImage, categories, tags, seo } = item;
@@ -46,8 +46,9 @@ export default function SinglePost({ item, related }) {
           {title}
         </h1>
         {featuredImage ? (
-          <figure>
+          <figure className="w-full">
             <img
+              className="w-full h-auto"
               src={featuredImage.node.sourceUrl}
               alt={featuredImage.node.altText}
               srcSet={featuredImage.node.srcSet}
@@ -224,6 +225,6 @@ export async function getStaticProps({ params }) {
 
   return {
     props: { item, related },
-    revalidate: 60,
+    revalidate: 1,
   };
 }
