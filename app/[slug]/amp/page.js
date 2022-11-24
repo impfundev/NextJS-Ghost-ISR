@@ -84,8 +84,7 @@ async function getData(slug) {
 }
 
 export default async function SinglePost({ params }) {
-  const { slug } = params;
-  await getData(slug);
+  await getData({ slug: params.slug });
   const { title, content, excerpt, slug, author, featuredImage, categories, tags } = item;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
