@@ -47,6 +47,8 @@ const GET_CATEGORY = gql`
             node {
               sourceUrl
               altText
+              sizes
+              srcSet
             }
           }
         }
