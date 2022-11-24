@@ -1,7 +1,6 @@
-import ampify from "ampify";
-
 export default function Layout({ children }) {
-  const html =`<html lang="id">
+  return (
+    <html lang="id">
       <head>
         <title>Next.js</title>
 
@@ -486,10 +485,6 @@ h1 strong {
       <body>
         {children}
       </body>
-    </html>`
-
-  return ampify(html, {
-    cwd: '',
-    canonicalURL: '',
-  });
+    </html>
+  );
 }
