@@ -15,7 +15,6 @@
     "html-react-parser": "^1.2.6",
     "simple-ampify": "1.1.0",
     "next": "^13.0.3",
-    "@next/font": "latest",
     "react": "^18.1.0",
     "react-dom": "^18.1.0"
   },
