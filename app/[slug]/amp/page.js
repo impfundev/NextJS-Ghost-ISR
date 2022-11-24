@@ -1,9 +1,7 @@
-import { gql } from "@apollo/client";
+import { gql, ApolloClient, InMemoryCache } from "@apollo/client";
 import { useRouter } from "next/router";
 import parse from "html-react-parser";
 import date from "date-and-time";
-
-import { client } from "../../../lib/apolloClient";
 
 export async function generateStaticParams() {
   const GET_SLUG = gql`
@@ -67,6 +65,11 @@ const GET_POST = gql`
     }
   }
 `;
+
+  const client = new ApolloClient({
+    uri: 'https://fandomnesia.stellate.sh',
+    cache: new InMemoryCache(),
+  });
 
   const response = await client.query({
     query: GET_POST,
