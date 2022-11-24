@@ -1,3 +1,9 @@
+'use client';
+
+import { gql } from "@apollo/client";
+import parse from "html-react-parser";
+import date from "date-and-time";
+
 export async function generateStaticParams() {
   const GET_SLUG = gql`
     query getPosts {
@@ -60,12 +66,11 @@ const GET_POST = gql`
   }
 `;
 
-async function getData({ params }) {
+async function getData(slug) {
   const client = new ApolloClient({
     uri: 'https://fandomnesia.stellate.sh',
     cache: new InMemoryCache(),
   });
-  const { slug } = params;
   const response = await client.query({
     query: GET_POST,
     variables: { slugId: slug },
@@ -79,7 +84,8 @@ async function getData({ params }) {
 }
 
 export default async function SinglePost({ params }) {
-  await getData({ params });
+  const { slug } = params;
+  await getData(slug);
   const { title, content, excerpt, slug, author, featuredImage, categories, tags } = item;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
