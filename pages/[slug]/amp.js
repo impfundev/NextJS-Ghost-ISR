@@ -70,6 +70,7 @@ const GET_POST = gql`
 `;
 
 export async function getStaticProps({ params }) {
+  const { slug } = params;
   const response = await client.query({
     query: GET_POST,
     variables: { slugId: slug },
