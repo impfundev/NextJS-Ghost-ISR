@@ -18,6 +18,8 @@ const GET_POSTS = gql`
           node {
             sourceUrl
             altText
+            sizes
+            srcSet
           }
         }
       }
