@@ -1,10 +1,3 @@
-'use client';
-
-import { ApolloClient, InMemoryCache, ApolloProvider, gql } from "@apollo/client";
-import { useRouter } from "next/router";
-import parse from "html-react-parser";
-import date from "date-and-time";
-
 export async function generateStaticParams() {
   const GET_SLUG = gql`
     query getPosts {
@@ -25,19 +18,75 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function SinglePost() {
-  const { title, content, excerpt, slug, author, featuredImage, categories, tags } = item;
-  const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
-  const haveTags = Boolean(tags?.nodes?.length);
-  const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
+const GET_POST = gql`
+  query getPostBySlug($slugId: ID!) {
+    post(id: $slugId, idType: SLUG) {
+      title
+      date
+      slug
+      excerpt
+      content
+      author {
+        node {
+          name
+          slug
+        }
+      }
+      featuredImage {
+        node {
+          sourceUrl
+          altText
+          caption
+          sizes
+          srcSet
+        }
+      }
+      categories(first: 1) {
+        nodes {
+          slug
+          name
+        }
+      }
+      tags {
+        nodes {
+          slug
+          name
+        }
+      }
+      seo {
+        fullHead
+      }
+    }
+  }
+`;
+
+async function getData({ params }) {
   const client = new ApolloClient({
     uri: 'https://fandomnesia.stellate.sh',
     cache: new InMemoryCache(),
   });
+  const { slug } = params;
+  const response = await client.query({
+    query: GET_POST,
+    variables: { slugId: slug },
+  });
+  const item = response?.data?.post;
+  if (!item) {
+    return null;
+  };
+  
+  return { item };
+}
+
+export default async function SinglePost({ params }) {
+  await getData({ params });
+  const { title, content, excerpt, slug, author, featuredImage, categories, tags } = item;
+  const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
+  const haveTags = Boolean(tags?.nodes?.length);
+  const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
 
   return (
     <>
-    <ApolloProvider client={client}>
     <header className="header">
       <div className="header-wrapper">
         <a href="/" className="logo-wrapper">
@@ -148,7 +197,6 @@ export default function SinglePost() {
         <a href={slug} className="category">Komentar</a>
       </div>
     </main>
-    </ApolloProvider>
     </>
   );
 }
