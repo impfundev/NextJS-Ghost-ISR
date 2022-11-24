@@ -47,6 +47,8 @@ const GET_TAG = gql`
             node {
               sourceUrl
               altText
+              sizes
+              srcSet
             }
           }
         }
