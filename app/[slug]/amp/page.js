@@ -1,3 +1,5 @@
+'use client';
+
 import { gql, ApolloClient, InMemoryCache } from "@apollo/client";
 import { useRouter } from "next/router";
 import parse from "html-react-parser";
