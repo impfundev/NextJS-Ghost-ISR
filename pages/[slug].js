@@ -5,10 +5,10 @@ import date from "date-and-time";
 import Link from "next/link";
 import Head from "next/head";
 
-import { client } from "../../lib/apolloClient";
-import Layout from "../../components/Layout";
-import Share from "../../components/Share";
-import PostCard from "../../components/PostCard";
+import { client } from "../lib/apolloClient";
+import Layout from "../components/Layout";
+import Share from "../components/Share";
+import PostCard from "../components/PostCard";
 
 export default function SinglePost({ item, related }) {
   const { title, excerpt, content, slug, author, featuredImage, categories, tags, seo } = item;
