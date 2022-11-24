@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import parse from "html-react-parser";
 import date from "date-and-time";
 import Head from "next/head";
-import ampify from "simple-ampify";
+import ampify from "ampify";
 
 import { client } from "../../lib/apolloClient";
 
