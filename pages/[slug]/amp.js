@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import parse from "html-react-parser";
 import date from "date-and-time";
 import Head from "next/head";
-import html2amp from "html2amp";
+import ampify from "simple-ampify";
 
 import { client } from "../../lib/apolloClient";
 
@@ -237,13 +237,11 @@ iframe {
 amp-img img {
   width: 100%;
   height: auto;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
   object-fit: cover;
 }
 
 figure {
+  position: relative;
   width: 100%;
   display: block;
   margin-left: auto;
@@ -687,7 +685,7 @@ export async function getStaticProps({ params }) {
     return { notFound: true };
   };
 
-  const ampContent = await html2amp(item.content)
+  const ampContent = await ampify(item.content)
 
   return {
     props: { item, ampContent },
