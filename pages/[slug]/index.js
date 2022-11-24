@@ -48,7 +48,6 @@ export default function SinglePost({ item, related }) {
         {featuredImage ? (
           <figure>
             <img
-              className="object-cover"
               src={featuredImage.node.sourceUrl}
               alt={featuredImage.node.altText}
               srcSet={featuredImage.node.srcSet}
