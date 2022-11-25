@@ -194,6 +194,15 @@ export default function SinglePost({ item }) {
           .replace(/\s*loading=(?:[^=>]*="[^"]*"|[^=>\s]*)/gi, (match) => {
             return match.replace(/loading/gi, '')
 	  })
+          .replace(/\s*allow=(?:[^=>]*="[^"]*"|[^=>\s]*)/gi, (match) => {
+            return match.replace(/allow/gi, '')
+	  })
+          .replace(/\s*title=(?:[^=>]*="[^"]*"|[^=>\s]*)/gi, (match) => {
+            return match.replace(/title/gi, '')
+	  })
+          .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, (match) => {
+            return (/application\/ld\+json/gi.test(match)) ? match : ''
+	  })
         )}
       </article>
       <>
