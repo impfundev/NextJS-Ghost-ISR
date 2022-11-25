@@ -1,11 +1,11 @@
 import { gql } from "@apollo/client";
 import parse from "html-react-parser";
+import reactHtmlReplace from 'react-html-replace';
 import date from "date-and-time";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
 import { client } from "../../lib/apolloClient";
-import ampConvert from "../../lib/ampConvert";
 
 export const config = { amp: true };
 
@@ -84,8 +84,20 @@ export async function getStaticProps({ params }) {
   };
 
   const { content } = item;
-  const { ampHtml } = await ampConvert({ content });
-  
+  const ampHtml = reactHtmlReplace(content, (tag, props) => {
+    if (tag === 'script') {
+      return ('');
+    }
+    if (tag === 'iframe') {
+      const { src, width, height } = props;
+      return <amp-iframe width={width} height={height} src={src} layout="responsive"></amp-iframe>;
+    }
+    if (tag === 'video') {
+      const { src } = props;
+      return <amp-video width="650" height="360" src={src} layout="responsive" autoplay loop></amp-video>;
+    }
+  });
+
   return { 
     props: {
       item,
