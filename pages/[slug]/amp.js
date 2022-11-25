@@ -83,7 +83,7 @@ export async function getStaticProps({ params }) {
     return null;
   };
 
-  const content = await parse(item.content);
+  const { content } = item;
   const { ampHtml } = await ampConvert({ content });
   
   return { 
@@ -192,7 +192,7 @@ export default function SinglePost({ item, ampHtml }) {
           <amp-social-share className="share-icon" type="system" aria-label="Share on Other"></amp-social-share>
         </div>
         <hr />
-        {ampHtml}
+        {parse(ampHtml)}
       </article>
       <>
         {haveTags ? (
