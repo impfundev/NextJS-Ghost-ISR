@@ -191,7 +191,7 @@ export default function SinglePost({ item }) {
         <>
         {parse(content) && reactHtmlReplace(content, (tag, props) => {
           if (tag === 'script') {
-            return ({` `});
+            return null;
           }
           if (tag === 'iframe') {
             const { src, width, height } = props;
