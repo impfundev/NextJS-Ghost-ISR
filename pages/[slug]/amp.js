@@ -193,13 +193,16 @@ export default function SinglePost({ item }) {
           if (tag === 'script') {
             return null;
           }
+          if (tag === 'figure') {
+            return <figure />;
+          }
           if (tag === 'iframe') {
             const { src, width, height } = props;
             return (<amp-iframe width={width} height={height} src={src} layout="responsive"></amp-iframe>);
           }
           if (tag === 'video') {
             const { src } = props;
-            return (<amp-video width="650" height="360" src={src} layout="responsive" autoplay loop></amp-video>);
+            return (<amp-video width="650" height="360" src={src} layout="responsive" autoplay="autoplay" loop="loop"></amp-video>);
           }
         })}
         </>
