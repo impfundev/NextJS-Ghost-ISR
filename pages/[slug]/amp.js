@@ -83,8 +83,7 @@ export async function getStaticProps({ params }) {
     return null;
   };
 
-  const { content } = item;
-  await parse(content);
+  const content = await parse(item.content);
   const { ampHtml } = await ampConvert({ content });
   
   return { 
