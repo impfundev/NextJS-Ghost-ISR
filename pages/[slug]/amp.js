@@ -83,22 +83,22 @@ export async function getStaticProps({ params }) {
   };
   const { content } = item;
   const theContent = await parse(content);
+  const jsonContent = JSON.stringify(theContent);
 
   return { 
     props: {
       item,
-      theContent,
+      jsonContent,
     },
     revalidate: 1,
   };
 }
 
-export default function SinglePost({ item, theContent }) {
+export default function SinglePost({ item, jsonContent }) {
   const { title, excerpt, slug, author, featuredImage, categories, tags, seo } = item;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
-  const jsonContent = JSON.stringify(theContent)
 
   return (
     <>
