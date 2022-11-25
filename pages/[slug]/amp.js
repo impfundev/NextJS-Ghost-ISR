@@ -189,7 +189,7 @@ export default function SinglePost({ item }) {
         <hr />
         {parse(
           content.replace(/<iframe([^>]*)>/gi, (match, sub) => {
-	    return `<amp-iframe ${sub} layout=responsive></amp-iframe>`
+	    return `<amp-iframe ${sub} sandbox="allow-scripts allow-same-origin"></amp-iframe>`
 	  })
           .replace(/\s*loading=(?:[^=>]*="[^"]*"|[^=>\s]*)/gi, (match) => {
             return match.replace(/loading/gi, '')
