@@ -189,16 +189,10 @@ export default function SinglePost({ item }) {
         <hr />
         {parse(
           content.replace(/<iframe([^>]*)>/gi, (match, sub) => {
-	    return `<amp-iframe ${sub} sandbox="allow-scripts allow-same-origin"></amp-iframe>`
+	    return `<amp-iframe ${sub} layout="responsive" sandbox="allow-downloads allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation"></amp-iframe>`
 	  })
           .replace(/\s*loading=(?:[^=>]*="[^"]*"|[^=>\s]*)/gi, (match) => {
             return match.replace(/loading/gi, '')
-	  })
-          .replace(/\s*allow=(?:[^=>]*="[^"]*"|[^=>\s]*)/gi, (match) => {
-            return match.replace(/allow/gi, '')
-	  })
-          .replace(/\s*title=(?:[^=>]*="[^"]*"|[^=>\s]*)/gi, (match) => {
-            return match.replace(/title/gi, '')
 	  })
           .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, (match) => {
             return (/application\/ld\+json/gi.test(match)) ? match : ''
