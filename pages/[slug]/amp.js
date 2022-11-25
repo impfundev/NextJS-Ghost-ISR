@@ -48,8 +48,8 @@ const GET_POST = gql`
           sourceUrl
           altText
           caption
-          sizes
           srcSet
+          sizes
         }
       }
       categories(first: 1) {
@@ -166,13 +166,12 @@ export default function SinglePost({ item }) {
         </h1>
         {featuredImage ? (
           <figure>
-            <amp-img
+            <img
               src={featuredImage.node.sourceUrl}
               alt={featuredImage.node.altText}
-              width="1200"
-              height="800"
-              layout="responsive"
-            ></amp-img>
+              srcSet={featuredImage.node.srcSet}
+              sizes={featuredImage.node.sizes}
+            />
             {featuredImage.node.caption ? (
               <figcaption>{parse(featuredImage.node.caption)}</figcaption>
             ) : null}
@@ -620,7 +619,7 @@ h1 strong {
           font-weight: 700;
           color: inherit;
         }
-        amp-img img {
+        img {
           margin-top: 24px;
           margin-bottom: 24px;
         }
