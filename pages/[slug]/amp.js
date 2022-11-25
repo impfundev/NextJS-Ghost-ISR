@@ -188,7 +188,8 @@ export default function SinglePost({ item }) {
           <amp-social-share className="share-icon" type="system" aria-label="Share on Other"></amp-social-share>
         </div>
         <hr />
-        {parse(content) && reactHtmlReplace(`${content}`, (tag, props) => {
+        <>
+        {parse(content) && reactHtmlReplace(content, (tag, props) => {
           if (tag === 'script') {
             return ({` `});
           }
@@ -201,6 +202,7 @@ export default function SinglePost({ item }) {
             return (<amp-video width="650" height="360" src={src} layout="responsive" autoplay loop></amp-video>);
           }
         })}
+        </>
       </article>
       <>
         {haveTags ? (
