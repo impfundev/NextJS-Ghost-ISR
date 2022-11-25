@@ -1,6 +1,5 @@
-import { gql } from "@apollo/client";
+import { ApolloClient, createHttpLink, InMemoryCache, gql } from "@apollo/client";
 import RSS from 'rss';
-import { client } from "../lib/apolloClient";
 
 const GET_POSTS = gql`
   query getPosts {
@@ -20,6 +19,17 @@ const GET_POSTS = gql`
 `;
 
 export async function getServerSideProps({ res }) {
+  const client = new ApolloClient({
+    ssrMode: true,
+    link: createHttpLink({
+      uri: process.env.NEXT_PUBLIC_WORDPRESS_API_URL,
+      credentials: 'same-origin',
+      headers: {
+        cookie: req.header('Cookie'),
+      },
+    }),
+    cache: new InMemoryCache(),
+  });
   const response = await client.query({
     query: GET_POSTS,
   });
