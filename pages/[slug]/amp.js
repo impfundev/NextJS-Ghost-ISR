@@ -98,6 +98,7 @@ export default function SinglePost({ item, theContent }) {
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
+  const jsonContent = JSON.stringify(theContent)
 
   return (
     <>
@@ -190,7 +191,7 @@ export default function SinglePost({ item, theContent }) {
           <amp-social-share className="share-icon" type="system" aria-label="Share on Other"></amp-social-share>
         </div>
         <hr />
-        {theContent}
+        {jsonContent}
       </article>
       <>
         {haveTags ? (
