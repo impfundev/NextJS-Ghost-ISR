@@ -194,6 +194,9 @@ export default function SinglePost({ item }) {
           .replace(/\s*loading=(?:[^=>]*="[^"]*"|[^=>\s]*)/gi, (match) => {
             return match.replace(/loading/gi, '')
 	  })
+          .replace(/<video([^>]*)>/gi, (match, sub) => {
+	    return `<amp-video ${sub} width="600" height="300" layout="responsive"></amp-video>`
+	  })
           .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, (match) => {
             return (/application\/ld\+json/gi.test(match)) ? match : ''
 	  })
