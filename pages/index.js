@@ -2,7 +2,6 @@ import { gql } from "@apollo/client";
 import Head from "next/head";
 
 import { client } from "../lib/apolloClient";
-import generateFeed from "../lib/generateFeed";
 import Layout from "../components/Layout";
 import PostsList from "../components/PostsList";
 
@@ -47,7 +46,6 @@ export async function getStaticProps() {
     query: GET_POSTS,
   });
   const posts = response.data.posts.nodes;
-  await generateFeed({ posts });
 
   return {
     props: {
