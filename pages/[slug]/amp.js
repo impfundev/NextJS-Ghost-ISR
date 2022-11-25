@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 
 import { client } from "../../lib/apolloClient";
+import ampConvert from "../../lib/ampConvert";
 
 export const config = { amp: true };
 
@@ -81,15 +82,21 @@ export async function getStaticProps({ params }) {
   if (!item) {
     return null;
   };
+
+  const { content } = item;
+  const ampHtml = ampConvert({ content });
   
   return { 
-    props: { item },
+    props: {
+      item,
+      ampHtml,
+    },
     revalidate: 1,
   };
 }
 
-export default function SinglePost({ item }) {
-  const { title, content, excerpt, slug, author, featuredImage, categories, tags, seo } = item;
+export default function SinglePost({ item, ampHtml }) {
+  const { title, excerpt, slug, author, featuredImage, categories, tags, seo } = item;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
@@ -185,7 +192,7 @@ export default function SinglePost({ item }) {
           <amp-social-share className="share-icon" type="system" aria-label="Share on Other"></amp-social-share>
         </div>
         <hr />
-        {parse(content)}
+        {parse(ampHtml)}
       </article>
       <>
         {haveTags ? (
