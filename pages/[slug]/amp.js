@@ -187,7 +187,7 @@ export default function SinglePost({ item }) {
           <amp-social-share className="share-icon" type="system" aria-label="Share on Other"></amp-social-share>
         </div>
         <hr />
-        {parse(content).replace(/<iframe([^>]*)>/gi, (match, sub) => {
+        {parse(content) && content.replace(/<iframe([^>]*)>/gi, (match, sub) => {
 	  return `<amp-iframe ${sub} layout=responsive></amp-iframe>`
 	})}
       </article>
