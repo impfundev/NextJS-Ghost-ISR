@@ -191,8 +191,8 @@ export default function SinglePost({ item }) {
           content.replace(/<iframe([^>]*)>/gi, (match, sub) => {
 	    return `<amp-iframe ${sub} layout="responsive" sandbox="allow-downloads allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation"></amp-iframe>`
 	  })
-          .replace(/\s*loading=(?:[^=>]*="[^"]*"|[^=>\s]*)/gi, (match) => {
-            return match.replace(/loading/gi, '')
+          .replace(/\s*decoding=(?:[^=>]*="[^"]*"|[^=>\s]*)/gi, (match) => {
+            return match.replace(/decoding/gi, '')
 	  })
           .replace(/<video([^>]*)>/gi, (match, sub) => {
 	    return `<amp-video ${sub} width="600" height="300" layout="responsive"></amp-video>`
@@ -328,7 +328,7 @@ iframe {
   min-height: 300px;
 }
 
-amp-img img {
+img {
   width: 100%;
   height: auto;
   object-fit: cover;
