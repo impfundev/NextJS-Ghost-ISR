@@ -1,6 +1,5 @@
 import { gql } from "@apollo/client";
 import parse from "html-react-parser";
-import reactHtmlReplace from 'react-html-replace';
 import date from "date-and-time";
 import { useRouter } from "next/router";
 import Head from "next/head";
@@ -82,17 +81,20 @@ export async function getStaticProps({ params }) {
   if (!item) {
     return null;
   };
+  const { content } = item;
+  const theContent = await parse(content);
 
   return { 
     props: {
       item,
+      theContent,
     },
     revalidate: 1,
   };
 }
 
-export default function SinglePost({ item }) {
-  const { title, excerpt, content, slug, author, featuredImage, categories, tags, seo } = item;
+export default function SinglePost({ item, theContent }) {
+  const { title, excerpt, slug, author, featuredImage, categories, tags, seo } = item;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
@@ -188,24 +190,7 @@ export default function SinglePost({ item }) {
           <amp-social-share className="share-icon" type="system" aria-label="Share on Other"></amp-social-share>
         </div>
         <hr />
-        <>
-        {parse(content) && reactHtmlReplace(content, (tag, props) => {
-          if (tag === 'script') {
-            return null;
-          }
-          if (tag === 'figure') {
-            return <figure />;
-          }
-          if (tag === 'iframe') {
-            const { src, width, height } = props;
-            return (<amp-iframe width={width} height={height} src={src} layout="responsive"></amp-iframe>);
-          }
-          if (tag === 'video') {
-            const { src } = props;
-            return (<amp-video width="650" height="360" src={src} layout="responsive" autoplay="autoplay" loop="loop"></amp-video>);
-          }
-        })}
-        </>
+        {theContent}
       </article>
       <>
         {haveTags ? (
