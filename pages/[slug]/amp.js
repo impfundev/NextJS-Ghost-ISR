@@ -231,7 +231,9 @@ export default function SinglePost({ item }) {
 .header {
 position: sticky; 
 top: 0; 
-background-color: #ffffff;
+background-color: #FBBF24;
+border-bottom-width: 1px;
+border-color: #000000;
 z-index: 100;
 }
 
@@ -319,8 +321,8 @@ border-radius: 9999px;
 }
 
 .share-icon {
-  width: 2rem;
-  height: 2rem;
+  width: 1.25rem;
+  height: 1.25rem;
   border-radius: 9999px;
 }
 
