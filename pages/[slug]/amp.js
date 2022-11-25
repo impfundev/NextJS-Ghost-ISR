@@ -83,32 +83,16 @@ export async function getStaticProps({ params }) {
     return null;
   };
 
-  const { content } = item;
-  const ampHtml = reactHtmlReplace(`${content}`, (tag, props) => {
-    if (tag === 'script') {
-      return ('');
-    }
-    if (tag === 'iframe') {
-      const { src, width, height } = props;
-      return <amp-iframe width={width} height={height} src={src} layout="responsive"></amp-iframe>;
-    }
-    if (tag === 'video') {
-      const { src } = props;
-      return <amp-video width="650" height="360" src={src} layout="responsive" autoplay loop></amp-video>;
-    }
-  });
-
   return { 
     props: {
       item,
-      ampHtml,
     },
     revalidate: 1,
   };
 }
 
-export default function SinglePost({ item, ampHtml }) {
-  const { title, excerpt, slug, author, featuredImage, categories, tags, seo } = item;
+export default function SinglePost({ item }) {
+  const { title, excerpt, content, slug, author, featuredImage, categories, tags, seo } = item;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
@@ -204,7 +188,19 @@ export default function SinglePost({ item, ampHtml }) {
           <amp-social-share className="share-icon" type="system" aria-label="Share on Other"></amp-social-share>
         </div>
         <hr />
-        {parse(ampHtml)}
+        {parse(content) && reactHtmlReplace(`${content}`, (tag, props) => {
+          if (tag === 'script') {
+            return ({` `});
+          }
+          if (tag === 'iframe') {
+            const { src, width, height } = props;
+            return (<amp-iframe width={width} height={height} src={src} layout="responsive"></amp-iframe>);
+          }
+          if (tag === 'video') {
+            const { src } = props;
+            return (<amp-video width="650" height="360" src={src} layout="responsive" autoplay loop></amp-video>);
+          }
+        })}
       </article>
       <>
         {haveTags ? (
