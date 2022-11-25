@@ -2,6 +2,7 @@ import { gql } from "@apollo/client";
 import parse from "html-react-parser";
 import date from "date-and-time";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 import { client } from "../../lib/apolloClient";
 
@@ -87,14 +88,17 @@ export async function getStaticProps({ params }) {
   };
 }
 
-export default async function SinglePost({ item }) {
-  const { title, content, excerpt, slug, author, featuredImage, categories, tags } = item;
+export default function SinglePost({ item }) {
+  const { title, content, excerpt, slug, author, featuredImage, categories, tags, seo } = item;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
 
   return (
     <>
+    <Head>
+      {parse(seo.fullHead)}
+    </Head>
     <header className="header">
       <div className="header-wrapper">
         <a href="/" className="logo-wrapper">
