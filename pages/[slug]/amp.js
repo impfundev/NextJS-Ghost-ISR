@@ -188,7 +188,10 @@ export default function SinglePost({ item }) {
         </div>
         <hr />
         {parse(
-          content.replace(/<iframe([^>]*)>/gi, (match, sub) => {
+          content.replace(/<iframe[^>]*loading=(?:[^=>]*="[^"]*"|[^=>\s]*)/gi, (match) => {
+            return match.replace(/loading/gi, '')
+	  })
+          .replace(/<iframe([^>]*)>/gi, (match, sub) => {
 	    return `<amp-iframe ${sub} layout="responsive" sandbox="allow-downloads allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation"></amp-iframe>`
 	  })
           .replace(/\s*decoding=(?:[^=>]*="[^"]*"|[^=>\s]*)/gi, (match) => {
