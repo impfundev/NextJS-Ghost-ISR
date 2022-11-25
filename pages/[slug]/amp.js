@@ -84,7 +84,7 @@ export async function getStaticProps({ params }) {
   };
 
   const { content } = item;
-  const ampHtml = reactHtmlReplace(content, (tag, props) => {
+  const ampHtml = reactHtmlReplace(`${content}`, (tag, props) => {
     if (tag === 'script') {
       return ('');
     }
