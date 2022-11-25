@@ -18,7 +18,7 @@ const GET_POSTS = gql`
   }
 `;
 
-export async function getServerSideProps({ res }) {
+export async function getServerSideProps({ req, res }) {
   const client = new ApolloClient({
     ssrMode: true,
     link: createHttpLink({
