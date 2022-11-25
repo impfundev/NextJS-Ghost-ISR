@@ -84,7 +84,7 @@ export async function getStaticProps({ params }) {
   };
 
   const { content } = item;
-  const ampHtml = ampConvert({ content });
+  const { ampHtml } = await ampConvert({ content });
   
   return { 
     props: {
