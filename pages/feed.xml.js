@@ -22,7 +22,7 @@ export async function getServerSideProps({ req, res }) {
   const client = new ApolloClient({
     ssrMode: true,
     link: createHttpLink({
-      uri: process.env.NEXT_PUBLIC_WORDPRESS_API_URL,
+      uri: 'https://cmsnya.fandomnesia.com/graphql',
       credentials: 'same-origin',
       headers: {
         cookie: req.header('Cookie'),
@@ -48,7 +48,7 @@ export async function getServerSideProps({ req, res }) {
     },
   };
   const feed = new RSS(feedOptions);
-  const results = posts.map((post) => {
+  const results = return posts.map((post) => {
           feed.item({
             title: post.title,
             description: post.excerpt,
