@@ -53,7 +53,7 @@ export async function getServerSideProps(context: GetStaticPropsContext, res: Ne
 
   //Set page headers
   res.setHeader("Content-Type", "text/xml; charset=utf-8");
-  res.write(Feeds(feed));
+  res.write(Feeds());
   res.end();
 
   return addApolloState(apolloClient, {
