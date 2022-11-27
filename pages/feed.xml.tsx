@@ -61,7 +61,7 @@ export async function getServerSideProps(context: GetStaticPropsContext, res: Ne
   });
 }
 
-export default function Feed() {
+export default function Feeds() {
   const { loading, error, data } = useQuery(GET_POSTS, {
     variables: {
       first: POSTS_PER_PAGE,
