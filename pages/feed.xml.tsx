@@ -1,11 +1,15 @@
 import { gql, useQuery } from "@apollo/client";
-import { GetStaticPropsContext } from "next";
+import { GetStaticPropsContext, NextApiResponse } from "next";
 
 import { initializeApollo, addApolloState } from "../lib/TsApolloClient";
 
 interface Post {
   databaseId: number;
   title: string;
+  slug: string;
+  date: string;
+  excerpt: string;
+  content: string;
 };
 
 interface PostEdge {
@@ -36,7 +40,7 @@ const GET_POSTS = gql`
   }
 `;
 
-export async function getServerSideProps(context: GetStaticPropsContext, res) {
+export async function getServerSideProps(context: GetStaticPropsContext, res: NextApiResponse) {
   const apolloClient = initializeApollo();
 
   await apolloClient.query({
