@@ -2,7 +2,6 @@ import { gql, useQuery } from "@apollo/client";
 import { GetStaticPropsContext } from "next";
 
 import { initializeApollo, addApolloState } from "../lib/TsApolloClient";
-import Layout from "../components/Layout";
 
 interface Post {
   databaseId: number;
@@ -45,7 +44,7 @@ export default function SSR() {
   const havePosts = Boolean(posts.length);
 
   return (
-    <Layout>
+    <main style={{ maxWidth: "800px", margin: "4rem auto" }}>
       <h1>SSR Page</h1>
       {loading ? (
         <p>Loading...</p>
@@ -62,7 +61,7 @@ export default function SSR() {
           );
         })
       )}
-    </Layout>
+    </main>
   );
 }
 
