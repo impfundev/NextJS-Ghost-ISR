@@ -48,7 +48,7 @@ export async function getServerSideProps({ req, res }) {
     },
   };
   const feed = new RSS(feedOptions);
-  const results = return posts.map((post) => {
+  const results = posts.map((post) => {
           feed.item({
             title: post.title,
             description: post.excerpt,
