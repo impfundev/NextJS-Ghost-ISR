@@ -4,12 +4,11 @@ import { ReactNode } from "react";
 import PostCard from "./PostCard";
 
 interface Props {
-  [key]: Post;
+  [key: string]: any;
 };
 
 interface Post {
   post: {
-    databaseId: number;
     title: string;
     excerpt: string;
     slug: string;
