@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 import PostCard from "./PostCard";
 
 interface Props {
-  posts: ReactNode;
+  posts: string;
 };
 
 export default function PostsList({ posts }: Props) {
