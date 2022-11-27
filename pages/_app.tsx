@@ -3,7 +3,7 @@ import Head from "next/head";
 
 import { AppContext, AppInitialProps } from "next/app";
 import { ApolloProvider } from "@apollo/client";
-import { useApollo } from "../lib/apolloClient";
+import { useApollo } from "../lib/TsApolloClient";
 
 function MyApp({ Component, pageProps }: AppContext & AppInitialProps) {
   const apolloClient = useApollo(pageProps);
