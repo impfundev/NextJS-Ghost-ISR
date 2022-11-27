@@ -3,7 +3,6 @@ import Layout from "components/Layout";
 export default function Tentang() {
   
   return (
-    <>
     <Layout>
       <article className="prose lg:prose-xl">
         <h1 className="text-xl">Tentang Kami</h1>
@@ -16,6 +15,5 @@ export default function Tentang() {
 
       </article>
     </Layout>
-    </>
   );
 }
