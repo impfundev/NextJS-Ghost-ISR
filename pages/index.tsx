@@ -10,7 +10,6 @@ const GET_POSTS = gql`
   query getPosts {
     posts(first: 20, after: null) {
       nodes {
-        databaseId
         title
         slug
         excerpt
