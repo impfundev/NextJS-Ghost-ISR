@@ -3,6 +3,7 @@ import { gql } from "@apollo/client";
 
 interface Props {
   post: {
+    databaseId: number;
     title: string;
     excerpt: string;
     slug: string;
@@ -18,9 +19,10 @@ interface Props {
 };
 
 export default function PostCard({ post }: Props) {
-  const { title, excerpt, slug, featuredImage } = post;
+  const { databaseId, title, excerpt, slug, featuredImage } = post;
 
   return (
+  <li key={databaseId}>
     <article className="max-w-sm rounded-2xl shadow-lg overflow-hidden border border-black text-black hover:border-yellow-500 hover:text-yellow-500 transition-all duration-300">
       <a className="relative" href={`/${slug}`} aria-label={title}>
         {featuredImage ? (
@@ -44,5 +46,6 @@ export default function PostCard({ post }: Props) {
         <a href={`/${slug}`}>{parse(excerpt)}</a>
       </div>
     </article>
+  </li>
   );
 }
