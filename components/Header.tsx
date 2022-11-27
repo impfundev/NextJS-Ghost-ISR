@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Header({ categories }) {
+export default function Header() {
   const [navActive, setNavActive] = useState(false);
   const handleClick = () => {
     setNavActive(!navActive);
