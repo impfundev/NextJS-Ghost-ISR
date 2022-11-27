@@ -4,7 +4,21 @@ import { ReactNode } from "react";
 import PostCard from "./PostCard";
 
 interface Props {
-  posts: string;
+  posts: {
+    post: {
+      title: string;
+      excerpt: string;
+      slug: string;
+      featuredImage: {
+        node: {
+          sourceUrl: string;
+          altText: string;
+          srcSet: string;
+          sizes: string;
+        }
+      }
+    }
+  }
 };
 
 export default function PostsList({ posts }: Props) {
