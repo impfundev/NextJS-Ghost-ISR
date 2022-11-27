@@ -1,5 +1,5 @@
+import parse from "html-react-parser";
 import { gql } from "@apollo/client";
-import { ReactNode } from "react";
 
 import PostCard from "./PostCard";
 
