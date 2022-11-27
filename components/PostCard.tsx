@@ -1,18 +1,18 @@
 import parse from "html-react-parser";
 import { gql } from "@apollo/client";
 
-type FeaturedImage = {
-  sourceUrl: string;
-  altText: string;
-  srcSet: string;
-  sizes: string;
-};
-
 interface Props {
   title: string;
   excerpt: string;
   slug: string;
-  featuredImage: FeaturedImage;
+  featuredImage: {
+    node: {
+      sourceUrl: string;
+      altText: string;
+      srcSet: string;
+      sizes: string;
+    };
+  };
 };
 
 export default function PostCard({ post }: Props) {
