@@ -1,7 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import { GetStaticPropsContext } from "next";
 
-import { initializeApollo, addApolloState } from "../lib/apolloClient";
+import { initializeApollo, addApolloState } from "../lib/TsApolloClient";
 import Layout from "../components/Layout";
 
 interface Post {
