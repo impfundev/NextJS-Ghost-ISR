@@ -1,9 +1,10 @@
-import { gql } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
+import { GetStaticPropsContext } from "next";
 import Head from "next/head";
 
-import { client } from "../lib/apolloClient";
 import Layout from "../components/Layout";
 import PostsList from "../components/PostsList";
+import { initializeApollo, addApolloState } from "../lib/TsApolloClient";
 
 const GET_POSTS = gql`
   query getPosts {
@@ -26,7 +27,10 @@ const GET_POSTS = gql`
   }
 `;
 
-export default function Home({ posts }) {
+export default function Home() {
+  const { loading, error, data } = useQuery(GET_POSTS);
+  const posts = data?.posts?.nodes;
+  const havePosts = Boolean(posts.length);
 
   return (
     <>
@@ -35,22 +39,28 @@ export default function Home({ posts }) {
         <meta name="description" content="Fandomnesia Site" />
       </Head>
       <Layout>
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>An error has occurred.</p>
+      ) : !havePosts ? (
+        <p>No posts found.</p>
+      ) : (
         <PostsList posts={posts} />
+      )}
       </Layout>
     </>
   );
 }
 
-export async function getStaticProps() {
-  const response = await client.query({
+export async function getStaticProps(context: GetStaticPropsContext) {
+  const apolloClient = initializeApollo();
+  await apolloClient.query({
     query: GET_POSTS,
   });
-  const posts = response.data.posts.nodes;
 
-  return {
-    props: {
-      posts,
-    },
+  return addApolloState(apolloClient, {
+    props: {},
     revalidate: 1,
   };
 }
