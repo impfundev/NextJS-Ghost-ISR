@@ -9,6 +9,7 @@ interface Props {
 
 interface Post {
   post: {
+    databaseId: string;
     title: string;
     excerpt: string;
     slug: string;
