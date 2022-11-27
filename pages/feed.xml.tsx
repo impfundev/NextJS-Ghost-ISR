@@ -36,7 +36,7 @@ const GET_POSTS = gql`
   }
 `;
 
-export async function getServerSideProps(context: GetStaticPropsContext) {
+export async function getServerSideProps(context: GetStaticPropsContext, res) {
   const apolloClient = initializeApollo();
 
   await apolloClient.query({
