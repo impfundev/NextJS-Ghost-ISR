@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
 import { ApolloClient, HttpLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
+import merge from 'deepmerge';
+import isEqual from 'lodash/isEqual';
 
 export const client = new ApolloClient({
   uri: process.env.NEXT_PUBLIC_WORDPRESS_API_URL,
