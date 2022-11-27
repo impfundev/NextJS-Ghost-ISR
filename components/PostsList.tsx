@@ -27,11 +27,8 @@ export default function PostsList({ posts }: Props) {
   return (
     <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 py-5">
       {posts.map((post: Post) => {
-        const { slug } = post;
         return (
-          <li key={slug}>
-            <PostCard post={post} />
-          </li>
+          <PostCard post={post} />
         );
       })}
     </ul>
