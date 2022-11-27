@@ -3,11 +3,6 @@ import { ApolloClient, HttpLink, InMemoryCache, NormalizedCacheObject } from '@a
 import merge from 'deepmerge';
 import isEqual from 'lodash/isEqual';
 
-export const client = new ApolloClient({
-  uri: process.env.NEXT_PUBLIC_WORDPRESS_API_URL,
-  cache: new InMemoryCache(),
-});
-
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
 
 let apolloClient = ApolloClient<NormalizedCacheObject> | undefined;
