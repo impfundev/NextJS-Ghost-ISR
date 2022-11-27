@@ -66,6 +66,22 @@ export default function Feed() {
   });
   const posts = data?.posts?.edges?.map((edge: PostEdge) => edge.node) || [];
   const siteUrl = 'https://fandomnesia-react.vercel.app';
+  const feedChild = posts.map((post: Post) => {
+    return `<lastBuildDate>${post.date}</lastBuildDate>
+      <item>
+        <title><![CDATA[${post.title}]]></title>
+        <link>${siteUrl}/${post.slug}</link>
+        <pubDate>${post.date}</pubDate>
+        <guid isPermaLink="false">${siteUrl}/${post.slug}</guid>
+        <description>
+          <![CDATA[${post.excerpt}]]>
+        </description>
+        <content:encoded>
+          <![CDATA[${post.content}]]>
+        </content:encoded>
+      </item>
+    `;
+  });
 
   return `<?xml version="1.0" ?>
         <rss
@@ -80,23 +96,7 @@ export default function Feed() {
               <link>${siteUrl}</link>
               <description>Your site description</description>
               <language>id-ID</language>
-              ${posts.map((post: Post) => {
-                return (
-                  <lastBuildDate>${post.date}</lastBuildDate>
-                  <item>
-                    <title><![CDATA[${post.title}]]></title>
-                    <link>${siteUrl}/${post.slug}</link>
-                    <pubDate>${post.date}</pubDate>
-                    <guid isPermaLink="false">${siteUrl}/${post.slug}</guid>
-                    <description>
-                      <![CDATA[${post.excerpt}]]>
-                    </description>
-                    <content:encoded>
-                      <![CDATA[${post.content}]]>
-                    </content:encoded>
-                  </item>
-                );
-              }
+              ${feedChild}
           </channel>
         </rss>`;
 }
