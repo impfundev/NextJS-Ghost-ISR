@@ -48,6 +48,24 @@ export async function getServerSideProps({ req, res }) {
     },
   };
   const feed = new RSS(feedOptions);
+  const results = posts.map((post) => {
+          feed.item({
+            title: post.title,
+            description: post.excerpt,
+            url: `${siteUrl}/${post.slug}`,
+            date: post.date,
+            custom_elements: [
+              {'media:content': {
+                _attr: {
+                  url: post.featuredImage?.node.sourceUrl || `${siteUrl}/favicon.jpg`,
+                  type: 'image/jpeg',
+                  medium: 'image',
+                }
+              }},
+            ],
+          });
+        });
+  await results;
 
   //Set page headers
   res.setHeader("Content-Type", "text/xml; charset=utf-8");
@@ -57,31 +75,14 @@ export async function getServerSideProps({ req, res }) {
   res.end();
 
   return {
-    props: { posts, feed }
+    props: {}
   };
 }
 
-export default function Feed({ posts, feed }) {
+export default function Feed() {
 
   return (
     <>
-      {posts.map((post) => {
-        feed.item({
-          title: post.title,
-          description: post.excerpt,
-          url: `${siteUrl}/${post.slug}`,
-          date: post.date,
-          custom_elements: [
-            {'media:content': {
-              _attr: {
-                url: post.featuredImage?.node.sourceUrl || `${siteUrl}/favicon.jpg`,
-                type: 'image/jpeg',
-                medium: 'image',
-              }
-            }},
-          ],
-        });
-      })}
     </>
   );
 }
