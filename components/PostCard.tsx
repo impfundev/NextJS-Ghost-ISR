@@ -2,7 +2,7 @@ import parse from "html-react-parser";
 import { gql } from "@apollo/client";
 
 interface Props {
-  post {
+  post: {
     title: string;
     excerpt: string;
     slug: string;
