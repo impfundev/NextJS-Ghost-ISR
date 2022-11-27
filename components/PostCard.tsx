@@ -15,7 +15,7 @@ interface Props {
   featuredImage: FeaturedImage;
 };
 
-export default function PostCard({ post }) {
+export default function PostCard({ post }: Props) {
   const { title, excerpt, slug, featuredImage } = post;
 
   return (
