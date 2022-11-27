@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 import PostCard from "./PostCard";
 
 interface Props {
-  [Post]: any;
+  [key]: Post;
 };
 
 interface Post {
