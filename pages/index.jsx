@@ -30,7 +30,7 @@ export async function getStaticProps() {
     query: GET_POSTS,
   });
 
-  const posts = response?.data?.posts;
+  const posts = response?.data?.posts.nodes;
 
   return {
     props: { posts },
