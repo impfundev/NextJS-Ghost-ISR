@@ -1,20 +1,16 @@
 import "../styles/globals.css";
 import Head from "next/head";
 
-import { AppContext, AppInitialProps } from "next/app";
-import { ApolloProvider } from "@apollo/client";
-import { useApollo } from "../lib/TsApolloClient";
-
-function MyApp({ Component, pageProps }: AppContext & AppInitialProps) {
+function MyApp({ Component, pageProps }) {
   const apolloClient = useApollo(pageProps);
 
   return (
-    <ApolloProvider client={apolloClient}>
+    <>
       <Head>
         <meta name="robots" content="noindex" />
       </Head>
       <Component {...pageProps} />
-    </ApolloProvider>
+    </>
   );
 }
 
