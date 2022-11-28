@@ -1,6 +1,7 @@
 import { gql } from "@apollo/client";
 import { useRouter } from "next/router";
 import parse from "html-react-parser";
+import LazyLoad from "react-lazy-load";
 import date from "date-and-time";
 import Link from "next/link";
 import Head from "next/head";
@@ -87,17 +88,19 @@ export default function SinglePost({ item, related }) {
           </>
         ) : null}
       </>
-      <div className="py-5">
-        <div className="fb-comments" data-href={`https://fandomnesia-react.vercel.app/${slug}`} data-width="100%" data-numposts="4" data-lazy="true"></div>
-      </div>
-      <div id="fb-root"></div>
-      <script async src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0"></script>
-      <h3 className="text-xl font-bold py-4">Artikel Terkait</h3>
-      <ul className="grid md:grid-cols-2 gap-6 py-5">
-        <>
-          <PostsList posts={posts} />
-        </>
-      </ul>
+      <LazyLoad threshold={0.95}>
+        <div className="py-5">
+          <div className="fb-comments" data-href={`https://fandomnesia-react.vercel.app/${slug}`} data-width="100%" data-numposts="4" data-lazy="true"></div>
+        </div>
+        <div id="fb-root"></div>
+        <script async src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0"></script>
+        <h3 className="text-xl font-bold py-4">Artikel Terkait</h3>
+        <ul className="grid md:grid-cols-2 gap-6 py-5">
+          <>
+            <PostsList posts={posts} />
+          </>
+        </ul>
+      </LazyLoad>
     </Layout>
     </>
   );
