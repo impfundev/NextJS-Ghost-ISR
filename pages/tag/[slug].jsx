@@ -5,10 +5,12 @@ import PostsList from "../../components/PostsList";
 
 export default function SingleTag({ tag }) {
   return (
+  <>
     <Layout>
       <h1 className="py-6 text-lg font-bold">{tag.name}</h1>
       <PostsList posts={tag.posts.nodes} />
     </Layout>
+  </>
   );
 }
 
