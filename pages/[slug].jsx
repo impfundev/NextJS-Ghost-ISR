@@ -5,17 +5,16 @@ import date from "date-and-time";
 import Link from "next/link";
 import Head from "next/head";
 
-import { client } from "../../lib/apolloClient";
-import Layout from "../../components/Layout";
-import Share from "../../components/Share";
-import PostCard from "../../components/PostCard";
+import { client } from "../lib/apolloClient";
+import Layout from "../components/Layout";
+import Share from "../components/Share";
+import PostsList from "../components/PostsList";
 
-export default function SinglePost({ item, related }) {
+export default function SinglePost({ item, posts }) {
   const { title, excerpt, content, slug, author, featuredImage, categories, tags, seo } = item;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
-  const { posts } = related;
   
   return (
     <>
@@ -94,14 +93,14 @@ export default function SinglePost({ item, related }) {
       <script async src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0"></script>
       <h3 className="text-xl font-bold py-4">Artikel Terkait</h3>
       <ul className="grid md:grid-cols-2 gap-6 py-5">
-          <>
-            {posts.nodes.filter((post) => post.slug !== slug).map((post) => {
-              return (
-                <li key={post.slug}>
-                  <PostCard post={post} />
-                </li>
-             );
-           })}
+        <>
+          {posts.nodes.filter((posts) => post.slug !== slug).map((post) => {
+            return (
+              <>
+                <PostCard post={post} />
+              </>
+            );
+          })}
         </>
       </ul>
     </Layout>
@@ -217,14 +216,14 @@ export async function getStaticProps({ params }) {
     },
   });
 
-  const related = secresponse?.data?.category;
+  const posts = secresponse?.data?.category;
   
-  if (!related) {
+  if (!posts) {
     return null;
   };
 
   return {
-    props: { item, related },
+    props: { item, posts },
     revalidate: 1,
   };
 }
