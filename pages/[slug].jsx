@@ -84,11 +84,9 @@ export default function SinglePost({ item, related }) {
           </>
         ) : null}
       </>
-      <LazyLoad threshold={0.95}>
-        <div className="py-5">
-          <div className="fb-comments" data-href={`${siteUrl}/${slug}`} data-width="100%" data-numposts="4"></div>
-        </div>
-      </LazyLoad>
+      <div className="py-5">
+        <div className="fb-comments" data-href={`${siteUrl}/${slug}`} data-width="100%" data-numposts="5" data-lazy="true"></div>
+      </div>
       <div id="fb-root"></div>
       <script async src={`${siteUrl}/js/facebook-comment.js`}></script>
       <h3 className="text-xl font-bold py-4">Artikel Terkait</h3>
