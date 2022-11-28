@@ -3,10 +3,10 @@ import { useRouter } from "next/router";
 import parse from "html-react-parser";
 import LazyLoad from "react-lazy-load";
 import date from "date-and-time";
-import Link from "next/link";
 import Head from "next/head";
 
 import { client } from "../lib/apolloClient";
+import { siteUrl } from "../lib/config";
 import Layout from "../components/Layout";
 import Share from "../components/Share";
 import PostsList from "../components/PostsList";
@@ -31,11 +31,9 @@ export default function SinglePost({ item, related }) {
               const { slug, name } = category;
               return (
                 <div className="py-4" key={slug}>
-                  <Link href={`/category/${slug}`}>
-                    <a className="px-3 py-1 bg-black text-white text-sm font-bold rounded-full">
-                      {name}
-                    </a>
-                  </Link>
+                  <a href={`${siteUrl}/category/${slug}`} className="px-3 py-1 bg-black text-white text-sm font-bold rounded-full">
+                    {name}
+                  </a>
                 </div>
               );
             })}
@@ -76,11 +74,9 @@ export default function SinglePost({ item, related }) {
               const { slug, name } = tag;
               return (
                 <li key={slug} className="m-0 p-0">
-                  <Link href={`/tag/${slug}`}>
-                    <a className="px-3 py-1 bg-black text-white text-sm font-bold rounded-full">
-                      {name}
-                    </a>
-                  </Link>
+                  <a href={`${siteUrl}/tag/${slug}`} className="px-3 py-1 bg-black text-white text-sm font-bold rounded-full">
+                    {name}
+                  </a>
                 </li>
               );
             })}
@@ -90,7 +86,7 @@ export default function SinglePost({ item, related }) {
       </>
       <LazyLoad threshold={0.95}>
         <div className="py-5">
-          <div className="fb-comments" data-href={`https://fandomnesia-react.vercel.app/${slug}`} data-width="100%" data-numposts="4"></div>
+          <div className="fb-comments" data-href={`${siteUrl}/${slug}`} data-width="100%" data-numposts="4"></div>
         </div>
       </LazyLoad>
       <div id="fb-root"></div>
