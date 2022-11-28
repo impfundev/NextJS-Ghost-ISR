@@ -21,6 +21,7 @@ export default function SinglePost({ item, related }) {
   return (
     <>
     <Head>
+      <link href='//connect.facebook.net' rel='dns-prefetch'/>
       {parse(seo.fullHead)}
     </Head>
     <Layout>
@@ -88,7 +89,7 @@ export default function SinglePost({ item, related }) {
         <div className="fb-comments" data-href={`${siteUrl}/${slug}`} data-width="100%" data-numposts="5" data-lazy="true"></div>
       </div>
       <div id="fb-root"></div>
-      <script async src={`${siteUrl}/js/facebook-comment.js`}></script>
+      <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0" nonce="HZqJ51n7"></script>
       <h3 className="text-xl font-bold py-4">Artikel Terkait</h3>
       <LazyLoad threshold={0.95}>
         <>
