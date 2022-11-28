@@ -88,18 +88,18 @@ export default function SinglePost({ item, related }) {
           </>
         ) : null}
       </>
-      <LazyLoad height={762} threshold={0.95}>
+      <LazyLoad height={500} width={400} threshold={0.95}>
         <div className="py-5">
           <div className="fb-comments" data-href={`https://fandomnesia-react.vercel.app/${slug}`} data-width="100%" data-numposts="4" data-lazy="true"></div>
+          <div id="fb-root"></div>
+          <script async src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0"></script>
         </div>
-        <div id="fb-root"></div>
-        <script async src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0"></script>
-        <h3 className="text-xl font-bold py-4">Artikel Terkait</h3>
-        <ul className="grid md:grid-cols-2 gap-6 py-5">
-          <>
-            <PostsList posts={posts} />
-          </>
-        </ul>
+      </LazyLoad>
+      <h3 className="text-xl font-bold py-4">Artikel Terkait</h3>
+      <LazyLoad height={700} width={400} threshold={0.95}>
+        <>
+          <PostsList posts={posts} />
+        </>
       </LazyLoad>
     </Layout>
     </>
