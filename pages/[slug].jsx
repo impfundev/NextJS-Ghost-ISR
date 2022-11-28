@@ -95,7 +95,7 @@ export default function SinglePost({ item, related }) {
       <h3 className="text-xl font-bold py-4">Artikel Terkait</h3>
       <ul className="grid md:grid-cols-2 gap-6 py-5">
         <>
-          <PostCard posts={posts} />
+          <PostsList posts={posts} />
         </>
       </ul>
     </Layout>
