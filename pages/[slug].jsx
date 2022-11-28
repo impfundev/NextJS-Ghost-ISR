@@ -10,12 +10,13 @@ import Layout from "../components/Layout";
 import Share from "../components/Share";
 import PostsList from "../components/PostsList";
 
-export default function SinglePost({ item, posts }) {
+export default function SinglePost({ item, related }) {
   const { title, excerpt, content, slug, author, featuredImage, categories, tags, seo } = item;
   const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
-  
+  const posts = related.posts.nodes.filter((posts) => posts.slug !== slug);
+
   return (
     <>
     <Head>
@@ -94,13 +95,7 @@ export default function SinglePost({ item, posts }) {
       <h3 className="text-xl font-bold py-4">Artikel Terkait</h3>
       <ul className="grid md:grid-cols-2 gap-6 py-5">
         <>
-          {posts.nodes.filter((posts) => post.slug !== slug).map((post) => {
-            return (
-              <>
-                <PostCard post={post} />
-              </>
-            );
-          })}
+          <PostCard posts={posts} />
         </>
       </ul>
     </Layout>
@@ -216,14 +211,14 @@ export async function getStaticProps({ params }) {
     },
   });
 
-  const posts = secresponse?.data?.category;
+  const related = secresponse?.data?.category;
   
-  if (!posts) {
+  if (!related) {
     return null;
   };
 
   return {
-    props: { item, posts },
+    props: { item, related },
     revalidate: 1,
   };
 }
