@@ -1,23 +1,7 @@
 import parse from "html-react-parser";
 import { gql } from "@apollo/client";
 
-interface Props {
-  post: {
-    title: string;
-    excerpt: string;
-    slug: string;
-    featuredImage: {
-      node: {
-        sourceUrl: string;
-        altText: string;
-        srcSet: string;
-        sizes: string;
-      }
-    }
-  }
-};
-
-export default function PostCard({ post }: Props) {
+export default function PostCard({ post }) {
   const { title, excerpt, slug, featuredImage } = post;
 
   return (
