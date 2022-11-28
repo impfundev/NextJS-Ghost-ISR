@@ -5,8 +5,8 @@ export default function Pedoman() {
   return (
     <>
     <Layout>
-      <article className="prose lg:prose-xl">
-        <h1 className="text-xl">Pedoman Media Siber</h1>
+      <article className="prose lg:prose-xl py-6">
+        <h1 className="text-xl py-4">Pedoman Media Siber</h1>
 
 <h2>Peraturan Dewan Pers</h2>
 <p>Kemerdekaan berpendapat, kemerdekaan berekspresi, dan kemerdekaan pers adalah hak asasi manusia yang dilindungi Pancasila, Undang-Undang Dasar 1945, dan Deklarasi Universal Hak Asasi Manusia PBB. Keberadaan media siber di Indonesia juga merupakan bagian dari kemerdekaan berpendapat, kemerdekaan berekspresi, dan kemerdekaan pers.</p>
