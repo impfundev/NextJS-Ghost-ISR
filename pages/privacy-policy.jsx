@@ -5,8 +5,8 @@ export default function Privacy() {
   return (
     <>
     <Layout>
-      <article className="prose lg:prose-xl">
-        <h1 className="text-xl">Kebijakan Privasi</h1>
+      <article className="prose lg:prose-xl py-6">
+        <h1 className="text-xl py-4">Kebijakan Privasi</h1>
 
 <h2>Siapa kami</h2>
 <p>Fandomnesia adalah portal informasi yang menyajikan berita terkini serta fakta menarik mengenai Budaya Populer, Selebritis, Gaya Hidup, dan Olahraga yang dapat diakses melalui <strong>www.fandomnesia.com</strong>.</p>
