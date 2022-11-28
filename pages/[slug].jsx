@@ -59,7 +59,7 @@ export default function SinglePost({ item, related }) {
           </figure>
         ) : null}
         <div className="flex items-center justify-between">
-          <span>Oleh: <a href={`/author/${author.node.slug}`}>{author.node.name}</a></span>
+          <span>Oleh: <a href={`${siteUrl}/author/${author.node.slug}`}>{author.node.name}</a></span>
           <Share title={title} slug={slug} />
         </div>
         <p><time className="text-gray-500 text-sm" datetime={item.date}>{dateFormated}</time></p>
@@ -90,7 +90,7 @@ export default function SinglePost({ item, related }) {
         </div>
       </LazyLoad>
       <div id="fb-root"></div>
-      <script async src="/js/facebook-comment"></script>
+      <script async src={`${siteUrl}/js/facebook-comment.js`}></script>
       <h3 className="text-xl font-bold py-4">Artikel Terkait</h3>
       <LazyLoad threshold={0.95}>
         <>
