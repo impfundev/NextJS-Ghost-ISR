@@ -3,7 +3,7 @@ import Head from "next/head";
 
 import Layout from "../components/Layout";
 import PostsList from "../components/PostsList";
-import { client } from "../../lib/apolloClient";
+import { client } from "../lib/apolloClient";
 
 const GET_POSTS = gql`
   query getPosts {
