@@ -5,10 +5,12 @@ import PostsList from "../../components/PostsList";
 
 export default function SingleCategory({ category }) {
   return (
+  <>
     <Layout>
       <h1 className="py-6 text-lg font-bold">{category.name}</h1>
       <PostsList posts={category.posts.nodes} />
     </Layout>
+  </>
   );
 }
 
