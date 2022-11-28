@@ -90,11 +90,11 @@ export default function SinglePost({ item, related }) {
       </>
       <LazyLoad threshold={0.95}>
         <div className="py-5">
-          <div className="fb-comments" data-href={`https://fandomnesia-react.vercel.app/${slug}`} data-width="100%" data-numposts="4" data-lazy="true"></div>
+          <div className="fb-comments" data-href={`https://fandomnesia-react.vercel.app/${slug}`} data-width="100%" data-numposts="4"></div>
         </div>
       </LazyLoad>
       <div id="fb-root"></div>
-      <script async src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0"></script>
+      <script async src="/js/facebook-comment"></script>
       <h3 className="text-xl font-bold py-4">Artikel Terkait</h3>
       <LazyLoad threshold={0.95}>
         <>
