@@ -6,10 +6,12 @@ import PostsList from "../../components/PostsList";
 
 export default function Author({ user }) {
   return (
+  <>
     <Layout>
       <h1 className="py-6 text-lg font-bold">By {user.name}</h1>
       <PostsList posts={user.posts.nodes} />
     </Layout>
+  </>
   );
 }
 
