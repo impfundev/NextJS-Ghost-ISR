@@ -18,6 +18,7 @@ export default function PostsList({ posts }) {
                       alt={featuredImage.node.altText}
                       srcSet={featuredImage.node.srcSet}
                       sizes={featuredImage.node.sizes}
+                      loading="lazy"
                     />
                   </>
                 ) : null}
