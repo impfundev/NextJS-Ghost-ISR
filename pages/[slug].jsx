@@ -88,7 +88,7 @@ export default function SinglePost({ item, related }) {
           </>
         ) : null}
       </>
-      <LazyLoad threshold={0.95}>
+      <LazyLoad height={762} threshold={0.95}>
         <div className="py-5">
           <div className="fb-comments" data-href={`https://fandomnesia-react.vercel.app/${slug}`} data-width="100%" data-numposts="4" data-lazy="true"></div>
         </div>
