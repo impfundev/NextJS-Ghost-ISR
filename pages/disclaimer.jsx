@@ -5,8 +5,8 @@ export default function Disclaimer() {
   return (
     <>
     <Layout>
-      <article className="prose lg:prose-xl">
-        <h1 className="text-xl">Disclaimer</h1>
+      <article className="prose lg:prose-xl py-6">
+        <h1 className="text-xl py-4">Disclaimer</h1>
 
 <p>Seluruh layanan yang diberikan mengikuti aturan main yang berlaku dan ditetapkan oleh Fandomnesia.</p>
 <p><strong>Disclaimer</strong></p>
