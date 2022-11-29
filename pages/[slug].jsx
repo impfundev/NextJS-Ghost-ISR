@@ -23,7 +23,12 @@ export default function SinglePost({ item, related }) {
     .setAttribute('crossorigin', 'anonymous')
     .setAttribute('src', 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0')
     .setAttribute('nonce', 'HZqJ51n7');
-    console.log(itemScript);
+    const itemDiv = document.createElement('div')
+    .setAttribute('class', 'fb-comments')
+    .setAttribute('data-href', `${siteUrl}/${slug}`)
+    .setAttribute('data-width', '100%')
+    .setAttribute('data-numposts', '5');
+    console.log(itemScript, itemDiv);
   };
 
   return (
@@ -99,7 +104,7 @@ export default function SinglePost({ item, related }) {
           <span>Komentar</span>
         </button>
       </div>
-      // <div id="fb-root"></div>
+      <div id="fb-root"></div>
       // <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0" nonce="HZqJ51n7"></script>
       <h3 className="text-xl font-bold py-4">Artikel Terkait</h3>
       <LazyLoad threshold={0.95}>
