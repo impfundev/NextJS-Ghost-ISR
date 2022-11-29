@@ -37,7 +37,6 @@ export default function SinglePost({ item, related }) {
           }, true);`
         }}
       />
-      <link href='//connect.facebook.net' rel='dns-prefetch'/>
       {parse(seo.fullHead)}
     </Head>
     <Layout>
@@ -102,7 +101,7 @@ export default function SinglePost({ item, related }) {
         ) : null}
       </>
       <div className="py-5">
-        <div className="fb-comments" data-href={`${siteUrl}/${slug}`} data-width="100%" data-numposts="5" data-lazy="true"></div>
+        <div className="fb-comments" data-href={`${siteUrl}/${slug}`} data-width="100%" data-numposts="5"></div>
       </div>
       <div id="fb-root"></div>
       <h3 className="text-xl font-bold py-4">Artikel Terkait</h3>
