@@ -19,25 +19,23 @@ export default function SinglePost({ item, related }) {
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
   const posts = related.posts.nodes.filter((posts) => posts.slug !== slug);
 
-  useEffect(() => {
+  return (
+    <>
+    <Head>
+  <script>
     let lzAd = false;
     window.addEventListener('scroll', () => {
       (0 != document.documentElement.scrollTop && false === lzAd || 0 != document.body.scrollTop && !1 === lzAd) && (!function(){
-        const itemScript = document.createElement('script')
+        itemScript = document.createElement('script')
         .setAttribute('crossorigin', 'anonymous')
         .setAttribute('src', 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0')
         .setAttribute('nonce', 'HZqJ51n7');
         .setAttribute('data-numposts', '5');
         itemScript.async = true;
-        console.log(itemScript);
+        document.head.appendChild(itemScript);
       }(), lzAd = true);
     }, true);
-  });
-
-  return (
-    <>
-    <Head>
-      <
+  </script>
       <link href='//connect.facebook.net' rel='dns-prefetch'/>
       {parse(seo.fullHead)}
     </Head>
