@@ -1,3 +1,4 @@
+import React from "react";
 import { gql } from "@apollo/client";
 import { useRouter } from "next/router";
 import parse from "html-react-parser";
@@ -17,6 +18,17 @@ export default function SinglePost({ item, related }) {
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
   const posts = related.posts.nodes.filter((posts) => posts.slug !== slug);
+  const handleComment = () => {
+    return React.createElement(
+      'script',
+      { async: null,
+        crossorigin: 'anonymous',
+        src: 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0',
+        nonce: 'HZqJ51n7'
+      },
+      null
+    );
+  };
 
   return (
     <>
@@ -86,10 +98,13 @@ export default function SinglePost({ item, related }) {
         ) : null}
       </>
       <div className="py-5">
-        <div className="fb-comments" data-href={`${siteUrl}/${slug}`} data-width="100%" data-numposts="5" data-lazy="true"></div>
+      // <div className="fb-comments" data-href={`${siteUrl}/${slug}`} data-width="100%" data-numposts="5" data-lazy="true"></div>
+        <button onClick={handleComment} className="py-4 w-full bg-black text-white text-center font-bold rounded-full">
+          <span>Komentar</span>
+        </button>
       </div>
-      <div id="fb-root"></div>
-      <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0" nonce="HZqJ51n7"></script>
+      // <div id="fb-root"></div>
+      // <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0" nonce="HZqJ51n7"></script>
       <h3 className="text-xl font-bold py-4">Artikel Terkait</h3>
       <LazyLoad threshold={0.95}>
         <>
