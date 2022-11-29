@@ -1,4 +1,3 @@
-import React from "react";
 import { gql } from "@apollo/client";
 import { useRouter } from "next/router";
 import parse from "html-react-parser";
@@ -19,15 +18,12 @@ export default function SinglePost({ item, related }) {
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
   const posts = related.posts.nodes.filter((posts) => posts.slug !== slug);
   const handleComment = () => {
-    return React.createElement(
-      'script',
-      { async: null,
-        crossorigin: 'anonymous',
-        src: 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0',
-        nonce: 'HZqJ51n7'
-      },
-      null
-    );
+    const itemScript = document.createElement('script')
+    .setAttribute('async')
+    .setAttribute('crossorigin', 'anonymous')
+    .setAttribute('src', 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0')
+    .setAttribute('nonce', 'HZqJ51n7');
+    console.log(itemScript);
   };
 
   return (
