@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { gql } from "@apollo/client";
 import { useRouter } from "next/router";
 import parse from "html-react-parser";
@@ -17,23 +18,26 @@ export default function SinglePost({ item, related }) {
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
   const posts = related.posts.nodes.filter((posts) => posts.slug !== slug);
-  const handleComment = () => {
-    const itemScript = document.createElement('script')
-    .setAttribute('async')
-    .setAttribute('crossorigin', 'anonymous')
-    .setAttribute('src', 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0')
-    .setAttribute('nonce', 'HZqJ51n7');
-    const itemDiv = document.createElement('div')
-    .setAttribute('class', 'fb-comments')
-    .setAttribute('data-href', `${siteUrl}/${slug}`)
-    .setAttribute('data-width', '100%')
-    .setAttribute('data-numposts', '5');
-    console.log(itemScript, itemDiv);
-  };
+
+  useEffect(() => {
+    let lzAd = false;
+    window.addEventListener('scroll', () => {
+      (0 != document.documentElement.scrollTop && false === lzAd || 0 != document.body.scrollTop && !1 === lzAd) && (!function(){
+        const itemScript = document.createElement('script')
+        .setAttribute('crossorigin', 'anonymous')
+        .setAttribute('src', 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0')
+        .setAttribute('nonce', 'HZqJ51n7');
+        .setAttribute('data-numposts', '5');
+        itemScript.async = true;
+        console.log(itemScript);
+      }(), lzAd = true);
+    }, true);
+  });
 
   return (
     <>
     <Head>
+      <
       <link href='//connect.facebook.net' rel='dns-prefetch'/>
       {parse(seo.fullHead)}
     </Head>
@@ -99,13 +103,9 @@ export default function SinglePost({ item, related }) {
         ) : null}
       </>
       <div className="py-5">
-      // <div className="fb-comments" data-href={`${siteUrl}/${slug}`} data-width="100%" data-numposts="5" data-lazy="true"></div>
-        <button onClick={handleComment} className="py-4 w-full bg-black text-white text-center font-bold rounded-full">
-          <span>Komentar</span>
-        </button>
+        <div className="fb-comments" data-href={`${siteUrl}/${slug}`} data-width="100%" data-numposts="5" data-lazy="true"></div>
       </div>
       <div id="fb-root"></div>
-      // <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0" nonce="HZqJ51n7"></script>
       <h3 className="text-xl font-bold py-4">Artikel Terkait</h3>
       <LazyLoad threshold={0.95}>
         <>
