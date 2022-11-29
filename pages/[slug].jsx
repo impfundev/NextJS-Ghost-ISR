@@ -22,20 +22,22 @@ export default function SinglePost({ item, related }) {
   return (
     <>
     <Head>
-  <script>
-    let lzAd = false;
-    window.addEventListener('scroll', () => {
-      (0 != document.documentElement.scrollTop && false === lzAd || 0 != document.body.scrollTop && !1 === lzAd) && (!function(){
-        itemScript = document.createElement('script')
-        .setAttribute('crossorigin', 'anonymous')
-        .setAttribute('src', 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0')
-        .setAttribute('nonce', 'HZqJ51n7');
-        .setAttribute('data-numposts', '5');
-        itemScript.async = true;
-        document.head.appendChild(itemScript);
-      }(), lzAd = true);
-    }, true);
-  </script>
+  <script
+    dangerouslySetInnerHTML={{
+    __html: `let lzAd = false;
+      window.addEventListener('scroll', () => {
+        (0 != document.documentElement.scrollTop && false === lzAd || 0 != document.body.scrollTop && !1 === lzAd) && (!function(){
+          itemScript = document.createElement('script')
+          .setAttribute('crossorigin', 'anonymous')
+          .setAttribute('src', 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0')
+          .setAttribute('nonce', 'HZqJ51n7');
+          .setAttribute('data-numposts', '5');
+          itemScript.async = true;
+          document.head.appendChild(itemScript);
+        }(), lzAd = true);
+      }, true);`
+    }}
+  />
       <link href='//connect.facebook.net' rel='dns-prefetch'/>
       {parse(seo.fullHead)}
     </Head>
