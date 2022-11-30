@@ -22,7 +22,7 @@ export default function SinglePost({ item, related }) {
     <>
     <Head>
       <link rel="canonical" href={`${siteUrl}/${slug}`} />
-      <script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3940256099942544" crossorigin="anonymous"></script>
+      <script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4676533344420647" crossorigin="anonymous"></script>
       <script
         dangerouslySetInnerHTML={{
         __html: `let lzAd = false;
@@ -86,8 +86,8 @@ export default function SinglePost({ item, related }) {
         <hr />
         <ins className="adsbygoogle"
           style={{ display: "block" }}
-          data-ad-client="ca-pub-3940256099942544"
-          data-ad-slot="6300978111"
+          data-ad-client="ca-pub-4676533344420647"
+          data-ad-slot="5741144487"
           data-ad-format="auto"
           data-full-width-responsive="true"
         ></ins>
