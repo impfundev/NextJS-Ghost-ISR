@@ -13,6 +13,7 @@ function Feeds(feed) {
           xmlns:atom="http://www.w3.org/2005/Atom"
           xmlns:media="http://search.yahoo.com/mrss/"
           xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+          xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
           version="2.0"
         >
           <channel>
