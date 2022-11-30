@@ -93,7 +93,9 @@ export default function SinglePost({ item, related }) {
         ></ins>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(window.adsbygoogle = window.adsbygoogle || []).push({});`}} />
+            __html: `(window.adsbygoogle = window.adsbygoogle || []).push({});`
+          }}
+        />
         {parse(content)}
       </article>
       <>
