@@ -3,9 +3,10 @@ import { siteUrl } from "../lib/config";
 export default function FloatingAds() {
   return (
   <>
-    <div className="fixed bottom-0 left-1/2 translate-x-1/2 w-full h-auto max-h-28 bg-white border border-inherit">
+    <div className="floating-ads w-full h-28 bg-white border border-inherit">
+      <button className="absolute bottom-28 right-0 p-3 bg-white border-t border-x border-inherit">⌵</button>
       <img
-        className="block mx-auto w-full h-auto object-cover px-4 pb-4"
+        className="block mx-auto object-cover p-3"
         alt="contoh iklan"
         src={`${siteUrl}/img/contoh-iklan-2.png`}
         width="320"
