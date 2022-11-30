@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm install -g @serverless/cli && serverless",
+    "build": "next build",
     "start": "next start"
   },
   "dependencies": {
