@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { gql } from "@apollo/client";
 import { useRouter } from "next/router";
 import parse from "html-react-parser";
@@ -18,14 +17,6 @@ export default function SinglePost({ item, related }) {
   const haveTags = Boolean(tags?.nodes?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
   const posts = related.posts.nodes.filter((posts) => posts.slug !== slug);
-  useEffect(() => {
-    var ads = document.getElementsByClassName("adsbygoogle").length;
-    for (var i = 0; i < ads; i++) {
-      try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      } catch (e) { }
-    }
-  }, []);
 
   return (
     <>
@@ -94,13 +85,16 @@ export default function SinglePost({ item, related }) {
         <p><time className="text-gray-500 text-sm" datetime={item.date}>{dateFormated}</time></p>
         <hr />
         <ins className="adsbygoogle"
-          style="display:block"
+          style={{ display: "block" }}
           data-ad-client="ca-pub-3940256099942544"
           data-ad-slot="6300978111"
           data-ad-format="auto"
           data-full-width-responsive="true"
         ></ins>
-       {parse(content)}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(window.adsbygoogle = window.adsbygoogle || []).push({});`}} />
+        {parse(content)}
       </article>
       <>
         {haveTags ? (
