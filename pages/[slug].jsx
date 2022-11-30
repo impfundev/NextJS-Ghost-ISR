@@ -22,7 +22,6 @@ export default function SinglePost({ item, related }) {
     <>
     <Head>
       <link rel="canonical" href={`${siteUrl}/${slug}`} />
-      <script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4676533344420647" crossorigin="anonymous"></script>
       <script
         dangerouslySetInnerHTML={{
         __html: `let lzAd = false;
@@ -84,18 +83,6 @@ export default function SinglePost({ item, related }) {
         </div>
         <p><time className="text-gray-500 text-sm" datetime={item.date}>{dateFormated}</time></p>
         <hr />
-        <ins className="adsbygoogle"
-          style={{ display: "block" }}
-          data-ad-client="ca-pub-4676533344420647"
-          data-ad-slot="5741144487"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        ></ins>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(window.adsbygoogle = window.adsbygoogle || []).push({});`
-          }}
-        />
         {parse(content)}
       </article>
       <>
