@@ -18,8 +18,8 @@ export default function PostsList({ posts }) {
                     alt={featuredImage.node.altText}
                     srcSet={featuredImage.node.srcSet}
                     sizes={featuredImage.node.sizes}
-                    width="300"
-                    height="240"
+                    width="1200"
+                    height="auto"
                     loading="lazy"
                   />
                 </>
