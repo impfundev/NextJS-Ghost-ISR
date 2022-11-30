@@ -1,11 +1,19 @@
 import { gql } from "@apollo/client";
+import Head from "next/head";
+
 import { client } from "../../lib/apolloClient";
+import { siteUrl } from "../lib/config";
 import Layout from "../../components/Layout";
 import PostsList from "../../components/PostsList";
 
 export default function SingleCategory({ category }) {
   return (
   <>
+    <Head>
+      <title>{category.name} - Fandomnesia</title>
+      <link rel="canonical" href={`${siteUrl}/${category.slug}`} />
+      <meta name="description" content={`Telusuri berita terbaru  serta  konten menarik lainya seputar ${category.name} di Fandomnesia.`} />
+    </Head>
     <Layout>
       <h1 className="py-6 text-lg font-bold">{category.name}</h1>
       <PostsList posts={category.posts.nodes} />
@@ -39,6 +47,7 @@ const GET_CATEGORY = gql`
   query getCategory($slugId: ID!) {
     category(id: $slugId, idType: SLUG) {
       name
+      slug
       posts {
         nodes {
           databaseId
