@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.3.19",
+    "axios": "latest",
     "deepmerge": "^4.2.2",
     "lodash": "^4.17.21",
     "graphql": "^15.5.0",
