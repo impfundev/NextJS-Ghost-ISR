@@ -2,6 +2,7 @@ import { siteUrl } from "../lib/config";
 
 export default function FloatingAds() {
   return (
+  <>
     <button className="fixed bottom-28 m-3 flex items-center bg-white rounded-t-lg border-x border-t border-inherit">
       ︿
     </button>
@@ -14,5 +15,6 @@ export default function FloatingAds() {
         height="50"
       />
     </div>
+  </>
   );
 }
