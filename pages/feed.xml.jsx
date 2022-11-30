@@ -11,17 +11,22 @@ function Feeds(feed) {
           xmlns:dc="http://purl.org/dc/elements/1.1/"
           xmlns:content="http://purl.org/rss/1.0/modules/content/"
           xmlns:atom="http://www.w3.org/2005/Atom"
+          xmlns:media="http://search.yahoo.com/mrss/"
+          xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
           version="2.0"
         >
           <channel>
-              <title>Your Site Name</title>
+              <title>Fandomnesia</title>
               <atom:link href="${siteUrl}/feed.xml" rel="self" type="application/rss+xml" />
               <link>${siteUrl}</link>
-              <description>Your site description</description>
-              <language>en-US</language>
+              <description>Fandomnesia.com menyajikan berita terbaru dan konten menarik seputar budaya populer, selebritis, teknologi, dan olahraga.</description>
+              <language>id</language>
               <lastBuildDate>${new Date(
                 latestPostDate
               ).toUTCString()}</lastBuildDate>
+              <sy:updatePeriod> hourly </sy:updatePeriod>
+              <sy:updateFrequency> 1 </sy:updateFrequency>
+              <atom:link rel="hub" href="https://pubsubhubbub.appspot.com/" />
               ${rssItemsXml}
           </channel>
         </rss>`;
