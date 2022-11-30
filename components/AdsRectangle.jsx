@@ -3,7 +3,7 @@ import { siteUrl } from "../lib/config";
 export default function AdsRectangle() {
   return (
     <div className="py-4 my-4 text-center border-y border-inherit">
-      <span className="text-sm text-inherit pb-4 before:content-['Iklan,_Scroll_Untuk_Melanjutkan']"></span>
+      <span className="text-sm pb-4 before:content-['Iklan,_Scroll_Untuk_Melanjutkan']"></span>
       <img
         className="block mx-auto py-4"
         alt="contoh iklan"
