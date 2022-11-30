@@ -56,10 +56,10 @@ const GET_CATEGORY = gql`
           slug
           featuredImage {
             node {
-              sourceUrl
+              sourceUrl(size: POST_THUMBNAIL)
               altText
-              sizes
-              srcSet
+              sizes(size: POST_THUMBNAIL)
+              srcSet(size: POST_THUMBNAIL)
             }
           }
         }
