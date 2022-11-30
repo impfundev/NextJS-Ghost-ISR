@@ -21,6 +21,7 @@ export default function SinglePost({ item, related }) {
   return (
     <>
     <Head>
+      <link rel="canonical" href={`${siteUrl}/${slug}`} />
       <script
         dangerouslySetInnerHTML={{
         __html: `let lzAd = false;
@@ -190,10 +191,10 @@ const GET_RELATED = gql`
           excerpt
           featuredImage {
             node {
-              sourceUrl
+              sourceUrl(size: POST_THUMBNAIL)
               altText
-              sizes
-              srcSet
+              sizes(size: POST_THUMBNAIL)
+              srcSet(size: POST_THUMBNAIL)
             }
           }
         }
