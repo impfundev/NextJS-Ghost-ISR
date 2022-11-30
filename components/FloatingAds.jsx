@@ -3,8 +3,8 @@ import { siteUrl } from "../lib/config";
 export default function FloatingAds() {
   return (
   <>
-    <div className="fixed bottom-0 translate-x-1/2 w-full h-auto max-h-28 bg-white border border-inherit">
-      <button className="absolute bottom-28 p-4 flex items-center bg-white rounded-t-lg border-x border-t border-inherit">
+    <div className="fixed bottom-0 left-1/2 translate-x-1/2 w-full h-auto max-h-28 bg-white border border-inherit">
+      <button className="absolute bottom-28 right-0 p-2 flex items-center bg-white rounded-t-lg border-x border-t border-inherit">
         <span>⌵</span>
       </button>
       <img
