@@ -45,7 +45,7 @@ export default function Home({ posts }) {
       <Head>
         <title>Fandomnesia</title>
         <link rel="canonical" href={siteUrl} />
-        <meta name="description" content="Fandomnesia Site" />
+        <meta name="description" content="Fandomnesia.com menyajikan berita terbaru dan konten menarik seputar budaya populer, selebritis, teknologi, dan olahraga." />
       </Head>
       <Layout>
         <PostsList posts={posts} />
