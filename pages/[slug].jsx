@@ -63,11 +63,13 @@ export default function SinglePost({ item, related }) {
         {featuredImage ? (
           <figure className="w-full">
             <img
-              className="w-full h-auto"
+              className="w-full h-auto object-cover"
               src={featuredImage.node.sourceUrl}
               alt={featuredImage.node.altText}
               srcSet={featuredImage.node.srcSet}
               sizes={featuredImage.node.sizes}
+              width="1200"
+              height="800"
             />
             {featuredImage.node.caption ? (
               <figcaption className="py-0" dangerouslySetInnerHTML={{ __html: featuredImage.node.caption }} />
@@ -152,11 +154,11 @@ const GET_POST = gql`
       }
       featuredImage {
         node {
-          sourceUrl
+          sourceUrl(size: POST_THUMBNAIL)
           altText
           caption
-          sizes
-          srcSet
+          sizes(size: POST_THUMBNAIL)
+          srcSet(size: POST_THUMBNAIL)
         }
       }
       categories(first: 1) {
