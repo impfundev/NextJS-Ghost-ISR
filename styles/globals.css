@@ -46,7 +46,7 @@ a {
 
 .hr-lines:after{
   content:" ";
-  height: 2px;
+  height: 1px;
   width: 130px;
   background: #6B7280;
   display: block;
