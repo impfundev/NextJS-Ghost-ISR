@@ -26,33 +26,9 @@ a {
   @apply no-underline;
 }
 
-.hr-lines{
-  position: relative;
-  max-width: 500px;
-  margin: 100px auto;
-  text-align: center;
-}
-
-.hr-lines:before{
-  content:" ";
-  display: block;
-  height: 1px;
-  width: 130px;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  background: #6B7280;
-}
-
-.hr-lines:after{
-  content:" ";
-  height: 1px;
-  width: 130px;
-  background: #6B7280;
-  display: block;
-  position: absolute;
-  top: 50%;
-  right: 0;
+.floating-ads {
+  @apply fixed left-1/2 bottom-0;
+  transform: translate(-50%, -50%);
 }
 
 .has-text-align-left {
