@@ -1,11 +1,19 @@
 import { gql } from "@apollo/client";
+import Head from "next/head";
+
 import { client } from "../../lib/apolloClient";
+import { siteUrl } from "../lib/config";
 import Layout from "../../components/Layout";
 import PostsList from "../../components/PostsList";
 
 export default function SingleTag({ tag }) {
   return (
   <>
+    <Head>
+      <title>{tag.name} - Fandomnesia</title>
+      <link rel="canonical" href={`${siteUrl}/${tag.slug}`} />
+      <meta name="description" content={`Telusuri berita terbaru  serta  konten menarik lainya seputar ${tag.name} di Fandomnesia.`} />
+    </Head>
     <Layout>
       <h1 className="py-6 text-lg font-bold">{tag.name}</h1>
       <PostsList posts={tag.posts.nodes} />
@@ -39,6 +47,7 @@ const GET_TAG = gql`
   query getTag($slugId: ID!) {
     tag(id: $slugId, idType: SLUG) {
       name
+      slug
       posts {
         nodes {
           databaseId
@@ -47,10 +56,10 @@ const GET_TAG = gql`
           slug
           featuredImage {
             node {
-              sourceUrl
+              sourceUrl(size: POST_THUMBNAIL)
               altText
-              sizes
-              srcSet
+              sizes(size: POST_THUMBNAIL)
+              srcSet(size: POST_THUMBNAIL)
             }
           }
         }
