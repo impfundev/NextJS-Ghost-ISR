@@ -1,5 +1,4 @@
-service: nextjs-with-aws-serverless
-frameworkVersion: '>=1.71.1'
+# serverless.yml
 
-myNextApp:
-  component: serverless-next.js
+myNextApplication:
+  component: "@sls-next/serverless-component" # it is recommended you pin the latest stable version of serverless-next.js
