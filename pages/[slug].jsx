@@ -10,6 +10,7 @@ import { siteUrl } from "../lib/config";
 import Layout from "../components/Layout";
 import Share from "../components/Share";
 import PostsList from "../components/PostsList";
+import AdsRectangle from "../components/AdsRectangle";
 
 export default function SinglePost({ item, related }) {
   const { title, excerpt, content, slug, author, featuredImage, categories, tags, seo } = item;
@@ -57,6 +58,9 @@ export default function SinglePost({ item, related }) {
           </>
         ) : null}
       </>
+      <LazyLoad threshold={0.95}>
+        <AdsRectangle />
+      </LazyLoad>
       <article className="prose lg:prose-xl">
         <h1 className="text-2xl md:text-4xl lg:text-6xl">
           {title}
@@ -85,6 +89,9 @@ export default function SinglePost({ item, related }) {
         <hr />
         {parse(content)}
       </article>
+      <LazyLoad threshold={0.95}>
+        <AdsRectangle />
+      </LazyLoad>
       <>
         {haveTags ? (
           <>
