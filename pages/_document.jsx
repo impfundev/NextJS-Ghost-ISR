@@ -5,7 +5,7 @@ export default function Document() {
   return (
     <Html lang="id">
       <Head>
-        <link type="application/rss+xml" rel="alternate" title="Fandomnesia" href={`${siteUrl}/feed.xml`} />
+        <link type="application/rss+xml" rel="alternate" title="Fandomnesia" href={`${siteUrl}/feed`} />
         <meta name="robots" content="noindex" />
       </Head>
       <body>
