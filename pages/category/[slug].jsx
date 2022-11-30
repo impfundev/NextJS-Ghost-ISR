@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 import Head from "next/head";
 
 import { client } from "../../lib/apolloClient";
-import { siteUrl } from "../lib/config";
+import { siteUrl } from "../../lib/config";
 import Layout from "../../components/Layout";
 import PostsList from "../../components/PostsList";
 
