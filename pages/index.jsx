@@ -4,6 +4,7 @@ import Head from "next/head";
 import Layout from "../components/Layout";
 import PostsList from "../components/PostsList";
 import { client } from "../lib/apolloClient";
+import { siteUrl } from "../lib/config";
 
 const GET_POSTS = gql`
   query getPosts {
@@ -14,10 +15,10 @@ const GET_POSTS = gql`
         excerpt
         featuredImage {
           node {
-            sourceUrl
+            sourceUrl(size: POST_THUMBNAIL)
             altText
-            sizes
-            srcSet
+            sizes(size: POST_THUMBNAIL)
+            srcSet(size: POST_THUMBNAIL)
           }
         }
       }
@@ -43,6 +44,7 @@ export default function Home({ posts }) {
     <>
       <Head>
         <title>Fandomnesia</title>
+        <link rel="canonical" href={siteUrl} />
         <meta name="description" content="Fandomnesia Site" />
       </Head>
       <Layout>
