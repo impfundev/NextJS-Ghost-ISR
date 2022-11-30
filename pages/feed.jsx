@@ -18,7 +18,7 @@ function Feeds(feed) {
         >
           <channel>
               <title>Fandomnesia</title>
-              <atom:link href="${siteUrl}/feed.xml" rel="self" type="application/rss+xml" />
+              <atom:link href="${siteUrl}/feed" rel="self" type="application/rss+xml" />
               <link>${siteUrl}</link>
               <description>Fandomnesia.com menyajikan berita terbaru dan konten menarik seputar budaya populer, selebritis, teknologi, dan olahraga.</description>
               <language>id</language>
