@@ -4,7 +4,7 @@ import { siteUrl } from "../lib/config";
 export default function FloatingAds() {
   const [adsActive, setAdsActive] = useState(false);
   const handleAds = () => {
-    setAdsActive(adsActive);
+    setAdsActive(!adsActive);
   };
 
   return (
@@ -16,7 +16,7 @@ export default function FloatingAds() {
         <span>︿</span>
       )}
     </button>
-    <div className={`fixed bottom-0 w-full ${ adsActive ? 'h-20' : 'h-0' } bg-white border border-inherit transition-all ease-in-out duration-300`}>
+    <div className={`fixed bottom-0 w-full ${ ! adsActive ? 'h-20' : 'h-0' } bg-white border border-inherit transition-all ease-in-out duration-300`}>
       <img
         className="block mx-auto object-cover py-2 w-[320px] h-auto"
         alt="contoh iklan"
