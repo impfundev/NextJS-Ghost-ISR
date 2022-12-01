@@ -4,12 +4,12 @@ import { siteUrl } from "../lib/config";
 export default function FloatingAds() {
   const [adsActive, setAdsActive] = useState(false);
   const handleAds = () => {
-    setAdsActive(!adsActive);
+    setAdsActive(adsActive);
   };
 
   return (
   <>
-    <button aria-label="Floating Ads" onClick={handleAds} className="fixed bottom-20 right-0 p-1 bg-white font-medium rounded-t-lg border-t border-x border-inherit">
+    <button aria-label="Floating Ads" onClick={handleAds} className={`fixed ${ adsActive ? 'bottom-20' : 'bottom-0' } right-0 p-1 bg-white font-medium rounded-t-lg border-t border-x border-inherit`}>
       { adsActive ? (
         <span>﹀</span>
       ) : (
