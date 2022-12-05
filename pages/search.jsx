@@ -20,7 +20,7 @@ export default function Search() {
           <input
             id="search-input"
             type="text"
-            name="cx=e7431585e16a34e4b&q"
+            name="cx=e7431585e16a34e4b&key=AIzaSyBdxplzwNoPim9ZYa9IzQW7-Ff0O32rteE&q"
             className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
             placeholder="Mulai ketik sesuatu disini..."
           />
