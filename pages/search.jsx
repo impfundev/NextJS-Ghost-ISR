@@ -6,9 +6,7 @@ export default function Search() {
     <Layout>
       <article className="prose lg:prose-xl">
         <h1 className="text-xl py-6">Temukan Berita atau Konten Menarik yang cari disini</h1>
-      <div className="rounded-xl border border-black w-full h-96 overflow-hidden">
         <div className="gcse-searchbox-only"></div>
-      </div>
       </article>
     </Layout>
     <script async src="https://cse.google.com/cse.js?cx=e7431585e16a34e4b"></script>
