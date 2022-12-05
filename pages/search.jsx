@@ -7,7 +7,7 @@ export default function Search() {
       <article className="prose lg:prose-xl">
         <h1 className="text-xl">Temukan Berita atau Konten Menarik yang cari disini</h1>
       <form
-        action="http://www.google.com/search"
+        action="https://www.google.com/search"
         method="get"
       >
         <label htmlFor="search-input" className="mb-2 text-sm font-medium text-gray-900 sr-only">
@@ -20,11 +20,10 @@ export default function Search() {
           <input
             id="search-input"
             type="text"
-            name="q"
             className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
             placeholder="Mulai ketik sesuatu disini..."
           />
-          <button type="submit" value="search" className="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Search</button>
+          <button type="submit" value="search?q=site%3Afandomnesia.com+" className="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Search</button>
         </div>
       </form>
       </article>
