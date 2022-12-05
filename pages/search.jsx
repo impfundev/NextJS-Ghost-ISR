@@ -7,7 +7,7 @@ export default function Search() {
       <article className="prose lg:prose-xl">
         <h1 className="text-xl">Temukan Berita atau Konten Menarik yang cari disini</h1>
       <form
-        action="https://cse.google.com/cse?cx=e7431585e16a34e4b&"
+        action="https://cse.google.com/cse?cx=e7431585e16a34e4b"
         method="get"
       >
         <label htmlFor="search-input" className="mb-2 text-sm font-medium text-gray-900 sr-only">
