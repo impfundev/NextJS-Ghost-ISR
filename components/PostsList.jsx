@@ -6,7 +6,7 @@ export default function PostsList({ posts }) {
   return (
     <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 py-5">
       {posts.map((post) => {
-        const { title, excerpt, slug, featuredImage } = post;
+        const { title, excerpt, slug, image } = post;
         return (
           <li key={slug}><a href={`${siteUrl}/${slug}`}>
             <article className="max-w-sm rounded-2xl shadow-lg overflow-hidden border border-black text-black hover:border-yellow-500 hover:text-yellow-500 transition-all duration-300">
@@ -14,12 +14,10 @@ export default function PostsList({ posts }) {
                 <>
                   <img
                     className="w-full object-cover h-60"
-                    src={featuredImage.node.sourceUrl}
-                    alt={featuredImage.node.altText}
-                    srcSet={featuredImage.node.srcSet}
-                    sizes={featuredImage.node.sizes}
-                    width="1200"
-                    height="auto"
+                    src={image.url}
+                    alt={title}
+                    width={image.width}
+                    height={image.height}
                     loading="lazy"
                   />
                 </>
@@ -28,7 +26,7 @@ export default function PostsList({ posts }) {
                 <h2 className="font-bold text-lg md:text-xl pt-1 pb-4">
                   {title}
                 </h2>
-                {parse(excerpt)}
+                <p>{excerpt}</p>
               </div>
             </article>
           </a></li>
