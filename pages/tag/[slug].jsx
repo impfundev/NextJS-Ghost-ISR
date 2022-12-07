@@ -25,7 +25,7 @@ export default function SingleTag({ tag }) {
 export async function getStaticPaths() {
   const GET_TAGSLUG = gql`
     query getTagSlug {
-      tags {
+      posts_list {
         nodes {
           slug
         }
@@ -44,25 +44,18 @@ export async function getStaticPaths() {
 }
 
 const GET_TAG = gql`
-  query getTag($slugId: ID!) {
-    tag(id: $slugId, idType: SLUG) {
-      name
+  query getTag($slugId: String!) {
+    posts_list(where: {categories_every: {slug_contains: $slugId}}) {
+      title
+      excerpt
       slug
-      posts {
-        nodes {
-          databaseId
-          title
-          excerpt
-          slug
-          featuredImage {
-            node {
-              sourceUrl(size: POST_THUMBNAIL)
-              altText
-              sizes(size: POST_THUMBNAIL)
-              srcSet(size: POST_THUMBNAIL)
-            }
-          }
-        }
+      image {
+        url
+        width
+        height
+      }
+      categories {
+        title
       }
     }
   }
