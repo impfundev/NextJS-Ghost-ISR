@@ -8,19 +8,14 @@ import { siteUrl } from "../lib/config";
 
 const GET_POSTS = gql`
   query getPosts {
-    posts(first: 20, after: null) {
-      nodes {
-        title
-        slug
-        excerpt
-        featuredImage {
-          node {
-            sourceUrl(size: POST_THUMBNAIL)
-            altText
-            sizes(size: POST_THUMBNAIL)
-            srcSet(size: POST_THUMBNAIL)
-          }
-        }
+    posts_list {
+      title
+      excerpt
+      slug
+      image {
+        url
+        width
+        height
       }
     }
   }
@@ -31,7 +26,7 @@ export async function getStaticProps() {
     query: GET_POSTS,
   });
 
-  const posts = response?.data?.posts.nodes;
+  const posts = response?.data?.posts_list;
 
   return {
     props: { posts },
