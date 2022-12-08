@@ -1,5 +1,3 @@
-import parse from "html-react-parser";
-import { gql } from "@apollo/client";
 import { siteUrl } from "../lib/config";
 
 export default function PostsList({ posts }) {
