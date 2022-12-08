@@ -3,7 +3,7 @@ import LazyLoad from "react-lazy-load";
 import date from "date-and-time";
 import Head from "next/head";
 
-import { getSinglePost, getPostsByTag } from "../lib/api";
+import { getSinglePost, getPosts, getPostsByTag } from "../lib/api";
 import { siteUrl } from "../lib/config";
 import Layout from "../components/Layout";
 import Share from "../components/Share";
