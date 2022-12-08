@@ -29,7 +29,7 @@ export default function Home({ posts }) {
         <meta name="description" content="Fandomnesia.com menyajikan berita terbaru dan konten menarik seputar budaya populer, selebritis, teknologi, dan olahraga." />
       </Head>
       <Layout>
-        <PostsList posts={posts} />
+        <PostsList posts={posts.slice(0,20)} />
       </Layout>
     </>
   );
