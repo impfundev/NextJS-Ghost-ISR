@@ -3,7 +3,7 @@ import LazyLoad from "react-lazy-load";
 import date from "date-and-time";
 import Head from "next/head";
 
-import { getSinglePost, getPosts } from "../lib/api";
+import { getSinglePost, getPostsByTag } from "../lib/api";
 import { siteUrl } from "../lib/config";
 import Layout from "../components/Layout";
 import Share from "../components/Share";
@@ -120,11 +120,9 @@ export async function getStaticProps({ params }) {
     return { notFound: true };
   };
   
-  const posts = await getPosts();
-  const related = posts.filter(
-    (post) => post.tags.map((tag) => tag.includes(post.tags[0]))
-  );
-  
+  const { tags } = post;
+  const { tag.slug } = tags.map((tag) => { tag.slug });
+  const related = await getPostsByTag({ tag.slug });
   if (!related) {
     return null;
   };
