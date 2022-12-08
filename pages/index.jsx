@@ -1,32 +1,18 @@
-import { gql } from "@apollo/client";
 import Head from "next/head";
 
 import Layout from "../components/Layout";
 import PostsList from "../components/PostsList";
-import { client } from "../lib/apolloClient";
+import { getPosts } from "../lib/api";
 import { siteUrl } from "../lib/config";
 
-const GET_POSTS = gql`
-  query getPosts {
-    posts_list {
-      title
-      excerpt
-      slug
-      image {
-        url
-        width
-        height
-      }
+export async function getStaticProps() {
+  const posts = await getPosts();
+
+  if (!posts) {
+    return {
+      notFound: true,
     }
   }
-`;
-
-export async function getStaticProps() {
-  const response = await client.query({
-    query: GET_POSTS,
-  });
-
-  const posts = response?.data?.posts_list;
 
   return {
     props: { posts },
