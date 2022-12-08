@@ -74,9 +74,9 @@ export default function SinglePost({ post, related }) {
                 (max-width: 2110px) 2110px, 2000px
               `}
             />
-            {feature_image_caption ? && (
+            {feature_image_caption ? (
               <figcaption className="py-0">{feature_image_caption}</figcaption>
-            )}
+            ) : null}
           </figure>
         ) : null}
         <div className="flex items-center justify-between">
