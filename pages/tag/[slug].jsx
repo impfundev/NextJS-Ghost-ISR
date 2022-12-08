@@ -26,7 +26,7 @@ export async function getStaticPaths() {
   const tags = await getAllTags();
   
   return {
-    paths: tags.map((tag) => ({params: {slug: `/tag/${tag.slug}`}})) || [],
+    paths: tags.map((tag) => ({params: {slug: `/tag/${tag.slug.replace(/%2Ftag%2F/gi, '')}`}})) || [],
     fallback: "blocking",
   };
 }
