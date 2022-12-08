@@ -145,7 +145,7 @@ export async function getStaticProps({ params }) {
   };
 
   const { primary_tag } = post;
-  const related = await getPostsByTag(parse(primary_tag.slug));
+  const related = await getPostsByTag(primary_tag.slug);
 
   if (!related) {
     return null;
