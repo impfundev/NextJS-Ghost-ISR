@@ -202,7 +202,7 @@ export async function getStaticProps({ params }) {
   const secresponse = await client.query({
     query: GET_RELATED,
     variables: {
-      catSlug: categories[0]?.map((category) => (category.slug)),
+      catSlug: categories[0]?.slug,
     },
   });
 
