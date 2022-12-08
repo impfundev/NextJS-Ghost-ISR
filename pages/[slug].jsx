@@ -1,20 +1,21 @@
 import { useRouter } from "next/router";
 import LazyLoad from "react-lazy-load";
+import parse from "html-react-parser";
 import date from "date-and-time";
+import Image from "next/image";
 import Head from "next/head";
 
-import { getSinglePost, getPosts } from "../lib/api";
+import { getSinglePost, getPosts, getPostsByTag } from "../lib/api";
 import { siteUrl } from "../lib/config";
 import Layout from "../components/Layout";
 import Share from "../components/Share";
 import PostsList from "../components/PostsList";
 import AdsRectangle from "../components/AdsRectangle";
 
-export default function SinglePost({ post }) {
+export default function SinglePost({ post, related }) {
   const { title, excerpt, html, slug, tags, feature_image, feature_image_caption, updated_at, published_at } = post;
-  const haveTags = Boolean(tags?.length);
   const dateFormat = date.format(new Date(`${updated_at ? updated_at : published_at}`), 'DD MMMM YYYY HH:mm');
-  // const posts = related.filter((posts) => posts.slug !== slug);
+  const posts = related.filter((posts) => posts.slug !== slug);
 
   return (
     <>
@@ -38,6 +39,17 @@ export default function SinglePost({ post }) {
       />
     </Head>
     <Layout>
+      {primary_tag ? && (
+        <>
+          <ul className="m-0 p-0 flex flex-wrap gap-1 list-none py-3">
+            <li key={primary_tag.slug} className="m-0 p-0">
+              <a href={`${siteUrl}${parse(primary_tag.slug)}`} className="px-3 py-1 bg-black text-white text-sm font-bold rounded-full">
+                {primary_tag.name}
+              </a>
+            </li>
+          </ul>
+        </>
+      )}
       <LazyLoad threshold={0.95}>
         <AdsRectangle />
       </LazyLoad>
@@ -47,16 +59,24 @@ export default function SinglePost({ post }) {
         </h1>
         {feature_image ? (
           <figure className="w-full">
-            <img
+            <Image
               className="w-full h-auto object-cover"
               src={feature_image}
               alt={title}
-              width="1200"
-              height="850"
+              width={1200}
+              height={850}
+              layout="responsive"
+              sizes={`
+                (max-width: 350px) 350px,
+                (max-width: 530px) 530px,
+                (max-width: 710px) 710px,
+                (max-width: 1200px) 1200px,
+                (max-width: 2110px) 2110px, 2000px
+              `}
             />
-            {feature_image_caption ? (
+            {feature_image_caption ? && (
               <figcaption className="py-0">{feature_image_caption}</figcaption>
-            ) : null}
+            )}
           </figure>
         ) : null}
         <div className="flex items-center justify-between">
@@ -65,33 +85,43 @@ export default function SinglePost({ post }) {
         </div>
         <p><time className="text-gray-500 text-sm" datetime={updated_at ? updated_at : published_at}>{dateFormat}</time></p>
         <hr />
-        {html}
+        {parse(html)}
       </article>
       <LazyLoad threshold={0.95}>
         <AdsRectangle />
       </LazyLoad>
-      <>
-        {haveTags ? (
-          <>
+      {tags ? && (
+        <>
           <ul className="m-0 p-0 flex flex-wrap gap-1 list-none py-3">
             {tags.map((tag) => {
               const { id, slug, name } = tag;
               return (
                 <li key={id} className="m-0 p-0">
-                  <a href={`${siteUrl}/tag/${slug}`} className="px-3 py-1 bg-black text-white text-sm font-bold rounded-full">
+                  <a href={`${siteUrl}${parse(slug)}`} className="px-3 py-1 bg-black text-white text-sm font-bold rounded-full">
                     {name}
                   </a>
                 </li>
               );
             })}
           </ul>
-          </>
-        ) : null}
-      </>
+        </>
+      )}
       <div className="py-5">
         <div className="fb-comments" data-href={`${siteUrl}/${slug}`} data-width="100%" data-numposts="5"></div>
       </div>
       <div id="fb-root"></div>
+      <h3 className="py-6 text-lg font-bold">Artikel Terkait</h3>
+      <LazyLoad threshold={0.95}>
+      {posts ? && (
+        <>
+          {posts.map((post) => {
+            return (
+              <PostsList posts={posts} />
+            )
+          }).slice(0,6)}
+        </>
+      )}
+      </LazyLoad>
     </Layout>
     </>
   );
@@ -114,8 +144,15 @@ export async function getStaticProps({ params }) {
     return { notFound: true };
   };
 
+  const { primary_tag } = post;
+  const related = await getPostsByTag(parse(primary_tag.slug));
+
+  if (!related) {
+    return null;
+  };
+
   return {
-    props: { post },
+    props: { post, related },
     revalidate: 1,
   };
 }
