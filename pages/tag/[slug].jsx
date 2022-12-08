@@ -1,4 +1,3 @@
-import { Tag } from "@tryghost/content-api";
 import Head from "next/head";
 
 import { getAllTags, getSingleTag, getPostsByTag } from "../../lib/api";
