@@ -142,7 +142,7 @@ export async function getStaticPaths() {
 
 const GET_POST = gql`
   query getPostBySlug($slugId: String!) {
-    posts(where: {slug_contains: $slugId}) {
+    posts(where: {slug: $slugId}) {
       title
       excerpt
       slug
