@@ -13,7 +13,7 @@ import PostsList from "../components/PostsList";
 import AdsRectangle from "../components/AdsRectangle";
 
 export default function SinglePost({ post, related }) {
-  const { title, excerpt, html, slug, tags, feature_image, feature_image_caption, updated_at, published_at } = post;
+  const { title, excerpt, html, slug, tags, primary_tag, feature_image, feature_image_caption, updated_at, published_at } = post;
   const dateFormat = date.format(new Date(`${updated_at ? updated_at : published_at}`), 'DD MMMM YYYY HH:mm');
   const posts = related.filter((posts) => posts.slug !== slug);
 
@@ -39,7 +39,7 @@ export default function SinglePost({ post, related }) {
       />
     </Head>
     <Layout>
-      {primary_tag ? && (
+      {primary_tag && (
         <>
           <ul className="m-0 p-0 flex flex-wrap gap-1 list-none py-3">
             <li key={primary_tag.slug} className="m-0 p-0">
@@ -90,7 +90,7 @@ export default function SinglePost({ post, related }) {
       <LazyLoad threshold={0.95}>
         <AdsRectangle />
       </LazyLoad>
-      {tags ? && (
+      {tags && (
         <>
           <ul className="m-0 p-0 flex flex-wrap gap-1 list-none py-3">
             {tags.map((tag) => {
@@ -112,7 +112,7 @@ export default function SinglePost({ post, related }) {
       <div id="fb-root"></div>
       <h3 className="py-6 text-lg font-bold">Artikel Terkait</h3>
       <LazyLoad threshold={0.95}>
-      {posts ? && (
+      {posts && (
         <>
           {posts.map((post) => {
             return (
