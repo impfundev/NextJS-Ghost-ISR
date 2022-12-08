@@ -35,7 +35,8 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { slug } = params;
   const tag = await getSingleTag(slug);
-  const posts = await getPostsByTag(slug);
+  const tagSlug = slug;
+  const posts = await getPostsByTag(tagSlug);
 
   if (!posts) {
     return { notFound: true };
