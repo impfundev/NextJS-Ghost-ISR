@@ -1,21 +1,19 @@
-import { gql } from "@apollo/client";
 import { useRouter } from "next/router";
 import LazyLoad from "react-lazy-load";
 import date from "date-and-time";
 import Head from "next/head";
 
-import { client } from "../lib/apolloClient";
+import { getSinglePost, getPosts } from "../lib/api";
 import { siteUrl } from "../lib/config";
 import Layout from "../components/Layout";
 import Share from "../components/Share";
 import PostsList from "../components/PostsList";
 import AdsRectangle from "../components/AdsRectangle";
 
-export default function SinglePost({ item, related }) {
-  const { title, excerpt, content, slug, image, caption, categories, tags } = item;
-  const haveCategories = Boolean(categories?.slice(0, 1).length);
+export default function SinglePost({ post, related }) {
+  const { title, excerpt, html, slug, tags, feature_image, feature_image_caption, updated_at, published_at } = post;
   const haveTags = Boolean(tags?.length);
-  const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
+  const dateFormat = date.format(new Date(`${updated_at ? updated_at : published_at}`), 'DD MMMM YYYY HH:mm');
   const posts = related.filter((posts) => posts.slug !== slug);
 
   return (
@@ -40,22 +38,6 @@ export default function SinglePost({ item, related }) {
       />
     </Head>
     <Layout>
-      <>
-        {haveCategories ? (
-          <>
-            {categories.map((category) => {
-              const { slug, title } = category;
-              return (
-                <div className="py-4" key={slug}>
-                  <a href={`${siteUrl}/category/${slug}`} className="px-3 py-1 bg-black text-white text-sm font-bold rounded-full">
-                    {title}
-                  </a>
-                </div>
-              );
-            })}
-          </>
-        ) : null}
-      </>
       <LazyLoad threshold={0.95}>
         <AdsRectangle />
       </LazyLoad>
@@ -63,17 +45,17 @@ export default function SinglePost({ item, related }) {
         <h1 className="text-2xl md:text-4xl lg:text-6xl">
           {title}
         </h1>
-        {image ? (
+        {feature_image ? (
           <figure className="w-full">
             <img
               className="w-full h-auto object-cover"
-              src={image.url}
+              src={feature_image}
               alt={title}
-              width={image.width}
-              height={image.height}
+              width="1200"
+              height="850"
             />
-            {caption ? (
-              <figcaption className="py-0">{caption}</figcaption>
+            {feature_image_caption ? (
+              <figcaption className="py-0">{feature_image_caption}</figcaption>
             ) : null}
           </figure>
         ) : null}
@@ -81,9 +63,9 @@ export default function SinglePost({ item, related }) {
           <span>Oleh: Ilham Maulana</span>
           <Share title={title} slug={slug} />
         </div>
-        <p><time className="text-gray-500 text-sm" datetime={item.date}>{dateFormated}</time></p>
+        <p><time className="text-gray-500 text-sm" datetime={updated_at ? updated_at : published_at}>{dateFormat}</time></p>
         <hr />
-        {content.html}
+        {html}
       </article>
       <LazyLoad threshold={0.95}>
         <AdsRectangle />
@@ -93,11 +75,11 @@ export default function SinglePost({ item, related }) {
           <>
           <ul className="m-0 p-0 flex flex-wrap gap-1 list-none py-3">
             {tags.map((tag) => {
-              const { slug, title } = tag;
+              const { id, slug, name } = tag;
               return (
-                <li key={slug} className="m-0 p-0">
-                  <a href={`${siteUrl}/tag/${title}`} className="px-3 py-1 bg-black text-white text-sm font-bold rounded-full">
-                    {title}
+                <li key={id} className="m-0 p-0">
+                  <a href={`${siteUrl}/tag/${slug}`} className="px-3 py-1 bg-black text-white text-sm font-bold rounded-full">
+                    {name}
                   </a>
                 </li>
               );
@@ -122,98 +104,36 @@ export default function SinglePost({ item, related }) {
 }
 
 export async function getStaticPaths() {
-  const GET_SLUG = gql`
-    query getPosts {
-      posts_list {
-        slug
-      }
-    }
-  `;
-
-  const { data } = await client.query({
-    query: GET_SLUG,
-  });
+  const posts = await getPosts();
+  const paths = posts.map((post) => ({
+    params: { slug: post.slug },
+  }))
 
   return {
-    paths: data?.posts_list.map((post) => ({params: {slug: post.slug}})) || [],
+    paths || [],
     fallback: "blocking",
   };
 }
 
-const GET_POST = gql`
-  query getPostBySlug($slugId: String!) {
-    posts(where: {slug: $slugId}) {
-      title
-      excerpt
-      slug
-      date
-      image {
-        url
-        width
-        height
-      }
-      caption
-      tags {
-        title
-        slug
-      }
-      categories {
-        title
-        slug
-      }
-      content {
-        html
-      }
-    }
-  }
-`;
-
-const GET_RELATED = gql`
-  query getRelated($catSlug: [String]) {
-    posts_list(where: {categories_every: {slug_in: $slugId}}) {
-      title
-      excerpt
-      slug
-      image {
-        url
-        width
-        height
-      }
-    }
-  }
-`;
-
 export async function getStaticProps({ params }) {
   const { slug } = params;
+  const post = await getSinglePost(slug);
 
-  const response = await client.query({
-    query: GET_POST,
-    variables: { slugId: slug },
-  });
-
-  const item = response?.data?.posts;
-
-  if (!item) {
+  if (!post) {
     return { notFound: true };
   };
-
-  const { categories } = item;
   
-  const secresponse = await client.query({
-    query: GET_RELATED,
-    variables: {
-      catSlug: categories[0]?.slug,
-    },
-  });
-
-  const related = secresponse?.data?.posts_list;
+  const posts = await getPosts();
+  const related = posts.filter(
+    (post) => post.tags.map((tag) => tag.includes(post.tags[0]))
+  );
   
   if (!related) {
     return null;
   };
 
   return {
-    props: { item, related },
+    props: { post, related },
     revalidate: 1,
   };
 }
