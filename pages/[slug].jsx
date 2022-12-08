@@ -5,17 +5,17 @@ import date from "date-and-time";
 import Image from "next/image";
 import Head from "next/head";
 
-import { getSinglePost, getPosts, getPostsByTag } from "../lib/api";
+import { getSinglePost, getPosts } from "../lib/api";
 import { siteUrl } from "../lib/config";
 import Layout from "../components/Layout";
 import Share from "../components/Share";
 import PostsList from "../components/PostsList";
 import AdsRectangle from "../components/AdsRectangle";
 
-export default function SinglePost({ post, related }) {
+export default function SinglePost({ post }) {
   const { title, excerpt, html, slug, tags, primary_tag, feature_image, feature_image_caption, updated_at, published_at } = post;
   const dateFormat = date.format(new Date(`${updated_at ? updated_at : published_at}`), 'DD MMMM YYYY HH:mm');
-  const posts = related.filter((posts) => posts.slug !== slug);
+  // const posts = related.filter((posts) => posts.slug !== slug);
 
   return (
     <>
@@ -110,18 +110,6 @@ export default function SinglePost({ post, related }) {
         <div className="fb-comments" data-href={`${siteUrl}/${slug}`} data-width="100%" data-numposts="5"></div>
       </div>
       <div id="fb-root"></div>
-      <h3 className="py-6 text-lg font-bold">Artikel Terkait</h3>
-      <LazyLoad threshold={0.95}>
-      {posts && (
-        <>
-          {posts.map((post) => {
-            return (
-              <PostsList posts={posts} />
-            )
-          }).slice(0,6)}
-        </>
-      )}
-      </LazyLoad>
     </Layout>
     </>
   );
@@ -144,15 +132,12 @@ export async function getStaticProps({ params }) {
     return { notFound: true };
   };
 
-  const tagSlug = post.primary_tag.slug;
-  const related = await getPostsByTag(tagSlug);
-
   if (!related) {
     return null;
   };
 
   return {
-    props: { post, related },
+    props: { post },
     revalidate: 1,
   };
 }
