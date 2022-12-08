@@ -105,12 +105,9 @@ export default function SinglePost({ post, related }) {
 
 export async function getStaticPaths() {
   const posts = await getPosts();
-  const paths = posts.map((post) => ({
-    params: { slug: post.slug },
-  }))
 
   return {
-    paths || [],
+    paths: posts.map((post) => ({params: {slug: post.slug}})) || [],
     fallback: "blocking",
   };
 }
