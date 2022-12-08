@@ -132,10 +132,6 @@ export async function getStaticProps({ params }) {
     return { notFound: true };
   };
 
-  if (!related) {
-    return null;
-  };
-
   return {
     props: { post },
     revalidate: 1,
