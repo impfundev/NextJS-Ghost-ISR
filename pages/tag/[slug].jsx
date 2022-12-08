@@ -24,12 +24,9 @@ export default function SingleTag({ posts, tag }) {
 
 export async function getStaticPaths() {
   const tags = await getAllTags();
-  const paths = tags.map((tag) => ({
-    params: { slug: `/tag/${tag.slug}` },
-  }))
   
   return {
-    paths || [],
+    paths: tags.map((tag) => ({params: {slug: `/tag/${tag.slug}`}})) || [],
     fallback: "blocking",
   };
 }
