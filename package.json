@@ -8,9 +8,8 @@
     "start": "next start"
   },
   "dependencies": {
-    "@apollo/client": "^3.3.19",
+    "@tryghost/content-api": "^1.11.4",
     "axios": "1.2.0",
-    "graphql": "^15.5.0",
     "date-and-time": "^2.4.0",
     "html-react-parser": "^1.2.6",
     "next": "^13.0.3",
