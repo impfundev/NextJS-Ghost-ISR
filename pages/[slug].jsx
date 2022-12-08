@@ -135,7 +135,7 @@ export async function getStaticPaths() {
   });
 
   return {
-    paths: data?.posts_list.map((post) => `/${post.slug}`) || [],
+    paths: data?.posts_list.map((post) => ({params: {slug: post.slug}})) || [],
     fallback: "blocking",
   };
 }
