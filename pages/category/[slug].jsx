@@ -6,17 +6,18 @@ import { siteUrl } from "../../lib/config";
 import Layout from "../../components/Layout";
 import PostsList from "../../components/PostsList";
 
-export default function SingleCategory({ category }) {
+export default function SingleCategory({ posts, category }) {
+  
   return (
   <>
     <Head>
-      <title>{category.name} - Fandomnesia</title>
+      <title>{category.title} - Fandomnesia</title>
       <link rel="canonical" href={`${siteUrl}/${category.slug}`} />
-      <meta name="description" content={`Telusuri berita terbaru  serta  konten menarik lainya seputar ${category.name} di Fandomnesia.`} />
+      <meta name="description" content={`Telusuri berita terbaru  serta  konten menarik lainya seputar ${category.title} di Fandomnesia.`} />
     </Head>
     <Layout>
-      <h1 className="py-6 text-lg font-bold">{category.name}</h1>
-      <PostsList posts={category.posts.nodes} />
+      <h1 className="py-6 text-lg font-bold">{category.title}</h1>
+      <PostsList posts={posts} />
     </Layout>
   </>
   );
@@ -25,8 +26,8 @@ export default function SingleCategory({ category }) {
 export async function getStaticPaths() {
   const GET_CATSLUG = gql`
     query getCatSlug {
-      categories {
-        nodes {
+      posts_list {
+        categories {
           slug
         }
       }
@@ -37,32 +38,28 @@ export async function getStaticPaths() {
     query: GET_CATSLUG,
   });
 
+  const { post } = data?.posts_list.map((post) => (post));
+
   return {
-    paths: data?.categories.nodes.map((category) => `/category/${category.slug}` ) || [],
+    paths: data?.post.categories.[0].map((category) => `/category/${category.slug}` ) || [],
     fallback: "blocking",
   };
 }
 
 const GET_CATEGORY = gql`
-  query getCategory($slugId: ID!) {
-    category(id: $slugId, idType: SLUG) {
-      name
+  query getCategory($slugId: String!) {
+    posts_list(where: {categories_every: {slug_contains: $slugId}}) {
+      title
+      excerpt
       slug
-      posts {
-        nodes {
-          databaseId
-          title
-          excerpt
-          slug
-          featuredImage {
-            node {
-              sourceUrl(size: POST_THUMBNAIL)
-              altText
-              sizes(size: POST_THUMBNAIL)
-              srcSet(size: POST_THUMBNAIL)
-            }
-          }
-        }
+      image {
+        url
+        width
+        height
+      }
+      categories {
+        title
+        slug
       }
     }
   }
@@ -76,14 +73,15 @@ export async function getStaticProps(context) {
     variables: { slugId: slug },
   });
 
-  const category = response?.data?.category;
+  const posts = response?.data?.posts_list;
+  const { category } = posts.categories.map((category) => (category));
 
   if (!category) {
     return { notFound: true };
   }
 
   return {
-    props: { category },
+    props: { posts, category },
     revalidate: 60,
   };
 }
