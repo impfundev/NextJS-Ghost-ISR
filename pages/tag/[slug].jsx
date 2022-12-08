@@ -7,16 +7,17 @@ import Layout from "../../components/Layout";
 import PostsList from "../../components/PostsList";
 
 export default function SingleTag({ tag }) {
+
   return (
   <>
     <Head>
-      <title>{tag.name} - Fandomnesia</title>
-      <link rel="canonical" href={`${siteUrl}/${tag.slug}`} />
-      <meta name="description" content={`Telusuri berita terbaru  serta  konten menarik lainya seputar ${tag.name} di Fandomnesia.`} />
+      <title>{tag.tags.title} - Fandomnesia</title>
+      <link rel="canonical" href={`${siteUrl}/${tag.tags.slug}`} />
+      <meta name="description" content={`Telusuri berita terbaru  serta  konten menarik lainya seputar ${tag.tags.title} di Fandomnesia.`} />
     </Head>
     <Layout>
-      <h1 className="py-6 text-lg font-bold">{tag.name}</h1>
-      <PostsList posts={tag.posts.nodes} />
+      <h1 className="py-6 text-lg font-bold">{tag.tags.title}</h1>
+      <PostsList posts={tag} />
     </Layout>
   </>
   );
@@ -26,7 +27,7 @@ export async function getStaticPaths() {
   const GET_TAGSLUG = gql`
     query getTagSlug {
       posts_list {
-        nodes {
+        tags {
           slug
         }
       }
@@ -38,14 +39,14 @@ export async function getStaticPaths() {
   });
 
   return {
-    paths: data?.tags.nodes.map((tag) => `/tag/${tag.slug}` ) || [],
+    paths: data?.posts_list.map((post) => `/tag/${post.tags.slug}` ) || [],
     fallback: "blocking",
   };
 }
 
 const GET_TAG = gql`
-  query getTag($slugId: String!) {
-    posts_list(where: {categories_every: {slug_contains: $slugId}}) {
+  query getTag($slugId: [String!]) {
+    posts_list(where: {tags_every: {slug_contains: $slugId}}) {
       title
       excerpt
       slug
@@ -54,8 +55,9 @@ const GET_TAG = gql`
         width
         height
       }
-      categories {
+      tags {
         title
+        slug
       }
     }
   }
@@ -69,7 +71,7 @@ export async function getStaticProps(context) {
     variables: { slugId: slug },
   });
 
-  const tag = response?.data?.tag;
+  const tag = response?.data?.posts_list;
 
   if (!tag) {
     return { notFound: true };
@@ -77,6 +79,6 @@ export async function getStaticProps(context) {
 
   return {
     props: { tag },
-    revalidate: 60,
+    revalidate: 1,
   };
 }
