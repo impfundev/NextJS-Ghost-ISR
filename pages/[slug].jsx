@@ -72,8 +72,8 @@ export default function SinglePost({ item, related }) {
               width={image.width}
               height={image.height}
             />
-            {featuredImage.node.caption ? (
-              <figcaption className="py-0">caption</figcaption>
+            {caption ? (
+              <figcaption className="py-0">{caption}</figcaption>
             ) : null}
           </figure>
         ) : null}
