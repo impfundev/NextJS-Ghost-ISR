@@ -41,7 +41,7 @@ export async function getStaticPaths() {
   const { post } = data?.posts_list.map((post) => (post));
 
   return {
-    paths: data?.post.categories[0].map((category) => `/category/${category.slug}` ) || [],
+    paths: post?.categories[0].map((category) => `/category/${category.slug}` ) || [],
     fallback: "blocking",
   };
 }
