@@ -142,7 +142,7 @@ export async function getStaticPaths() {
 
 const GET_POST = gql`
   query getPostBySlug($slugId: String!) {
-    posts(where: {slug: $slugId}) {
+    post(where: {slug: $slugId}) {
       title
       excerpt
       slug
@@ -191,7 +191,7 @@ export async function getStaticProps({ params }) {
     variables: { slugId: slug },
   });
 
-  const item = response?.data?.posts;
+  const item = response?.data?.post;
 
   if (!item) {
     return { notFound: true };
@@ -202,7 +202,7 @@ export async function getStaticProps({ params }) {
   const secresponse = await client.query({
     query: GET_RELATED,
     variables: {
-      catSlug: categories[0]?.slug,
+      catSlug: categories[0]?.map((category) => (category.slug)),
     },
   });
 
