@@ -1,7 +1,7 @@
-import { gql } from "@apollo/client";
+import { Tag } from "@tryghost/content-api";
 import Head from "next/head";
 
-import { client } from "../../lib/apolloClient";
+import { getAllTags, getSingleTag, getPostsByTag } from "../../lib/api";
 import { siteUrl } from "../../lib/config";
 import Layout from "../../components/Layout";
 import PostsList from "../../components/PostsList";
@@ -11,12 +11,12 @@ export default function SingleTag({ posts, tag }) {
   return (
   <>
     <Head>
-      <title>{tag.title} - Fandomnesia</title>
+      <title>{tag.name} - Fandomnesia</title>
       <link rel="canonical" href={`${siteUrl}/${tag.slug}`} />
-      <meta name="description" content={`Telusuri berita terbaru  serta  konten menarik lainya seputar ${tag.title} di Fandomnesia.`} />
+      <meta name="description" content={`Telusuri berita terbaru  serta  konten menarik lainya seputar ${tag.name} di Fandomnesia.`} />
     </Head>
     <Layout>
-      <h1 className="py-6 text-lg font-bold">{tag.title}</h1>
+      <h1 className="py-6 text-lg font-bold">{tag.name}</h1>
       <PostsList posts={posts} />
     </Layout>
   </>
@@ -24,58 +24,24 @@ export default function SingleTag({ posts, tag }) {
 }
 
 export async function getStaticPaths() {
-  const GET_TAGSLUG = gql`
-    query getTagSlug {
-      posts_list {
-        tags {
-          slug
-        }
-      }
-    }
-  `;
-
-  const { data } = await client.query({
-    query: GET_TAGSLUG,
-  });
-  const { post } = data?.posts_list.map((post) => (post));
-
+  const tags = await getAllTags();
+  const paths = tags.map((tag) => ({
+    params: { slug: `/tag/${tag.slug}` },
+  }))
+  
   return {
-    paths: post?.tags[0].map((tag) => `/tag/${tag.slug}` ) || [],
+    paths || [],
     fallback: "blocking",
   };
 }
 
-const GET_TAG = gql`
-  query getTag($slugId: String!) {
-    posts_list(where: {tags_every: {slug_contains: $slugId}}) {
-      title
-      excerpt
-      slug
-      image {
-        url
-        width
-        height
-      }
-      tags {
-        title
-        slug
-      }
-    }
-  }
-`;
+export async function getStaticProps(params) {
+  if (!(params && params.slug && Array.isArray(params.slug))) throw Error('getStaticProps: wrong parameters.');
+  const [slug] = params.slug.reverse();
+  const tag = await getSingleTag(slug);
+  const posts = await getPostsByTag(slug);
 
-export async function getStaticProps(context) {
-  const { slug } = context.params;
-
-  const response = await client.query({
-    query: GET_TAG,
-    variables: { slugId: slug },
-  });
-
-  const posts = response?.data?.posts_list;
-  const { tag } = posts.tags[0].map((tag) => (tag));
-
-  if (!tag) {
+  if (!posts) {
     return { notFound: true };
   }
 
