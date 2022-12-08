@@ -74,7 +74,7 @@ export async function getStaticProps(context) {
   });
 
   const posts = response?.data?.posts_list;
-  const { category } = posts.categories.map((category) => (category));
+  const { category } = posts.categories[0].map((category) => (category));
 
   if (!category) {
     return { notFound: true };
