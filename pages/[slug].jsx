@@ -169,8 +169,8 @@ const GET_POST = gql`
 `;
 
 const GET_RELATED = gql`
-  query getRelated($catSlug: String!) {
-    posts_list(where: {categories_every: {slug_contains: $slugId}}) {
+  query getRelated($catSlug: [String]) {
+    posts_list(where: {categories_every: {slug_in: $slugId}}) {
       title
       excerpt
       slug
