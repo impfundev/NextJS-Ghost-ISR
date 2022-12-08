@@ -121,8 +121,8 @@ export async function getStaticProps({ params }) {
   };
   
   const { tags } = post;
-  const { tag.slug } = tags.map((tag) => { tag.slug });
-  const related = await getPostsByTag({ tag.slug });
+  const { tag.slug } = tags.map((tag) => (tag.slug));
+  const related = await getPostsByTag(tag.slug);
   if (!related) {
     return null;
   };
