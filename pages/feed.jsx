@@ -1,5 +1,5 @@
-import getFeedsPosts from "../lib/getFeedsPosts";
-import postsTofeed from "../lib/postsTofeed";
+import postsFeed from "../lib/postsFeed";
+import { getPosts } from "../lib/api";
 import { siteUrl } from "../lib/config";
 
 const FeedPage = () => null;
@@ -35,8 +35,11 @@ function Feeds(feed) {
 // This gets called on every request
 export async function getServerSideProps({ res }) {
   // Fetch data from external API
-  const posts = await getFeedsPosts();
-  const feed = await postsTofeed(posts);
+  const posts = await getPosts();
+  if (!posts) {
+    return null
+  }
+  const feed = await postsFeed(posts);
   //Set page headers
   res.setHeader("Content-Type", "text/xml; charset=utf-8");
   //Set cache for 600s so it wont call our wp on every request.
