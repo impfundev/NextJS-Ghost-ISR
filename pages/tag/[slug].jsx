@@ -1,4 +1,5 @@
 import Head from "next/head";
+import parse from "html-react-parser";
 
 import { getAllTags, getSingleTag, getPostsByTag } from "../../lib/api";
 import { siteUrl } from "../../lib/config";
@@ -26,14 +27,13 @@ export async function getStaticPaths() {
   const tags = await getAllTags();
   
   return {
-    paths: tags.map((tag) => ({params: {slug: `/tag/${tag.slug.replace(/%2Ftag%2F/gi, '')}`}})) || [],
+    paths: tags.map((tag) => ({params: {slug: `${parse(tag.slug)}`}})) || [],
     fallback: "blocking",
   };
 }
 
-export async function getStaticProps(params) {
-  if (!(params && params.slug && Array.isArray(params.slug))) throw Error('getStaticProps: wrong parameters.');
-  const [slug] = params.slug.reverse();
+export async function getStaticProps({ params }) {
+  const { slug } = params;
   const tag = await getSingleTag(slug);
   const posts = await getPostsByTag(slug);
 
