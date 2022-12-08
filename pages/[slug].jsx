@@ -1,6 +1,5 @@
 import { gql } from "@apollo/client";
 import { useRouter } from "next/router";
-import parse from "html-react-parser";
 import LazyLoad from "react-lazy-load";
 import date from "date-and-time";
 import Head from "next/head";
@@ -13,11 +12,11 @@ import PostsList from "../components/PostsList";
 import AdsRectangle from "../components/AdsRectangle";
 
 export default function SinglePost({ item, related }) {
-  const { title, excerpt, content, slug, author, featuredImage, categories, tags, seo } = item;
-  const haveCategories = Boolean(categories?.nodes?.slice(0, 1).length);
-  const haveTags = Boolean(tags?.nodes?.length);
+  const { title, excerpt, content, slug, image, caption, categories, tags } = item;
+  const haveCategories = Boolean(categories?.slice(0, 1).length);
+  const haveTags = Boolean(tags?.length);
   const dateFormated = date.format(new Date(item.date), 'DD MMMM YYYY HH:mm');
-  const posts = related.posts.nodes.filter((posts) => posts.slug !== slug);
+  const posts = related.filter((posts) => posts.slug !== slug);
 
   return (
     <>
@@ -39,18 +38,17 @@ export default function SinglePost({ item, related }) {
           }, true);`
         }}
       />
-      {parse(seo.fullHead)}
     </Head>
     <Layout>
       <>
         {haveCategories ? (
           <>
-            {categories.nodes.map((category) => {
-              const { slug, name } = category;
+            {categories.map((category) => {
+              const { slug, title } = category;
               return (
                 <div className="py-4" key={slug}>
                   <a href={`${siteUrl}/category/${slug}`} className="px-3 py-1 bg-black text-white text-sm font-bold rounded-full">
-                    {name}
+                    {title}
                   </a>
                 </div>
               );
@@ -65,29 +63,27 @@ export default function SinglePost({ item, related }) {
         <h1 className="text-2xl md:text-4xl lg:text-6xl">
           {title}
         </h1>
-        {featuredImage ? (
+        {image ? (
           <figure className="w-full">
             <img
               className="w-full h-auto object-cover"
-              src={featuredImage.node.sourceUrl}
-              alt={featuredImage.node.altText}
-              srcSet={featuredImage.node.srcSet}
-              sizes={featuredImage.node.sizes}
-              width="1200"
-              height="800"
+              src={image.url}
+              alt={title}
+              width={image.width}
+              height={image.height}
             />
             {featuredImage.node.caption ? (
-              <figcaption className="py-0" dangerouslySetInnerHTML={{ __html: featuredImage.node.caption }} />
+              <figcaption className="py-0">caption</figcaption>
             ) : null}
           </figure>
         ) : null}
         <div className="flex items-center justify-between">
-          <span>Oleh: <a href={`${siteUrl}/author/${author.node.slug}`}>{author.node.name}</a></span>
+          <span>Oleh: Ilham Maulana</span>
           <Share title={title} slug={slug} />
         </div>
         <p><time className="text-gray-500 text-sm" datetime={item.date}>{dateFormated}</time></p>
         <hr />
-        {parse(content)}
+        {content.html}
       </article>
       <LazyLoad threshold={0.95}>
         <AdsRectangle />
@@ -96,12 +92,12 @@ export default function SinglePost({ item, related }) {
         {haveTags ? (
           <>
           <ul className="m-0 p-0 flex flex-wrap gap-1 list-none py-3">
-            {tags.nodes.map((tag) => {
-              const { slug, name } = tag;
+            {tags.map((tag) => {
+              const { slug, title } = tag;
               return (
                 <li key={slug} className="m-0 p-0">
-                  <a href={`${siteUrl}/tag/${slug}`} className="px-3 py-1 bg-black text-white text-sm font-bold rounded-full">
-                    {name}
+                  <a href={`${siteUrl}/tag/${title}`} className="px-3 py-1 bg-black text-white text-sm font-bold rounded-full">
+                    {title}
                   </a>
                 </li>
               );
@@ -128,10 +124,8 @@ export default function SinglePost({ item, related }) {
 export async function getStaticPaths() {
   const GET_SLUG = gql`
     query getPosts {
-      posts {
-        nodes {
-          slug
-        }
+      posts_list {
+        slug
       }
     }
   `;
@@ -141,70 +135,49 @@ export async function getStaticPaths() {
   });
 
   return {
-    paths: data?.posts.nodes.map((post) => `/${post.slug}`) || [],
+    paths: data?.posts_list.map((post) => `/${post.slug}`) || [],
     fallback: "blocking",
   };
 }
 
 const GET_POST = gql`
-  query getPostBySlug($slugId: ID!) {
-    post(id: $slugId, idType: SLUG) {
+  query getPostBySlug($slugId: String!) {
+    posts(where: {posts_every: {slug_contains: $slugId}}) {
       title
-      date
-      slug
       excerpt
-      content
-      author {
-        node {
-          name
-          slug
-        }
+      slug
+      date
+      image {
+        url
+        width
+        height
       }
-      featuredImage {
-        node {
-          sourceUrl(size: POST_THUMBNAIL)
-          altText
-          caption
-          sizes(size: POST_THUMBNAIL)
-          srcSet(size: POST_THUMBNAIL)
-        }
-      }
-      categories(first: 1) {
-        nodes {
-          slug
-          name
-        }
-      }
+      caption
       tags {
-        nodes {
-          slug
-          name
-        }
+        title
+        slug
       }
-      seo {
-        fullHead
+      categories {
+        title
+        slug
+      }
+      content {
+        html
       }
     }
   }
 `;
 
 const GET_RELATED = gql`
-  query getRelated($catSlug: ID!) {
-    category(id: $catSlug, idType: SLUG) {
-      posts {
-        nodes {
-          title
-          slug
-          excerpt
-          featuredImage {
-            node {
-              sourceUrl(size: POST_THUMBNAIL)
-              altText
-              sizes(size: POST_THUMBNAIL)
-              srcSet(size: POST_THUMBNAIL)
-            }
-          }
-        }
+  query getRelated($catSlug: String!) {
+    posts_list(where: {categories_every: {slug_contains: $slugId}}) {
+      title
+      excerpt
+      slug
+      image {
+        url
+        width
+        height
       }
     }
   }
@@ -218,7 +191,7 @@ export async function getStaticProps({ params }) {
     variables: { slugId: slug },
   });
 
-  const item = response?.data?.post;
+  const item = response?.data?.posts;
 
   if (!item) {
     return { notFound: true };
@@ -229,11 +202,11 @@ export async function getStaticProps({ params }) {
   const secresponse = await client.query({
     query: GET_RELATED,
     variables: {
-      catSlug: categories.nodes[0]?.slug,
+      catSlug: categories[0]?.slug,
     },
   });
 
-  const related = secresponse?.data?.category;
+  const related = secresponse?.data?.posts_list;
   
   if (!related) {
     return null;
