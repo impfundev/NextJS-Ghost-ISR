@@ -9,12 +9,10 @@ import { getSinglePost, getPosts } from "../lib/api";
 import { siteUrl } from "../lib/config";
 import Layout from "../components/Layout";
 import Share from "../components/Share";
-import PostsList from "../components/PostsList";
 import AdsRectangle from "../components/AdsRectangle";
 
 export default function SinglePost({ post }) {
-  const { title, excerpt, html, tags, feature_image, feature_image_caption, updated_at, published_at } = post;
-  const slug = post.slug;
+  const { title, excerpt, html, slug, tags, feature_image, feature_image_caption, updated_at, published_at } = post;
   const dateFormat = date.format(new Date(`${updated_at ? updated_at : published_at}`), 'DD MMMM YYYY HH:mm');
 
   return (
@@ -39,6 +37,8 @@ export default function SinglePost({ post }) {
       />
     </Head>
     <Layout>
+    {post.primary_tag ? (
+    <>
       <ul className="m-0 p-0 flex flex-wrap gap-1 list-none py-3">
         <li key={post.primary_tag.slug} className="m-0 p-0">
           <a href={`${siteUrl}/tag/${post.primary_tag.slug}`} className="px-3 py-1 bg-black text-white text-sm font-bold rounded-full">
@@ -46,6 +46,8 @@ export default function SinglePost({ post }) {
           </a>
         </li>
       </ul>
+    </>
+    ) : null}
       <LazyLoad threshold={0.95}>
         <AdsRectangle />
       </LazyLoad>
@@ -87,6 +89,8 @@ export default function SinglePost({ post }) {
       <LazyLoad threshold={0.95}>
         <AdsRectangle />
       </LazyLoad>
+      {tags ? (
+      <>
       <ul className="m-0 p-0 flex flex-wrap gap-1 list-none py-3">
         {tags.map((tag) => {
           return (
@@ -98,6 +102,8 @@ export default function SinglePost({ post }) {
           );
         })}
       </ul>
+      </>
+      ) : null}
       <div className="py-5">
         <div className="fb-comments" data-href={`${siteUrl}/${slug}`} data-width="100%" data-numposts="5"></div>
       </div>
@@ -116,8 +122,9 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps(context) {
-  const post = await getSinglePost(context.params.slug);
+export async function getStaticProps({ params }) {
+  const { slug } = params;
+  const post = await getSinglePost(slug);
  
   if (!post) {
     return { notFound: true };
