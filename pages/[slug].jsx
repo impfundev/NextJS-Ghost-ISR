@@ -5,17 +5,17 @@ import date from "date-and-time";
 import Image from "next/image";
 import Head from "next/head";
 
-import { getSinglePost, getPosts } from "../lib/api";
+import { getSinglePost, getPosts, getRelatedPosts } from "../lib/api";
 import { siteUrl } from "../lib/config";
 import Layout from "../components/Layout";
 import Share from "../components/Share";
 import PostsList from "../components/PostsList";
 import AdsRectangle from "../components/AdsRectangle";
 
-export default function SinglePost({ post }) {
-  const { title, excerpt, html, slug, tags, primary_tag, feature_image, feature_image_caption, updated_at, published_at } = post;
+export default function SinglePost({ post, related }) {
+  const { title, excerpt, html, slug, tags, feature_image, feature_image_caption, updated_at, published_at } = post;
   const dateFormat = date.format(new Date(`${updated_at ? updated_at : published_at}`), 'DD MMMM YYYY HH:mm');
-  // const posts = related.filter((posts) => posts.slug !== slug);
+  const posts = related.filter((item) => item.slug !== slug);
 
   return (
     <>
@@ -39,17 +39,13 @@ export default function SinglePost({ post }) {
       />
     </Head>
     <Layout>
-      {primary_tag && (
-        <>
-          <ul className="m-0 p-0 flex flex-wrap gap-1 list-none py-3">
-            <li key={primary_tag.slug} className="m-0 p-0">
-              <a href={`${siteUrl}${parse(primary_tag.slug)}`} className="px-3 py-1 bg-black text-white text-sm font-bold rounded-full">
-                {primary_tag.name}
-              </a>
-            </li>
-          </ul>
-        </>
-      )}
+      <ul className="m-0 p-0 flex flex-wrap gap-1 list-none py-3">
+        <li key={post.primary_tag.slug} className="m-0 p-0">
+          <a href={`${siteUrl}/tag/${post.primary_tag.slug}`} className="px-3 py-1 bg-black text-white text-sm font-bold rounded-full">
+            {post.primary_tag.name}
+          </a>
+        </li>
+      </ul>
       <LazyLoad threshold={0.95}>
         <AdsRectangle />
       </LazyLoad>
@@ -90,26 +86,22 @@ export default function SinglePost({ post }) {
       <LazyLoad threshold={0.95}>
         <AdsRectangle />
       </LazyLoad>
-      {tags && (
-        <>
-          <ul className="m-0 p-0 flex flex-wrap gap-1 list-none py-3">
-            {tags.map((tag) => {
-              const { id, slug, name } = tag;
-              return (
-                <li key={id} className="m-0 p-0">
-                  <a href={`${siteUrl}${parse(slug)}`} className="px-3 py-1 bg-black text-white text-sm font-bold rounded-full">
-                    {name}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </>
-      )}
+      <ul className="m-0 p-0 flex flex-wrap gap-1 list-none py-3">
+        {tags.map((tag) => {
+          return (
+            <li key={tag.id} className="m-0 p-0">
+              <a href={`${siteUrl}/tag/${parse(tag.slug)}`} className="px-3 py-1 bg-black text-white text-sm font-bold rounded-full">
+                {tag.name}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
       <div className="py-5">
         <div className="fb-comments" data-href={`${siteUrl}/${slug}`} data-width="100%" data-numposts="5"></div>
       </div>
       <div id="fb-root"></div>
+      <PostsList posts={posts} />
     </Layout>
     </>
   );
@@ -127,13 +119,15 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { slug } = params;
   const post = await getSinglePost(slug);
+  const tagName = post.tags.map((tag) => tag.name);
+  const related = await getRelatedPosts(tagName);
 
   if (!post) {
     return { notFound: true };
   };
 
   return {
-    props: { post },
+    props: { post, related },
     revalidate: 1,
   };
 }
