@@ -114,7 +114,7 @@ export default function SinglePost({ post, allPosts }) {
       </div>
       <div id="fb-root"></div>
       <LazyLoad threshold={0.95}>
-        <PostsList posts={allPosts} />
+        <PostsList posts={allPosts.filter((post) => post.slug !== slug)} />
       </LazyLoad>
     </Layout>
     </>
