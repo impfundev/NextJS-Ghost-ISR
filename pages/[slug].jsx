@@ -116,8 +116,8 @@ export default function SinglePost({ post, posts }) {
       {posts ? (
         <>
           <LazyLoad threshold={0.95}>
-            <h3 className="text-lg font-bold">Artikel Terkait</h3>
-            <PostsList posts={posts} />
+            <h3 className="text-lg font-bold">Artikel Terbaru</h3>
+            <PostsList posts={posts.slice(0,6)} />
           </LazyLoad>
         </>
       ) : null}
@@ -145,7 +145,7 @@ export async function getStaticProps({ params }) {
  
   const posts = await getPosts();
 
-  if (!related) {
+  if (!posts) {
     return null;
   };
 
