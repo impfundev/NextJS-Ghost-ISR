@@ -5,14 +5,14 @@ import date from "date-and-time";
 import Image from "next/image";
 import Head from "next/head";
 
-import { getSinglePost, getPosts } from "../lib/api";
+import { getSinglePost, getPosts, getRelatedPosts } from "../lib/api";
 import { siteUrl } from "../lib/config";
 import Layout from "../components/Layout";
 import Share from "../components/Share";
 import PostsList from "../components/PostsList";
 import AdsRectangle from "../components/AdsRectangle";
 
-export default function SinglePost({ post }) {
+export default function SinglePost({ post, relatedPosts }) {
   const { title, excerpt, html, slug, tags, feature_image, feature_image_caption, updated_at, published_at } = post;
   const dateFormat = date.format(new Date(`${updated_at ? updated_at : published_at}`), 'DD MMMM YYYY HH:mm');
 
@@ -113,6 +113,7 @@ export default function SinglePost({ post }) {
         <div className="fb-comments" data-href={`${siteUrl}/${slug}`} data-width="100%" data-numposts="5"></div>
       </div>
       <div id="fb-root"></div>
+      <PostsList posts={relatedPosts} />
     </Layout>
     </>
   );
@@ -134,9 +135,12 @@ export async function getStaticProps({ params }) {
   if (!post) {
     return { notFound: true };
   };
+
+  const tagSlug = post.tags.map((tag) => tag.slug);
+  cosnt relatedPosts = await getRelatedPosts(tagSlug);
  
   return {
-    props: { post },
+    props: { post, relatedPosts },
     revalidate: 1,
   };
 }
