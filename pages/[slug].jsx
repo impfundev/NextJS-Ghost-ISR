@@ -140,8 +140,9 @@ export async function getStaticProps({ params }) {
   if (!post) {
     return { notFound: true };
   };
-
-  const relatedPosts = await getRelatedPosts(tags.slug);
+  
+  const tagSlug = '/tag/' + tags.slug;
+  const relatedPosts = await getRelatedPosts(tagSlug);
  
   return {
     props: { post, relatedPosts },
