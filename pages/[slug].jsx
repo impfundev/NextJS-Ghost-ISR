@@ -5,16 +5,17 @@ import date from "date-and-time";
 import Image from "next/image";
 import Head from "next/head";
 
-import { getSinglePost, getPosts } from "../lib/api";
+import { getSinglePost, getPosts, getPostsByTag } from "../lib/api";
 import { siteUrl } from "../lib/config";
 import Layout from "../components/Layout";
 import Share from "../components/Share";
+import PostsList from "../components/PostsList";
 import AdsRectangle from "../components/AdsRectangle";
 
-export default function SinglePost({ post }) {
+export default function SinglePost({ post, related }) {
   const { title, excerpt, html, slug, tags, feature_image, feature_image_caption, updated_at, published_at } = post;
   const dateFormat = date.format(new Date(`${updated_at ? updated_at : published_at}`), 'DD MMMM YYYY HH:mm');
-
+  const posts = related.filter((posts) => posts.slug !== slug);
   return (
     <>
     <Head>
@@ -79,7 +80,11 @@ export default function SinglePost({ post }) {
           </figure>
         ) : null}
         <div className="flex items-center justify-between">
-          <span>Oleh: Ilham Maulana</span>
+          {post.primary_author ? (
+            <>
+              <span>Oleh: <a href={`${siteUrl}/author/${post.primary_author.slug}`}>{post.primary_author.name}</a></span>
+            </>
+          ) : null}
           <Share title={title} slug={slug} />
         </div>
         <p><time className="text-gray-500 text-sm" datetime={updated_at ? updated_at : published_at}>{dateFormat}</time></p>
@@ -108,6 +113,14 @@ export default function SinglePost({ post }) {
         <div className="fb-comments" data-href={`${siteUrl}/${slug}`} data-width="100%" data-numposts="5"></div>
       </div>
       <div id="fb-root"></div>
+      {posts ? (
+        <>
+          <LazyLoad threshold={0.95}>
+            <h3 className="text-lg font-bold">Artikel Terkait</h3>
+            <PostsList posts={posts} />
+          </LazyLoad>
+        </>
+      ) : null}
     </Layout>
     </>
   );
@@ -125,13 +138,14 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { slug } = params;
   const post = await getSinglePost(slug);
+  const related = await getPostsByTag(post.primary_tag.slug);
  
   if (!post) {
     return { notFound: true };
   };
 
   return {
-    props: { post },
+    props: { post, related },
     revalidate: 1,
   };
 }
