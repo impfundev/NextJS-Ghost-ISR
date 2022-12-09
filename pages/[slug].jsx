@@ -12,10 +12,7 @@ import Share from "../components/Share";
 import PostsList from "../components/PostsList";
 import AdsRectangle from "../components/AdsRectangle";
 
-export default function SinglePost({ post, related }) {
-  const posts = related?.filter(
-    (posts) => posts.slug !== post.slug && posts.primary_tag.slug.includes(post.primary_tag.slug)
-  );
+export default function SinglePost({ post, posts }) {
   const { title, excerpt, html, slug, tags, feature_image, feature_image_caption, updated_at, published_at } = post;
   const dateFormat = date.format(new Date(`${updated_at ? updated_at : published_at}`), 'DD MMMM YYYY HH:mm');
 
@@ -146,14 +143,14 @@ export async function getStaticProps({ params }) {
     return { notFound: true };
   };
  
-  const related = await getPosts();
+  const posts = await getPosts();
 
   if (!related) {
     return null;
   };
 
   return {
-    props: { post, related },
+    props: { post, posts },
     revalidate: 1,
   };
 }
