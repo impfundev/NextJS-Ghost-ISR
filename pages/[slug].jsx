@@ -16,7 +16,7 @@ export default function SinglePost({ post, related }) {
   const { title, excerpt, html, slug, tags, feature_image, feature_image_caption, updated_at, published_at } = post;
   const dateFormat = date.format(new Date(`${updated_at ? updated_at : published_at}`), 'DD MMMM YYYY HH:mm');
   const posts = related?.filter(
-    (posts) => posts.slug !== post.slug && posts.tags.map((t) => (t.slug)).includes(post.primary_tag.slug)
+    (posts) => posts.forEach((item) => item.slug) !== post.slug && posts.tags.forEach((t) => (t.slug)).includes(post.primary_tag.slug)
   );
 
   return (
