@@ -113,7 +113,11 @@ export default function SinglePost({ post, relatedPosts }) {
         <div className="fb-comments" data-href={`${siteUrl}/${slug}`} data-width="100%" data-numposts="5"></div>
       </div>
       <div id="fb-root"></div>
-      <PostsList posts={relatedPosts} />
+      {relatedPosts ? (
+        <>
+          <PostsList posts={relatedPosts} />
+        </>
+      ) : null}
     </Layout>
     </>
   );
@@ -126,7 +130,7 @@ export async function getStaticPaths() {
     paths: posts.map((post) => ({
       params: {
         slug: post.slug,
-        tags: post.primary_tag,
+        tag: post.primary_tag,
       }}
     )) || [],
     fallback: "blocking",
@@ -134,15 +138,14 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const { slug, tags } = params;
+  const { slug, tag } = params;
   const post = await getSinglePost(slug);
  
   if (!post) {
     return { notFound: true };
   };
   
-  const tagSlug = '/tag/' + tags.slug;
-  const relatedPosts = await getRelatedPosts(tagSlug);
+  const relatedPosts = await getRelatedPosts({ tag });
  
   return {
     props: { post, relatedPosts },
