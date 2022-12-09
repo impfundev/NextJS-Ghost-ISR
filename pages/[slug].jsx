@@ -123,20 +123,25 @@ export async function getStaticPaths() {
   const posts = await getPosts();
 
   return {
-    paths: posts.map((post) => ({params: {slug: post.slug}})) || [],
+    paths: posts.map((post) => ({
+      params: {
+        slug: post.slug,
+        tags: post.primary_tag.slug,
+      }}
+    )) || [],
     fallback: "blocking",
   };
 }
 
 export async function getStaticProps({ params }) {
-  const { slug } = params;
+  const { slug, tags } = params;
   const post = await getSinglePost(slug);
  
   if (!post) {
     return { notFound: true };
   };
 
-  cosnt relatedPosts = await getRelatedPosts(post.tags.map((tag) => tag.slug));
+  cosnt relatedPosts = await getRelatedPosts(tags);
  
   return {
     props: { post, relatedPosts },
