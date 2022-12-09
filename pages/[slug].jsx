@@ -141,7 +141,7 @@ export async function getStaticProps({ params }) {
     return { notFound: true };
   };
 
-  cosnt relatedPosts = await getRelatedPosts(tags);
+  const relatedPosts = await getRelatedPosts(tags);
  
   return {
     props: { post, relatedPosts },
