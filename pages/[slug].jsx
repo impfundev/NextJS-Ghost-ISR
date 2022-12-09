@@ -120,7 +120,9 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { slug } = params;
   const post = await getSinglePost(slug);
-  const tagName = post.tags.map((tag) => tag.name);
+  await post.tags.map((tag) => {
+    return { tagName: tag.name };
+  });
   const related = await getRelatedPosts(tagName);
 
   if (!post) {
