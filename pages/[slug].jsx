@@ -113,7 +113,14 @@ export default function SinglePost({ post, allPosts }) {
         <div className="fb-comments" data-href={`${siteUrl}/${slug}`} data-width="100%" data-numposts="5"></div>
       </div>
       <div id="fb-root"></div>
+      {post.primary_tag ? (
+        <>
+          <h3 className="text-lg font-bold py-4">Artikel Terkait</h3>
+          <PostsList posts={allPosts.filter((item) => item.slug !== slug && item.primary_tag.slug.includes(post.primary_tag.slug))} />
+        </>
+      ) : null}
       <LazyLoad threshold={0.95}>
+        <h3 className="text-lg font-bold py-4">Artikel Terbaru</h3>
         <PostsList posts={allPosts.filter((post) => post.slug !== slug)} />
       </LazyLoad>
     </Layout>
