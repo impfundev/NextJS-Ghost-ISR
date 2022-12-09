@@ -126,7 +126,7 @@ export async function getStaticPaths() {
     paths: posts.map((post) => ({
       params: {
         slug: post.slug,
-        tags: post.primary_tag.slug,
+        tags: post.primary_tag,
       }}
     )) || [],
     fallback: "blocking",
@@ -141,7 +141,7 @@ export async function getStaticProps({ params }) {
     return { notFound: true };
   };
 
-  const relatedPosts = await getRelatedPosts(tags);
+  const relatedPosts = await getRelatedPosts(tags.slug);
  
   return {
     props: { post, relatedPosts },
