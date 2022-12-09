@@ -12,7 +12,7 @@ import Share from "../components/Share";
 import PostsList from "../components/PostsList";
 import AdsRectangle from "../components/AdsRectangle";
 
-export default function SinglePost({ post, posts }) {
+export default function SinglePost({ post }) {
   const { title, excerpt, html, slug, tags, feature_image, feature_image_caption, updated_at, published_at } = post;
   const dateFormat = date.format(new Date(`${updated_at ? updated_at : published_at}`), 'DD MMMM YYYY HH:mm');
 
@@ -113,14 +113,6 @@ export default function SinglePost({ post, posts }) {
         <div className="fb-comments" data-href={`${siteUrl}/${slug}`} data-width="100%" data-numposts="5"></div>
       </div>
       <div id="fb-root"></div>
-      {posts ? (
-        <>
-          <LazyLoad threshold={0.95}>
-            <h3 className="text-lg font-bold">Artikel Terbaru</h3>
-            <PostsList posts={posts.slice(0,6)} />
-          </LazyLoad>
-        </>
-      ) : null}
     </Layout>
     </>
   );
@@ -143,14 +135,8 @@ export async function getStaticProps({ params }) {
     return { notFound: true };
   };
  
-  const posts = await getPosts();
-
-  if (!posts) {
-    return null;
-  };
-
   return {
-    props: { post, posts },
+    props: { post },
     revalidate: 1,
   };
 }
