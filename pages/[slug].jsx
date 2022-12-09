@@ -15,7 +15,7 @@ import AdsRectangle from "../components/AdsRectangle";
 export default function SinglePost({ post, related }) {
   const { title, excerpt, html, slug, tags, feature_image, feature_image_caption, updated_at, published_at } = post;
   const dateFormat = date.format(new Date(`${updated_at ? updated_at : published_at}`), 'DD MMMM YYYY HH:mm');
-  const posts = related.filter((posts) => posts.slug !== slug);
+  const posts = related?.filter((posts) => posts.slug !== slug);
   return (
     <>
     <Head>
@@ -138,10 +138,20 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { slug } = params;
   const post = await getSinglePost(slug);
-  const related = await getPostsByTag(post.primary_tag.slug);
  
   if (!post) {
     return { notFound: true };
+  };
+  
+  const { tags } = post;
+  const tagSlug = tags?.map((tag) => {
+    const { slug } = tag;
+    return { slug };
+  });
+  const related = await getPostsByTag(tagSlug);
+
+  if (!related) {
+    return null;
   };
 
   return {
