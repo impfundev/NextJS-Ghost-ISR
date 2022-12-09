@@ -12,10 +12,10 @@ import Share from "../components/Share";
 import PostsList from "../components/PostsList";
 import AdsRectangle from "../components/AdsRectangle";
 
-export default function SinglePost({ post, related }) {
+export default function SinglePost({ post }) {
   const { title, excerpt, html, slug, tags, feature_image, feature_image_caption, updated_at, published_at } = post;
   const dateFormat = date.format(new Date(`${updated_at ? updated_at : published_at}`), 'DD MMMM YYYY HH:mm');
-  const posts = related.filter((item) => item.slug !== slug);
+  // const posts = related.filter((item) => item.slug !== slug);
 
   return (
     <>
@@ -102,7 +102,6 @@ export default function SinglePost({ post, related }) {
         <div className="fb-comments" data-href={`${siteUrl}/${slug}`} data-width="100%" data-numposts="5"></div>
       </div>
       <div id="fb-root"></div>
-      <PostsList posts={posts} />
     </Layout>
     </>
   );
@@ -120,15 +119,13 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { slug } = params;
   const post = await getSinglePost(slug);
-  const tagName = post.primary_tag.name;
-  const related = await getRelatedPosts(tagName);
-
+ 
   if (!post) {
     return { notFound: true };
   };
 
   return {
-    props: { post, related },
+    props: { post },
     revalidate: 1,
   };
 }
