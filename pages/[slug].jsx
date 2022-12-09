@@ -5,7 +5,7 @@ import date from "date-and-time";
 import Image from "next/image";
 import Head from "next/head";
 
-import { getSinglePost, getPosts, getRelatedPosts } from "../lib/api";
+import { getSinglePost, getPosts } from "../lib/api";
 import { siteUrl } from "../lib/config";
 import Layout from "../components/Layout";
 import Share from "../components/Share";
@@ -118,7 +118,8 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const { slug } = params;
-  const post = await getSinglePost(slug);
+  const postSlug = slug;
+  const post = await getSinglePost(postSlug);
  
   if (!post) {
     return { notFound: true };
