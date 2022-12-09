@@ -135,7 +135,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const { slug, tag } = params;
+  const { slug } = params;
   const post = await getSinglePost(slug);
 
   if (!post) {
