@@ -5,14 +5,14 @@ import date from "date-and-time";
 import Image from "next/image";
 import Head from "next/head";
 
-import { getSinglePost, getPosts, getRelatedPosts } from "../lib/api";
+import { getSinglePost, getPosts, getMorePosts } from "../lib/api";
 import { siteUrl } from "../lib/config";
 import Layout from "../components/Layout";
 import Share from "../components/Share";
 import PostsList from "../components/PostsList";
 import AdsRectangle from "../components/AdsRectangle";
 
-export default function SinglePost({ post, relatedPosts }) {
+export default function SinglePost({ post, allPosts }) {
   const { title, excerpt, html, slug, tags, feature_image, feature_image_caption, updated_at, published_at } = post;
   const dateFormat = date.format(new Date(`${updated_at ? updated_at : published_at}`), 'DD MMMM YYYY HH:mm');
 
@@ -113,11 +113,9 @@ export default function SinglePost({ post, relatedPosts }) {
         <div className="fb-comments" data-href={`${siteUrl}/${slug}`} data-width="100%" data-numposts="5"></div>
       </div>
       <div id="fb-root"></div>
-      {relatedPosts ? (
-        <>
-          <PostsList posts={relatedPosts} />
-        </>
-      ) : null}
+      <LazyLoad threshold={0.95}>
+        <PostsList posts={allPosts} />
+      </LazyLoad>
     </Layout>
     </>
   );
@@ -130,7 +128,6 @@ export async function getStaticPaths() {
     paths: posts.map((post) => ({
       params: {
         slug: post.slug,
-        tag: post.primary_tag,
       }}
     )) || [],
     fallback: "blocking",
@@ -140,15 +137,19 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { slug, tag } = params;
   const post = await getSinglePost(slug);
- 
+
   if (!post) {
     return { notFound: true };
   };
-  
-  const relatedPosts = await getRelatedPosts({ tag });
- 
+
+  const allPosts = await getMorePosts();
+
+  if (!allPosts) {
+    return null;
+  };
+
   return {
-    props: { post, relatedPosts },
+    props: { post, allPosts },
     revalidate: 1,
   };
 }
