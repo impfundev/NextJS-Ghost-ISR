@@ -143,12 +143,8 @@ export async function getStaticProps({ params }) {
     return { notFound: true };
   };
   
-  const { tags } = post;
-  const tagSlug = tags?.map((tag) => {
-    const { slug } = tag;
-    return { slug };
-  });
-  const related = await getPostsByTag(tagSlug);
+  const { primary_tag } = post;
+  const related = await getPostsByTag(primary_tag.slug);
 
   if (!related) {
     return null;
