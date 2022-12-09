@@ -5,7 +5,7 @@ import date from "date-and-time";
 import Image from "next/image";
 import Head from "next/head";
 
-import { getSinglePost, getPosts, getPostsByTag } from "../lib/api";
+import { getSinglePost, getPosts } from "../lib/api";
 import { siteUrl } from "../lib/config";
 import Layout from "../components/Layout";
 import Share from "../components/Share";
@@ -15,7 +15,10 @@ import AdsRectangle from "../components/AdsRectangle";
 export default function SinglePost({ post, related }) {
   const { title, excerpt, html, slug, tags, feature_image, feature_image_caption, updated_at, published_at } = post;
   const dateFormat = date.format(new Date(`${updated_at ? updated_at : published_at}`), 'DD MMMM YYYY HH:mm');
-  const posts = related?.filter((posts) => posts.slug !== slug);
+  const posts = related?.filter(
+    (posts) => posts.slug !== slug && posts.tags.map((t) => (t.slug)).includes(post.primary_tag.slug)
+  ));
+
   return (
     <>
     <Head>
@@ -142,9 +145,8 @@ export async function getStaticProps({ params }) {
   if (!post) {
     return { notFound: true };
   };
-  
-  const { primary_tag } = post;
-  const related = await getPostsByTag(primary_tag.slug);
+ 
+  const related = await getPosts();
 
   if (!related) {
     return null;
