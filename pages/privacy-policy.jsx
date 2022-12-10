@@ -5,7 +5,7 @@ export default function Privacy() {
   return (
     <>
     <Layout>
-      <article className="prose lg:prose-xl py-6">
+      <article className="prose py-6">
         <h1 className="text-xl py-4">Kebijakan Privasi</h1>
 
 <h2>Siapa kami</h2>
