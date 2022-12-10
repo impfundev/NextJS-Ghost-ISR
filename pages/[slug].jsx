@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import LazyLoad from "react-lazy-load";
 import parse from "html-react-parser";
+import probe from "probe-image-size";
 import date from "date-and-time";
 import Image from "next/image";
 import Head from "next/head";
@@ -12,8 +13,8 @@ import Share from "../components/Share";
 import PostsList from "../components/PostsList";
 import AdsRectangle from "../components/AdsRectangle";
 
-export default function SinglePost({ post, relatedPosts }) {
-  const { title, excerpt, html, slug, tags, feature_image, feature_image_caption, updated_at, published_at } = post;
+export default function SinglePost({ post, relatedPosts, thumbnail }) {
+  const { title, excerpt, html, slug, tags, feature_image_caption, updated_at, published_at } = post;
   const dateFormat = date.format(new Date(`${updated_at ? updated_at : published_at}`), 'DD MMMM YYYY HH:mm');
 
   return (
@@ -56,11 +57,13 @@ export default function SinglePost({ post, relatedPosts }) {
         <h1 className="text-2xl md:text-4xl lg:text-6xl">
           {title}
         </h1>
-        {feature_image ? (
+        {thumbnail ? (
           <figure className="w-full">
             <Image
-              className="w-full h-auto object-cover"
-              src={feature_image}
+              className="w-full h-auto"
+              src={thumbnail.url}
+              width={thumbnail.width}
+              height={thumbnail.height}
               alt={title}
               priority={true}
               quality={80}
@@ -146,8 +149,15 @@ export async function getStaticProps({ params }) {
     return null;
   };
 
+  const { feature_image } = post;
+  let thumbnail = await probe(feature_image, { rejectUnauthorized: false });
+
+  if (!thumbnail) {
+    return null;
+  };
+
   return {
-    props: { post, relatedPosts },
+    props: { post, relatedPosts, thumbnail },
     revalidate: 1,
   };
 }
