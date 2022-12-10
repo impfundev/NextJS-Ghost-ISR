@@ -1,14 +1,16 @@
+import { Rubik } from "@next/font/google";
 import Header from "./Header";
-import FloatingAds from "./FloatingAds";
+// import FloatingAds from "./FloatingAds";
+
+const rubik = Rubik({ subsets: ['latin'] });
 
 export default function Layout({ children }) {
   return (
     <>
       <Header />
-      <main className="container mx-auto px-5 pb-8">
+      <main className={`${rubik.className} container mx-auto px-5 pb-8`}>
         {children}
       </main>
-      <FloatingAds />
       <footer className="bg-black text-white">
         <div className="grid grid-cols-2 gap-8 py-8 px-6 md:grid-cols-4">
           <div>
