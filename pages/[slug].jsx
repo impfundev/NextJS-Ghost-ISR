@@ -66,13 +66,12 @@ export default function SinglePost({ post, relatedPosts }) {
               height={850}
               layout="responsive"
               sizes={`
-                (max-width: 350px) 350px,
-                (max-width: 530px) 530px,
-                (max-width: 710px) 710px,
+                (max-width: 480px) 480px,
+                (max-width: 720px) 720px,
                 (max-width: 1200px) 1200px,
-                (max-width: 2110px) 2110px, 2000px
               `}
-              priority="true"
+              priority={true}
+              quality={80}
             />
             {feature_image_caption ? (
               <figcaption className="py-0">{feature_image_caption}</figcaption>
