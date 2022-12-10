@@ -29,9 +29,6 @@ export default function Home({ posts }) {
           title={siteName}
           description={siteDesc}
           canonical={siteUrl}
-          robotsProps={{
-            maxImagePreview: 'large',
-          }}
           openGraph={{
             type: 'website',
             url: siteUrl,
