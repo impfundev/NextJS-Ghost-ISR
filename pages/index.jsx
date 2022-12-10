@@ -1,9 +1,10 @@
 import Head from "next/head";
+import { NextSeo } from "next-seo";
 
 import Layout from "../components/Layout";
 import PostsList from "../components/PostsList";
 import { getPosts } from "../lib/api";
-import { siteUrl } from "../lib/config";
+import { siteName, siteUrl, siteDesc } from "../lib/config";
 
 export async function getStaticProps() {
   const posts = await getPosts();
@@ -24,9 +25,31 @@ export default function Home({ posts }) {
   return (
     <>
       <Head>
-        <title>Fandomnesia</title>
-        <link rel="canonical" href={siteUrl} />
-        <meta name="description" content="Fandomnesia.com menyajikan berita terbaru dan konten menarik seputar budaya populer, selebritis, teknologi, dan olahraga." />
+        <NextSeo
+          title={siteName}
+          description={siteDesc}
+          canonical={siteUrl}
+          openGraph={{
+            url: siteUrl,
+            title: siteName,
+            description: siteDesc,
+            images: [
+              {
+                url: `${siteUrl}/favicon.png`,
+                width: 150,
+                height: 150,
+                alt: siteName,
+                type: 'image/png',
+              }
+            ],
+            siteName: siteName,
+          }}
+          twitter={{
+            handle: '@fandomnesia_com',
+            site: '@fandomnesia_com',
+            cardType: 'summary_large_image',
+          }}
+        />
       </Head>
       <Layout>
         <PostsList posts={posts.slice(0,20)} />
