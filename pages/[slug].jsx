@@ -53,7 +53,7 @@ export default function SinglePost({ post, relatedPosts, thumbnail }) {
       <LazyLoad threshold={0.95}>
         <AdsRectangle />
       </LazyLoad>
-      <article className="prose lg:prose-xl">
+      <article className="prose">
         <h1 className="text-2xl md:text-4xl lg:text-6xl">
           {title}
         </h1>
