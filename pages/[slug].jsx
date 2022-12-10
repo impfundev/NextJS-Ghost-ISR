@@ -64,7 +64,7 @@ export default function SinglePost({ post, relatedPosts, thumbnail }) {
               width={thumbnail.width}
               height={thumbnail.height}
               alt={title}
-              layout={responsive}
+              layout="responsive"
               quality={80}
               priority
             />
