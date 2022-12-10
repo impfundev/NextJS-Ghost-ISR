@@ -114,7 +114,9 @@ export default function SinglePost({ post, relatedPosts }) {
       </div>
       <div id="fb-root"></div>
       <h3 className="text-lg font-bold py-4">Artikel Terbaru</h3>
-      <PostsList posts={relatedPosts} />
+      <LazyLoad threshold={0.95}>
+        <PostsList posts={relatedPosts} />
+      </LazyLoad>
     </Layout>
     </>
   );
