@@ -5,7 +5,6 @@ import { siteUrl } from "../lib/config";
 export default function Document() {
   return (
     <Html lang="id">
-      <Head>
         <NextSeo
           noindex={true}
           nofollow={true}
@@ -30,7 +29,7 @@ export default function Document() {
             },
           ]}
         />
-      </Head>
+      <Head />
       <body>
         <Main />
         <NextScript />
