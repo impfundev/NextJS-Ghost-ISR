@@ -12,7 +12,7 @@ import Share from "../components/Share";
 import PostsList from "../components/PostsList";
 import AdsRectangle from "../components/AdsRectangle";
 
-export default function SinglePost({ post, allPosts }) {
+export default function SinglePost({ post, relatedPosts }) {
   const { title, excerpt, html, slug, tags, feature_image, feature_image_caption, updated_at, published_at } = post;
   const dateFormat = date.format(new Date(`${updated_at ? updated_at : published_at}`), 'DD MMMM YYYY HH:mm');
 
@@ -115,7 +115,7 @@ export default function SinglePost({ post, allPosts }) {
       <div id="fb-root"></div>
       <LazyLoad threshold={0.95}>
         <h3 className="text-lg font-bold py-4">Artikel Terbaru</h3>
-        <PostsList posts={allPosts.filter((post) => post.slug !== slug)} />
+        <PostsList posts={relatedPosts} />
       </LazyLoad>
     </Layout>
     </>
@@ -149,8 +149,14 @@ export async function getStaticProps({ params }) {
     return null;
   };
 
+  const relatedPosts = allPosts?.filter((post) => post.slug !== slug);
+
+  if (!relatedPosts) {
+    return null;
+  };
+
   return {
-    props: { post, allPosts },
+    props: { post, relatedPosts },
     revalidate: 1,
   };
 }
