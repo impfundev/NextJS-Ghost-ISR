@@ -51,13 +51,13 @@ export default function Seo({
       property="og:description"
       content={description}
     />
-    {post == true (
+    {post === true (
         <meta
           property="og:image"
           content={image}
         />
     ) : null}
-    {post == true (
+    {post === true (
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={articleJsonLd()}
