@@ -64,6 +64,7 @@ export default function SinglePost({ post, relatedPosts, thumbnail }) {
               src={thumbnail.url}
               width={thumbnail.width}
               height={thumbnail.height}
+              sizes={`(max-width: 480px) 480px,(max-width: 640px) 640px,(max-width: 1280px) 1280px,(max-width: 2000px) 2000px, ${thumbnail.width}px`}
               alt={title}
               priority={true}
               quality={80}
