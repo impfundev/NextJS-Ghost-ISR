@@ -34,11 +34,9 @@ export default function SinglePost({ post, relatedPosts, thumbnail }) {
             article: {
               publishedTime: published_at,
               modifiedTime: updated_at,
-              section: post.primary_tag.name,
               authors: [
                 `${post.primary_author.slug}`,
               ],
-              tags: post.primary_tag.name,
             },
             images: [
               {
@@ -154,8 +152,6 @@ export default function SinglePost({ post, relatedPosts, thumbnail }) {
       images={[
         `${thumbnail.url}`,
       ]}
-      section={post.primary_tag.name}
-      keywords={`${tags.map((tag) => tag.name)}`}
       datePublished={published_at}
       dateModified={updated_at}
       authorName={[
