@@ -34,11 +34,11 @@ export default function SinglePost({ post, relatedPosts, thumbnail }) {
             article: {
               publishedTime: published_at,
               modifiedTime: updated_at,
-              section: post.primary_tag.name,
+              section: tags[0].name,
               authors: [
                 `${post.primary_author.slug}`,
               ],
-              tags: tags,
+              tags: tags[0].name,
             },
             images: [
               {
