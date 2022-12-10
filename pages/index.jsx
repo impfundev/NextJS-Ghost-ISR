@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { NextSeo } from "next-seo";
 
 import Layout from "../components/Layout";
@@ -24,7 +23,6 @@ export async function getStaticProps() {
 export default function Home({ posts }) {
   return (
     <>
-      <Head>
         <NextSeo
           title={siteName}
           description={siteDesc}
@@ -51,7 +49,6 @@ export default function Home({ posts }) {
             cardType: 'summary_large_image',
           }}
         />
-      </Head>
       <Layout>
         <PostsList posts={posts.slice(0,20)} />
       </Layout>
