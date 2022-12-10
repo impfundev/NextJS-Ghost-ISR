@@ -34,7 +34,7 @@ export default function Document() {
           ]}
         />
       </Head>
-      <body className={rubik.className}>
+      <body className={`${rubik.className}`}>
         <Main />
         <NextScript />
       </body>
