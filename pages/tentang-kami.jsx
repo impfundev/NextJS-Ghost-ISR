@@ -4,7 +4,7 @@ export default function Tentang() {
   
   return (
     <Layout>
-      <article className="prose lg:prose-xl py-6">
+      <article className="prose py-6">
         <h1 className="text-xl py-4">Tentang Kami</h1>
         <p>Seiring meningkatnya minat banyak orang dengan dunia hiburan, kebutuhan akan informasi terkait apa yang mereka sukai juga meningkat. Disinilah Fandomnesia hadir untuk memfasilitasi banyak orang dengan informasi yang terpercaya.</p>
         <p>Fandomnesia menyajikan informasi terkini terkait dunia hiburan untuk sektor Budaya Populer yang meliputi Film, Serial Televisi, Animasi, Komik dan lainya.</p>
