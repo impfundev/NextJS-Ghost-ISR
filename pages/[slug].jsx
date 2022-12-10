@@ -84,11 +84,8 @@ export default function SinglePost({ post, relatedPosts, thumbnail }) {
       </ul>
     </>
     ) : null}
-      <LazyLoad threshold={0.95}>
-        <AdsRectangle />
-      </LazyLoad>
-      <article>
-        <h1 className="text-2xl md:text-4xl">
+      <article className="prose">
+        <h1 className="text-2xl">
           {title}
         </h1>
         {thumbnail ? (
@@ -117,11 +114,8 @@ export default function SinglePost({ post, relatedPosts, thumbnail }) {
         </div>
         <p><time className="text-gray-500 text-sm" datetime={updated_at ? updated_at : published_at}>{dateFormat}</time></p>
         <hr />
-        <div className="prose">{parse(html)}</div>
+        {parse(html)}
       </article>
-      <LazyLoad threshold={0.95}>
-        <AdsRectangle />
-      </LazyLoad>
       {tags ? (
       <>
       <ul className="m-0 p-0 flex flex-wrap gap-1 list-none py-3">
