@@ -14,6 +14,10 @@ export default function Document() {
           }}
           additionalLinkTags={[
             {
+              rel: 'icon',
+              href: `${siteUrl}/favicon.png`,
+            },
+            {
               rel: 'apple-touch-icon',
               href: `${siteUrl}/favicon.png`,
               sizes: '150x150'
