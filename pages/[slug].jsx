@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import LazyLoad from "react-lazy-load";
 import parse from "html-react-parser";
 import probe from "probe-image-size";
@@ -13,7 +12,6 @@ import { siteName, siteUrl } from "../lib/config";
 import Layout from "../components/Layout";
 import Share from "../components/Share";
 import PostsList from "../components/PostsList";
-import AdsRectangle from "../components/AdsRectangle";
 
 export default function SinglePost({ post, relatedPosts, thumbnail }) {
   const { title, excerpt, html, slug, tags, feature_image_caption, updated_at, published_at } = post;
@@ -180,27 +178,12 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { slug } = params;
   const post = await getSinglePost(slug);
-
-  if (!post) {
-    return { notFound: true };
-  };
-
   const allPosts = await getMorePosts();
-
-  if (!allPosts) {
-    return null;
-  };
-
   const relatedPosts = allPosts?.filter((post) => post.slug !== slug);
-
-  if (!relatedPosts) {
-    return null;
-  };
-
   const { feature_image } = post;
   let thumbnail = await probe(feature_image, { rejectUnauthorized: false });
 
-  if (!thumbnail) {
+  if (!post, !relatedPosts, !thumbnail) {
     return null;
   };
 
