@@ -1,6 +1,9 @@
+import { Rubik } from "@next/font/google";
 import { NextSeo } from "next-seo";
 import { Html, Head, Main, NextScript } from 'next/document'
 import { siteUrl } from "../lib/config";
+
+const rubik = Rubik({ subsets: ['latin'] });
 
 export default function Document() {
   return (
@@ -31,7 +34,7 @@ export default function Document() {
           ]}
         />
       </Head>
-      <body>
+      <body className={rubik.className}>
         <Main />
         <NextScript />
       </body>
