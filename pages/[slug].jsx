@@ -113,10 +113,8 @@ export default function SinglePost({ post, relatedPosts }) {
         <div className="fb-comments" data-href={`${siteUrl}/${slug}`} data-width="100%" data-numposts="5"></div>
       </div>
       <div id="fb-root"></div>
-      <LazyLoad threshold={0.95}>
-        <h3 className="text-lg font-bold py-4">Artikel Terbaru</h3>
-        <PostsList posts={relatedPosts} />
-      </LazyLoad>
+      <h3 className="text-lg font-bold py-4">Artikel Terbaru</h3>
+      <PostsList posts={relatedPosts} />
     </Layout>
     </>
   );
