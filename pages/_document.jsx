@@ -1,3 +1,4 @@
+import { NextSeo } from "next-seo";
 import { Html, Head, Main, NextScript } from 'next/document'
 import { siteUrl } from "../lib/config";
 
