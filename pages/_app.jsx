@@ -17,12 +17,17 @@ function MyApp({ Component, pageProps }) {
           }}
           additionalLinkTags={[
             {
-              rel: 'icon',
-              href: `${siteUrl}/favicon.png`,
+              rel: 'shortcut icon',
+              href: `/favicon.ico`,
             },
             {
               rel: 'apple-touch-icon',
-              href: `${siteUrl}/favicon.png`,
+              href: '/favicon.png`,
+              sizes: '150x150'
+            },
+            {
+              rel: 'apple-touch-icon-precomposed',
+              href: '/favicon.png`,
               sizes: '150x150'
             },
             {
