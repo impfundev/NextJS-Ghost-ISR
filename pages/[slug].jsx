@@ -38,7 +38,7 @@ export default function SinglePost({ post, relatedPosts, thumbnail }) {
               authors: [
                 `${post.primary_author.slug}`,
               ],
-              tags: `${tags.map((tag) => tag.name)}`,
+              tags: tags,
             },
             images: [
               {
