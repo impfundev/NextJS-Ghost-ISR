@@ -58,15 +58,15 @@ export default function SinglePost({ post, relatedPosts, thumbnail }) {
           {title}
         </h1>
         {thumbnail ? (
-          <figure className="w-full">
+          <figure className="w-full block">
             <Image
               src={thumbnail.url}
               width={thumbnail.width}
               height={thumbnail.height}
               alt={title}
-              priority={true}
-              quality={80}
               layout={responsive}
+              quality={80}
+              priority
             />
             {feature_image_caption ? (
               <figcaption className="py-0">{feature_image_caption}</figcaption>
