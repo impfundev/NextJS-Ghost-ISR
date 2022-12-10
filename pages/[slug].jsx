@@ -3,11 +3,13 @@ import LazyLoad from "react-lazy-load";
 import parse from "html-react-parser";
 import probe from "probe-image-size";
 import date from "date-and-time";
+
+import { NextSeo, NewsArticleJsonLd } from "next-seo";
 import Image from "next/image";
 import Head from "next/head";
 
 import { getSinglePost, getPosts, getMorePosts } from "../lib/api";
-import { siteUrl } from "../lib/config";
+import { siteName, siteUrl } from "../lib/config";
 import Layout from "../components/Layout";
 import Share from "../components/Share";
 import PostsList from "../components/PostsList";
@@ -20,7 +22,41 @@ export default function SinglePost({ post, relatedPosts, thumbnail }) {
   return (
     <>
     <Head>
-      <link rel="canonical" href={`${siteUrl}/${slug}`} />
+        <NextSeo
+          title={title}
+          description={excerpt}
+          canonical={`${siteUrl}/${slug}`}
+          openGraph={{
+            type: 'article',
+            url: `${siteUrl}/${slug}`,
+            title: title,
+            description: excerpt,
+            article: {
+              publishedTime: published_at,
+              modifiedTime: updated_at,
+              section: post.primary_tag.name,
+              authors: [
+                `${post.primary_author.slug}`,
+              ],
+              tags: `${tags.map((tag) => tag.name)}`,
+            },
+            images: [
+              {
+                url: `${thumbnail.url}`,
+                width: `${thumbnail.width}`,
+                height: `${thumbnail.height}`,
+                alt: title,
+                type: `${thumbnail.mime}`,
+              }
+            ],
+            siteName: siteName,
+          }}
+          twitter={{
+            handle: '@fandomnesia_com',
+            site: '@fandomnesia_com',
+            cardType: 'summary_large_image',
+          }}
+        />
       <script
         dangerouslySetInnerHTML={{
         __html: `let lzAd = false;
@@ -112,6 +148,28 @@ export default function SinglePost({ post, relatedPosts, thumbnail }) {
         <PostsList posts={relatedPosts} />
       </LazyLoad>
     </Layout>
+    <NewsArticleJsonLd
+      url={`${siteUrl}/${slug}`}
+      title={title}
+      images={[
+        `${thumbnail.url}`,
+      ]}
+      section={post.primary_tag.name}
+      keywords={`${tags.map((tag) => tag.name)}`}
+      datePublished={published_at}
+      dateModified={updated_at}
+      authorName={[
+        {
+          name: post.primary_author.name,
+          url: `${siteUrl}/author/${post.primary_author.slug}`,
+        },
+      ]}
+      publisherName={siteName}
+      publisherLogo={`${siteUrl}/favicon.png`}
+      description={excerpt}
+      body={parse(html)}
+      isAccessibleForFree={true}
+    />
     </>
   );
 }
