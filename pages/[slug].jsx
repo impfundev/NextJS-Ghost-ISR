@@ -62,14 +62,6 @@ export default function SinglePost({ post, relatedPosts }) {
               className="w-full h-auto object-cover"
               src={feature_image}
               alt={title}
-              width={1200}
-              height={850}
-              layout="responsive"
-              sizes={`
-                (max-width: 480px) 480px,
-                (max-width: 720px) 720px,
-                (max-width: 1200px) 1200px,
-              `}
               priority={true}
               quality={80}
             />
