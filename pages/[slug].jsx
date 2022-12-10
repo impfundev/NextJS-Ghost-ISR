@@ -22,6 +22,23 @@ export default function SinglePost({ post, relatedPosts, thumbnail }) {
   return (
     <>
     <Head>
+      <script
+        dangerouslySetInnerHTML={{
+        __html: `let lzAd = false;
+          window.addEventListener('scroll', () => {
+            (0 != document.documentElement.scrollTop && false === lzAd || 0 != document.body.scrollTop && !1 === lzAd) && (!function(){
+              itemScript = document.createElement('script');
+              itemScript.src= 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0';
+              itemScript.async = true;
+              itemScript.setAttribute('crossorigin', 'anonymous');
+              itemScript.setAttribute('nonce', 'HZqJ51n7');
+              itemScript.setAttribute('data-numposts', '5');
+              document.head.appendChild(itemScript);
+            }(), lzAd = true);
+          }, true);`
+        }}
+      />
+    </Head>
         <NextSeo
           title={title}
           description={excerpt}
@@ -55,23 +72,6 @@ export default function SinglePost({ post, relatedPosts, thumbnail }) {
             cardType: 'summary_large_image',
           }}
         />
-      <script
-        dangerouslySetInnerHTML={{
-        __html: `let lzAd = false;
-          window.addEventListener('scroll', () => {
-            (0 != document.documentElement.scrollTop && false === lzAd || 0 != document.body.scrollTop && !1 === lzAd) && (!function(){
-              itemScript = document.createElement('script');
-              itemScript.src= 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0';
-              itemScript.async = true;
-              itemScript.setAttribute('crossorigin', 'anonymous');
-              itemScript.setAttribute('nonce', 'HZqJ51n7');
-              itemScript.setAttribute('data-numposts', '5');
-              document.head.appendChild(itemScript);
-            }(), lzAd = true);
-          }, true);`
-        }}
-      />
-    </Head>
     <Layout>
     {post.primary_tag ? (
     <>
