@@ -1,9 +1,17 @@
 import { NextSeo } from "next-seo";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
 
-import Layout from "../components/Layout";
-import PostsList from "../components/PostsList";
 import { getPosts } from "../lib/api";
 import { siteName, siteUrl, siteDesc } from "../lib/config";
+
+const Layout = dynamic(() => import("../components/Layout"), {
+  suspense: true,
+  ssr: false,
+});
+const PostsList = dynamic(() => import("../components/PostsList"), {
+  suspense: true,
+});
 
 export async function getStaticProps() {
   const posts = await getPosts();
