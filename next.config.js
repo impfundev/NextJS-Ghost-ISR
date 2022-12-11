@@ -3,7 +3,7 @@ module.exports = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'fandomnesia.digitalpress.blog',
+        hostname: 'digitalpress.fra1.cdn.digitaloceanspaces.com',
       },
     ],
     deviceSizes: [480, 640, 760, 1080, 1200],
