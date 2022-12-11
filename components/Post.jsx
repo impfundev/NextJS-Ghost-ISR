@@ -9,6 +9,7 @@ import Image from "next/image";
 import Head from "next/head";
 
 import { siteName, siteUrl } from "../lib/config";
+import SeoArticle from "./SeoArticle";
 
 const Layout = dynamic(() => import("./Layout"), {
   suspense: true,
@@ -46,6 +47,20 @@ export default function Post({ post, relatedPosts, thumbnail }) {
         }}
       />
     </Head>
+    <SeoArticle
+      url={`${siteUrl}/${slug}`}
+      body={parse(html)}
+      title={title}
+      images={thumbnail}
+      excerpt={excerpt}
+      siteUrl={siteUrl}
+      siteName={siteName}
+      authorName={post.primary_author.name}
+      authorSlug={post.primary_author.slug}
+      modifiedTime={updated_at}
+      publishedTime={published_at}
+      publisherLogo={`${siteUrl}/favicon.png`}
+    />
     <Layout>
     {post.primary_tag ? (
     <>
