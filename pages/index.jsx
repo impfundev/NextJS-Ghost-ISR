@@ -21,10 +21,13 @@ export async function getStaticProps() {
   const { feature_image } = post;
   let thumbnail = await probe(feature_image, { rejectUnauthorized: false });
 
-  if (!posts, !thumbnail) {
+  if (!posts) {
     return {
       notFound: true,
     }
+  }
+  if (!thumbnail) {
+    return null
   }
 
   return {
