@@ -3,7 +3,6 @@ import { Suspense } from "react";
 
 import { siteName, siteUrl } from "../lib/config";
 import SeoArticle from "./SeoArticle";
-import Date from "./Date";
 
 const Layout = dynamic(() => import("./Layout"), {
   suspense: true,
@@ -17,6 +16,14 @@ const Thumbnail = dynamic(() => import("./Thumbnail"), {
   suspense: true,
 });
 const Author = dynamic(() => import("./Author"), {
+  suspense: true,
+  ssr: false,
+});
+const DateUpdate = dynamic(() => import("./DateUpdate"), {
+  suspense: true,
+  ssr: false,
+});
+const DatePublish = dynamic(() => import("./DatePublish"), {
   suspense: true,
   ssr: false,
 });
@@ -79,7 +86,11 @@ export default function Post({ post, relatedPosts, thumbnail }) {
           title={title}
           slug={slug}
         />
-        <Date update={updated_at} publish={published_at} />
+        {updated_at ? (
+          <DateUpdate update={updated_at} />
+        ) : (
+          <DatePublish publish={published_at} />
+        )}
         <hr />
         <Content content={html} />
       </article>
