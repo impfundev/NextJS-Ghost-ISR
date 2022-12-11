@@ -1,7 +1,7 @@
 import { siteUrl } from "../lib/config";
 import Image from "next/image";
 
-export default function PostsList({ posts }) {
+export default function PostsList({ posts, thumbnail }) {
   return (
     <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 py-5">
       {posts.map((post) => {
@@ -12,14 +12,12 @@ export default function PostsList({ posts }) {
               {feature_image ? (
                 <figure className="relative w-[590px] h-60">
                   <Image
-                    src={feature_image}
+                    src={thumbnail.url}
+                    width={thumbnail.width}
+                    height={thumbnail.height}
                     alt={title}
-                    sizes="100vw"
-                    fill
+                    layout="responsive"
                     quality={70}
-                    style={{
-                      objectFit: 'cover',
-                    }}
                   />
                 </figure>
               ) : null}
