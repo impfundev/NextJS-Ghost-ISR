@@ -17,9 +17,8 @@ const PostsList = dynamic(() => import("../components/PostsList"), {
 
 export async function getStaticProps() {
   const posts = await getPosts();
-  const { post } = posts.map((post) => post);
-  const { feature_image } = post;
-  let thumbnail = await probe(feature_image, { rejectUnauthorized: false });
+  const image = posts.map((post) => post.feature_image);
+  let thumbnail = await probe(image, { rejectUnauthorized: false });
 
   if (!posts) {
     return {
