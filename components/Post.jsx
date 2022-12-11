@@ -9,7 +9,6 @@ import { Suspense } from "react";
 import Image from "next/image";
 import Head from "next/head";
 
-import { getSinglePost, getPosts, getMorePosts } from "../lib/api";
 import { siteName, siteUrl } from "../lib/config";
 
 const Layout = dynamic(() => import("./Layout"), {
