@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function Thumbnail({ thumbnail, caption }) {
+export default function Thumbnail({ thumbnail, caption, title }) {
   return (
     <figure className="w-full block">
       <Image
