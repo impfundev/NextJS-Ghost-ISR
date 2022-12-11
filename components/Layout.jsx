@@ -1,5 +1,10 @@
-import Header from "./Header";
-// import FloatingAds from "./FloatingAds";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+
+const Header = dynamic(() => import("./Header"), {
+  suspense: true,
+  ssr: false,
+});
 
 export default function Layout({ children }) {
   return (
