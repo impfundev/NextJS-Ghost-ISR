@@ -10,7 +10,7 @@ export default function PostsList({ posts }) {
           <li key={id}><a href={`${siteUrl}/${slug}`}>
             <article className="max-w-sm rounded-2xl shadow-lg overflow-hidden border border-black text-black hover:border-yellow-500 hover:text-yellow-500 transition-all duration-300">
               {feature_image ? (
-                <figure className="relative w-[590] h-60">
+                <figure className="relative w-[590px] h-60">
                   <Image
                     src={feature_image}
                     alt={title}
