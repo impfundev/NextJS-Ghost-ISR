@@ -2,9 +2,7 @@ import LazyLoad from "react-lazy-load";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
-const PostsList = dynamic(() => import("./PostsList"), {
-  suspense: true,
-});
+import PostsList from "./PostsList";
 
 export default function MorePost({ posts }) {
   return (
