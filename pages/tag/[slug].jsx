@@ -54,14 +54,17 @@ export async function getStaticProps({ params }) {
   const { feature_image } = post;
   let thumbnail = await probe(feature_image, { rejectUnauthorized: false });
 
-  if (!posts, !tag, !thumbnail) {
+  if (!posts) {
     return {
       notFound: true,
     }
   }
+  if (!tag, !thumbnail) {
+    return null
+  }
 
   return {
     props: { posts, tag, thumbnail },
-    revalidate: 1,
+    revalidate: 300,
   };
 }
