@@ -1,7 +1,22 @@
 import { NextSeo, NewsArticleJsonLd } from "next-seo";
 
-export default function SeoArticle() {
+export default function SeoArticle({
+  url,
+  body,
+  title,
+  images,
+  excerpt,
+  twitter,
+  siteName,
+  canonical,
+  authorName,
+  authorSlug,
+  modifiedTime,
+  publishedTime,
+  publisherLogo,
+}) {
   return (
+  <>
     <NextSeo
       title={title}
       description={excerpt}
@@ -55,5 +70,6 @@ export default function SeoArticle() {
       body={parse(html)}
       isAccessibleForFree={true}
     />
+  </>
   );
 }
