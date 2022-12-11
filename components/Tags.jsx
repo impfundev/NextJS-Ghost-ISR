@@ -1,4 +1,4 @@
-export default function Tags({ tags }) {
+export default function Tags({ tags, siteUrl }) {
   return (
     <ul className="m-0 p-0 flex flex-wrap gap-1 list-none py-3">
       {tags.map((tag) => {
