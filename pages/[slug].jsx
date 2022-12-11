@@ -46,6 +46,6 @@ export async function getStaticProps({ params }) {
 
   return {
     props: { post, relatedPosts, thumbnail },
-    revalidate: 1,
+    revalidate: 30,
   };
 }
