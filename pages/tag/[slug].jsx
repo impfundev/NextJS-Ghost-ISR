@@ -1,10 +1,18 @@
 import Head from "next/head";
 import parse from "html-react-parser";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
 
 import { getAllTags, getSingleTag, getPostsByTag } from "../../lib/api";
 import { siteUrl } from "../../lib/config";
-import Layout from "../../components/Layout";
-import PostsList from "../../components/PostsList";
+
+const Layout = dynamic(() => import("../../components/Layout"), {
+  suspense: true,
+  ssr: false,
+});
+const PostsList = dynamic(() => import("../../components/PostsList"), {
+  suspense: true,
+});
 
 export default function SingleTag({ posts, tag }) {
 
