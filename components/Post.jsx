@@ -1,4 +1,3 @@
-import LazyLoad from "react-lazy-load";
 import probe from "probe-image-size";
 
 import dynamic from "next/dynamic";
@@ -38,8 +37,9 @@ const Comment = dynamic(() => import("./Comment"), {
   suspense: true,
   ssr: false,
 });
-const PostsList = dynamic(() => import("./PostsList"), {
+const MorePost = dynamic(() => import("./MorePost"), {
   suspense: true,
+  ssr: false,
 });
 
 export default function Post({ post, relatedPosts, thumbnail }) {
@@ -93,10 +93,7 @@ export default function Post({ post, relatedPosts, thumbnail }) {
         </>
       ) : null}
       <Comment url={`${siteUrl}/${slug}`} />
-      <h3 className="text-lg font-bold py-4">Artikel Terbaru</h3>
-      <LazyLoad threshold={0.95}>
-        <PostsList posts={relatedPosts} />
-      </LazyLoad>
+      <MorePost posts={relatedPosts} />
     </Layout>
     </>
   );
