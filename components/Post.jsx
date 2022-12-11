@@ -20,7 +20,7 @@ const PrimaryTags = dynamic(() => import("./PrimaryTags"), {
 const Thumbnail = dynamic(() => import("./Thumbnail"), {
   suspense: true,
 });
-const Share = dynamic(() => import("./Share"), {
+const Author = dynamic(() => import("./Author"), {
   suspense: true,
   ssr: false,
 });
@@ -68,14 +68,12 @@ export default function Post({ post, relatedPosts, thumbnail }) {
             caption={feature_image_caption}
           />
         ) : null}
-        <div className="flex items-center justify-between">
-          {post.primary_author ? (
-            <>
-              <span>Oleh: <a href={`${siteUrl}/author/${post.primary_author.slug}`}>{post.primary_author.name}</a></span>
-            </>
-          ) : null}
-          <Share title={title} slug={slug} />
-        </div>
+        <Author
+          author={post.primary_author}
+          siteUrl={siteUrl}
+          title={title}
+          slug={slug}
+        />
         <p><time className="text-gray-500 text-sm" datetime={updated_at ? updated_at : published_at}>{dateFormat}</time></p>
         <hr />
         {parse(html)}
