@@ -14,6 +14,10 @@ const Layout = dynamic(() => import("./Layout"), {
   suspense: true,
   ssr: false,
 });
+const PrimaryTags = dynamic(() => import("./PrimaryTags"), {
+  suspense: true,
+  ssr: false,
+});
 const Share = dynamic(() => import("./Share"), {
   suspense: true,
   ssr: false,
@@ -49,13 +53,7 @@ export default function Post({ post, relatedPosts, thumbnail }) {
     <Layout>
     {post.primary_tag ? (
     <>
-      <ul className="m-0 p-0 flex flex-wrap gap-1 list-none py-3">
-        <li key={post.primary_tag.slug} className="m-0 p-0">
-          <a href={`${siteUrl}/tag/${post.primary_tag.slug}`} className="px-3 py-1 bg-black text-white text-sm font-bold rounded-full">
-            {post.primary_tag.name}
-          </a>
-        </li>
-      </ul>
+      <PrimaryTags tag={post.primary_tag} siteUrl={siteUrl} />
     </>
     ) : null}
       <article className="prose">
