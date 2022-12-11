@@ -4,14 +4,25 @@ import probe from "probe-image-size";
 import date from "date-and-time";
 
 import { NextSeo, NewsArticleJsonLd } from "next-seo";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
 import Image from "next/image";
 import Head from "next/head";
 
 import { getSinglePost, getPosts, getMorePosts } from "../lib/api";
 import { siteName, siteUrl } from "../lib/config";
-import Layout from "../components/Layout";
-import Share from "../components/Share";
-import PostsList from "../components/PostsList";
+
+const Layout = dynamic(() => import("../components/Layout"), {
+  suspense: true,
+  ssr: false,
+});
+const Share = dynamic(() => import("../components/Share"), {
+  suspense: true,
+  ssr: false,
+});
+const PostsList = dynamic(() => import("../components/PostsList"), {
+  suspense: true,
+});
 
 export default function SinglePost({ post, relatedPosts, thumbnail }) {
   const { title, excerpt, html, slug, tags, feature_image_caption, updated_at, published_at } = post;
