@@ -6,7 +6,6 @@ import date from "date-and-time";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import Image from "next/image";
-import Head from "next/head";
 
 import { siteName, siteUrl } from "../lib/config";
 import SeoArticle from "./SeoArticle";
@@ -16,6 +15,10 @@ const Layout = dynamic(() => import("./Layout"), {
   ssr: false,
 });
 const Share = dynamic(() => import("./Share"), {
+  suspense: true,
+  ssr: false,
+});
+const Comment = dynamic(() => import("./Comment"), {
   suspense: true,
   ssr: false,
 });
@@ -29,24 +32,6 @@ export default function Post({ post, relatedPosts, thumbnail }) {
 
   return (
     <>
-    <Head>
-      <script
-        dangerouslySetInnerHTML={{
-        __html: `let lzAd = false;
-          window.addEventListener('scroll', () => {
-            (0 != document.documentElement.scrollTop && false === lzAd || 0 != document.body.scrollTop && !1 === lzAd) && (!function(){
-              itemScript = document.createElement('script');
-              itemScript.src= 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0';
-              itemScript.async = true;
-              itemScript.setAttribute('crossorigin', 'anonymous');
-              itemScript.setAttribute('nonce', 'HZqJ51n7');
-              itemScript.setAttribute('data-numposts', '5');
-              document.head.appendChild(itemScript);
-            }(), lzAd = true);
-          }, true);`
-        }}
-      />
-    </Head>
     <SeoArticle
       url={`${siteUrl}/${slug}`}
       body={parse(html)}
@@ -120,10 +105,7 @@ export default function Post({ post, relatedPosts, thumbnail }) {
       </ul>
       </>
       ) : null}
-      <div className="py-5">
-        <div className="fb-comments" data-href={`${siteUrl}/${slug}`} data-width="100%" data-numposts="5"></div>
-      </div>
-      <div id="fb-root"></div>
+      <Comment url={`${siteUrl}/${slug}`} />
       <h3 className="text-lg font-bold py-4">Artikel Terbaru</h3>
       <LazyLoad threshold={0.95}>
         <PostsList posts={relatedPosts} />
