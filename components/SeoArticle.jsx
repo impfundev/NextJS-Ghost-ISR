@@ -6,9 +6,8 @@ export default function SeoArticle({
   title,
   images,
   excerpt,
-  twitter,
+  siteUrl,
   siteName,
-  canonical,
   authorName,
   authorSlug,
   modifiedTime,
@@ -20,26 +19,26 @@ export default function SeoArticle({
     <NextSeo
       title={title}
       description={excerpt}
-      canonical={`${siteUrl}/${slug}`}
+      canonical={url}
       openGraph={{
         type: 'article',
-        url: `${siteUrl}/${slug}`,
+        url: url,
         title: title,
         description: excerpt,
         article: {
-          publishedTime: published_at,
-          modifiedTime: updated_at,
+          publishedTime: publishedTime,
+          modifiedTime: modifiedTime,
           authors: [
-            `${post.primary_author.slug}`,
+            `${authorSlug}`,
           ],
         },
         images: [
           {
-            url: `${thumbnail.url}`,
-            width: `${thumbnail.width}`,
-            height: `${thumbnail.height}`,
+            url: `${images.url}`,
+            width: `${images.width}`,
+            height: `${images.height}`,
             alt: title,
-            type: `${thumbnail.mime}`,
+            type: `${images.mime}`,
           }
         ],
         siteName: siteName,
@@ -51,23 +50,23 @@ export default function SeoArticle({
       }}
     />
     <NewsArticleJsonLd
-      url={`${siteUrl}/${slug}`}
+      url={url}
       title={title}
       images={[
-        `${thumbnail.url}`,
+        `${images.url}`,
       ]}
-      datePublished={published_at}
-      dateModified={updated_at}
+      datePublished={publishedTime}
+      dateModified={modifiedTime}
       authorName={[
         {
-          name: post.primary_author.name,
-          url: `${siteUrl}/author/${post.primary_author.slug}`,
+          name: authorName,
+          url: `${siteUrl}/author/${authorSlug}`,
         },
       ]}
       publisherName={siteName}
       publisherLogo={`${siteUrl}/favicon.png`}
       description={excerpt}
-      body={parse(html)}
+      body={body}
       isAccessibleForFree={true}
     />
   </>
