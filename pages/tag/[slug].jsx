@@ -51,7 +51,7 @@ export async function getStaticProps({ params }) {
   const tagSlug = slug;
   const posts = await getPostsByTag(tagSlug);
   const image = posts.map((post) => post.feature_image);
-  let thumbnail = await probe(feature_image, { rejectUnauthorized: false });
+  let thumbnail = await probe(image, { rejectUnauthorized: false });
 
   if (!posts) {
     return {
