@@ -2,6 +2,8 @@ import { NextSeo } from "next-seo";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
+import probe from "probe-image-size";
+
 import { getPosts } from "../lib/api";
 import { siteName, siteUrl, siteDesc } from "../lib/config";
 
@@ -15,20 +17,23 @@ const PostsList = dynamic(() => import("../components/PostsList"), {
 
 export async function getStaticProps() {
   const posts = await getPosts();
+  const { post } = posts.map((post) => post);
+  const { feature_image } = post;
+  let thumbnail = await probe(feature_image, { rejectUnauthorized: false });
 
-  if (!posts) {
+  if (!posts, !thumbnail) {
     return {
       notFound: true,
     }
   }
 
   return {
-    props: { posts },
-    revalidate: 1,
+    props: { posts, thumbnail },
+    revalidate: 300,
   };
 }
 
-export default function Home({ posts }) {
+export default function Home({ posts, thumbnail }) {
   return (
     <>
         <NextSeo
