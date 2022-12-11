@@ -9,11 +9,7 @@ const Share = dynamic(() => import("./Share"), {
 export default function Author({ author, siteUrl, title, slug }) {
   return (
     <div className="flex items-center justify-between">
-      {author ? (
-        <>
-          <span>Oleh: <a href={`${siteUrl}/author/${author.slug}`}>{author.name}</a></span>
-        </>
-      ) : null}
+      <span>Oleh: <a href={`${siteUrl}/author/${author.slug}`}>{author.name}</a></span>
       <Share title={title} slug={`${siteUrl}/${slug}`} />
     </div>
   );
