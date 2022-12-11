@@ -9,6 +9,5 @@ module.exports = {
     deviceSizes: [480, 640, 760, 1080, 1200],
     imageSizes: [480, 640, 760, 1080, 1200],
     formats: ['image/avif', 'image/webp'],
-    minimumCacheTTL: 60,
   },
 }
