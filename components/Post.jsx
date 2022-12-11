@@ -1,7 +1,5 @@
 import LazyLoad from "react-lazy-load";
-import parse from "html-react-parser";
 import probe from "probe-image-size";
-import date from "date-and-time";
 
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
@@ -24,6 +22,18 @@ const Author = dynamic(() => import("./Author"), {
   suspense: true,
   ssr: false,
 });
+const Date = dynamic(() => import("./Date"), {
+  suspense: true,
+  ssr: false,
+});
+const Content = dynamic(() => import("./Content"), {
+  suspense: true,
+  ssr: false,
+});
+const Tags = dynamic(() => import("./Tags"), {
+  suspense: true,
+  ssr: false,
+});
 const Comment = dynamic(() => import("./Comment"), {
   suspense: true,
   ssr: false,
@@ -34,13 +44,12 @@ const PostsList = dynamic(() => import("./PostsList"), {
 
 export default function Post({ post, relatedPosts, thumbnail }) {
   const { title, excerpt, html, slug, tags, feature_image_caption, updated_at, published_at } = post;
-  const dateFormat = date.format(new Date(`${updated_at ? updated_at : published_at}`), 'DD MMMM YYYY HH:mm');
 
   return (
     <>
     <SeoArticle
       url={`${siteUrl}/${slug}`}
-      body={parse(html)}
+      body={html}
       title={title}
       images={thumbnail}
       excerpt={excerpt}
@@ -74,24 +83,14 @@ export default function Post({ post, relatedPosts, thumbnail }) {
           title={title}
           slug={slug}
         />
-        <p><time className="text-gray-500 text-sm" datetime={updated_at ? updated_at : published_at}>{dateFormat}</time></p>
+        <Date update={updated_at} publish={published_at} />
         <hr />
-        {parse(html)}
+        <Content content={html} />
       </article>
       {tags ? (
-      <>
-      <ul className="m-0 p-0 flex flex-wrap gap-1 list-none py-3">
-        {tags.map((tag) => {
-          return (
-            <li key={tag.id} className="m-0 p-0">
-              <a href={`${siteUrl}/tag/${parse(tag.slug)}`} className="px-3 py-1 bg-black text-white text-sm font-bold rounded-full">
-                {tag.name}
-              </a>
-            </li>
-          );
-        })}
-      </ul>
-      </>
+        <>
+          <Tags tags={tags} />
+        </>
       ) : null}
       <Comment url={`${siteUrl}/${slug}`} />
       <h3 className="text-lg font-bold py-4">Artikel Terbaru</h3>
