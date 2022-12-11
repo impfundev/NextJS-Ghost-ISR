@@ -5,7 +5,6 @@ import date from "date-and-time";
 
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
-import Image from "next/image";
 
 import { siteName, siteUrl } from "../lib/config";
 import SeoArticle from "./SeoArticle";
@@ -17,6 +16,9 @@ const Layout = dynamic(() => import("./Layout"), {
 const PrimaryTags = dynamic(() => import("./PrimaryTags"), {
   suspense: true,
   ssr: false,
+});
+const Thumbnail = dynamic(() => import("./Thumbnail"), {
+  suspense: true,
 });
 const Share = dynamic(() => import("./Share"), {
   suspense: true,
@@ -61,20 +63,10 @@ export default function Post({ post, relatedPosts, thumbnail }) {
           {title}
         </h1>
         {thumbnail ? (
-          <figure className="w-full block">
-            <Image
-              src={thumbnail.url}
-              width={thumbnail.width}
-              height={thumbnail.height}
-              alt={title}
-              layout="responsive"
-              quality={80}
-              priority
-            />
-            {feature_image_caption ? (
-              <figcaption className="py-0">{feature_image_caption}</figcaption>
-            ) : null}
-          </figure>
+          <Thumbnail
+            thumbnail={thumbnail}
+            caption={feature_image_caption}
+          />
         ) : null}
         <div className="flex items-center justify-between">
           {post.primary_author ? (
