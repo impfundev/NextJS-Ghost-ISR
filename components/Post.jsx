@@ -1,5 +1,3 @@
-import probe from "probe-image-size";
-
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
