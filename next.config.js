@@ -3,7 +3,7 @@ module.exports = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'demo.ghost.io',
+        hostname: 'fandomnesia.digitalpress.blog',
       },
     ],
     deviceSizes: [480, 640, 760, 1080, 1200],
