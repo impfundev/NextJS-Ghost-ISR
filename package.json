@@ -9,8 +9,6 @@
   },
   "dependencies": {
     "@tryghost/content-api": "^1.11.4",
-    "@tryghost/helpers": "^1.1.74",
-    "axios": "1.2.0",
     "date-and-time": "^2.4.0",
     "html-react-parser": "^1.2.6",
     "probe-image-size": "^7.2.2",
