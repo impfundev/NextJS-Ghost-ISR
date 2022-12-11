@@ -58,7 +58,10 @@ export default function Home({ posts }) {
           }}
         />
       <Layout>
-        <PostsList posts={posts.slice(0,20)} />
+        <PostsList
+          posts={posts.slice(0,20)}
+          thumbnail={thumbnail}
+        />
       </Layout>
     </>
   );
