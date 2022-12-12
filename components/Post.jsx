@@ -102,7 +102,6 @@ export default function Post({ post, relatedPosts, thumbnail }) {
       <Comment url={`${siteUrl}/${slug}`} />
       <MorePost
         posts={relatedPosts}
-        thumbnail={thumbnail}
       />
     </Layout>
     </>
