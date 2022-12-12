@@ -17,20 +17,15 @@ const PostsList = dynamic(() => import("../components/PostsList"), {
 
 export async function getStaticProps() {
   const posts = await getPosts();
-  const image = posts.map((post) => post.feature_image);
-  let thumbnail = await probe(image, { rejectUnauthorized: false });
-
+  
   if (!posts) {
     return {
       notFound: true,
     }
   }
-  if (!thumbnail) {
-    return null
-  }
 
   return {
-    props: { posts, thumbnail },
+    props: { posts },
     revalidate: 300,
   };
 }
@@ -67,7 +62,6 @@ export default function Home({ posts, thumbnail }) {
       <Layout>
         <PostsList
           posts={posts.slice(0,20)}
-          thumbnail={thumbnail}
         />
       </Layout>
     </>
