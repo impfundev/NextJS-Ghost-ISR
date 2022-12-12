@@ -15,6 +15,6 @@ export async function NextImage({ image }) {
       quality={70}
     />
   );
-}
+};
 
 export default function NextImage;
