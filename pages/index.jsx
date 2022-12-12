@@ -2,8 +2,6 @@ import { NextSeo } from "next-seo";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
-import probe from "probe-image-size";
-
 import { getPosts } from "../lib/api";
 import { siteName, siteUrl, siteDesc } from "../lib/config";
 
