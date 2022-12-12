@@ -3,8 +3,6 @@ import parse from "html-react-parser";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
-import probe from "probe-image-size";
-
 import { getAllTags, getSingleTag, getPostsByTag } from "../../lib/api";
 import { siteUrl } from "../../lib/config";
 
@@ -29,7 +27,6 @@ export default function SingleTag({ posts, tag, thumbnail }) {
       <h1 className="py-6 text-lg font-bold">{tag.name}</h1>
       <PostsList
         posts={posts}
-        thumbnail={thumbnail}
       />
     </Layout>
   </>
@@ -50,20 +47,18 @@ export async function getStaticProps({ params }) {
   const tag = await getSingleTag(slug);
   const tagSlug = slug;
   const posts = await getPostsByTag(tagSlug);
-  const image = posts.map((post) => post.feature_image);
-  let thumbnail = await probe(image, { rejectUnauthorized: false });
-
+  
   if (!posts) {
     return {
       notFound: true,
     }
   }
-  if (!tag, !thumbnail) {
+  if (!tag) {
     return null
   }
 
   return {
-    props: { posts, tag, thumbnail },
+    props: { posts, tag },
     revalidate: 300,
   };
 }
