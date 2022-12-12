@@ -1,7 +1,7 @@
 import Image from "next/image";
 import probe from "probe-image-size";
 
-export async function NextImage({ image }) {
+export async default function NextImage({ image }) {
   let thumbnail = await probe(image, { rejectUnauthorized: false });
  
   return (
@@ -16,5 +16,3 @@ export async function NextImage({ image }) {
     />
   );
 };
-
-export default function NextImage;
