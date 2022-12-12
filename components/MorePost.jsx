@@ -11,7 +11,6 @@ export default function MorePost({ posts, thumbnail }) {
       <LazyLoad threshold={0.95}>
         <PostsList
           posts={posts}
-          thumbnail={thumbnail}
         />
       </LazyLoad>
     </>
