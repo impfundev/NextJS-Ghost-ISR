@@ -13,6 +13,7 @@ export default function PostsList({ posts, thumbnail }) {
               {feature_image ? (
                 <NextImage
                   image={feature_image}
+                  title={title}
                 />
               ) : null}
               <div className="grid gap-4 m-5">
