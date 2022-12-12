@@ -1,5 +1,12 @@
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+
 import { siteUrl } from "../lib/config";
-import Image from "next/image";
+
+const NextImage = dynamic(() => import("./NextImage"), {
+  suspense: true,
+  ssr: false,
+});
 
 export default function PostsList({ posts, thumbnail }) {
   return (
@@ -10,14 +17,8 @@ export default function PostsList({ posts, thumbnail }) {
           <li key={id}><a href={`${siteUrl}/${slug}`}>
             <article className="max-w-sm rounded-2xl shadow-lg overflow-hidden border border-black text-black hover:border-yellow-500 hover:text-yellow-500 transition-all duration-300">
               {feature_image ? (
-                <Image
-                  className="object-cover w-full h-60"
-                  src={thumbnail.url}
-                  width={thumbnail.width}
-                  height={thumbnail.height}
-                  alt={title}
-                  layout="responsive"
-                  quality={70}
+                <NextImage
+                  image={feature_image}
                 />
               ) : null}
               <div className="grid gap-4 m-5">
