@@ -67,7 +67,6 @@ export default function Post({ post, relatedPosts, thumbnail }) {
           <Tags tags={tags} siteUrl={siteUrl} />
         </>
       ) : null}
-      <!--[ <Comment url={`${siteUrl}/${slug}`} /> ]-->
       <MorePost
         posts={relatedPosts}
       />
