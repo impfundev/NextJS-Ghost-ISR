@@ -1,11 +1,5 @@
-import dynamic from "next/dynamic";
-import { Suspense } from "react";
 import { siteUrl } from "../lib/config";
-
-const NextImage = dynamic(() => import("../components/NextImage"), {
-  suspense: true,
-  ssr: false,
-});
+import NextImage from "../components/NextImage";
 
 export default function PostsList({ posts, thumbnail }) {
   return (
