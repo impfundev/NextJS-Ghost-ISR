@@ -1,7 +1,4 @@
 import probe from "probe-image-size";
-import dynamic from "next/dynamic";
-import { Suspense } from "react";
-
 import { getSinglePost, getPosts, getMorePosts } from "../lib/api";
 
 import Post from "../components/Post";
