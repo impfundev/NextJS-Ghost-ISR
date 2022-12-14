@@ -4,10 +4,7 @@ import { Suspense } from "react";
 
 import { getSinglePost, getPosts, getMorePosts } from "../lib/api";
 
-const Post = dynamic(() => import("../components/Post"), {
-  suspense: true,
-  ssr: false,
-});
+import Post from "../components/Post";
 
 export default function SinglePost({ post, relatedPosts, thumbnail }) {
   return (
