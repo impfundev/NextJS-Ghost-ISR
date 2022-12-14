@@ -1,48 +1,16 @@
-import dynamic from "next/dynamic";
-import { Suspense } from "react";
-
 import { siteName, siteUrl } from "../lib/config";
 import SeoArticle from "./SeoArticle";
 
-const Layout = dynamic(() => import("./Layout"), {
-  suspense: true,
-  ssr: false,
-});
-const PrimaryTags = dynamic(() => import("./PrimaryTags"), {
-  suspense: true,
-  ssr: false,
-});
-const Thumbnail = dynamic(() => import("./Thumbnail"), {
-  suspense: true,
-});
-const Author = dynamic(() => import("./Author"), {
-  suspense: true,
-  ssr: false,
-});
-const DateUpdate = dynamic(() => import("./DateUpdate"), {
-  suspense: true,
-  ssr: false,
-});
-const DatePublish = dynamic(() => import("./DatePublish"), {
-  suspense: true,
-  ssr: false,
-});
-const Content = dynamic(() => import("./Content"), {
-  suspense: true,
-  ssr: false,
-});
-const Tags = dynamic(() => import("./Tags"), {
-  suspense: true,
-  ssr: false,
-});
-const Comment = dynamic(() => import("./Comment"), {
-  suspense: true,
-  ssr: false,
-});
-const MorePost = dynamic(() => import("./MorePost"), {
-  suspense: true,
-  ssr: false,
-});
+import Layout from "./Layout";
+import PrimaryTags from "./PrimaryTags";
+import Thumbnail from "./Thumbnail";
+import Author from "./Author";
+import DateUpdate from "./DateUpdate";
+import DatePublish from "./DatePublish";
+import Content from "./Content";
+import Tags from "./Tags";
+import Comment from "./Comment";
+import MorePost from "./MorePost";
 
 export default function Post({ post, relatedPosts, thumbnail }) {
   const { title, excerpt, html, slug, tags, feature_image_caption, updated_at, published_at } = post;
