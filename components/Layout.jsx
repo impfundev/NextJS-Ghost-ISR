@@ -1,10 +1,4 @@
-import dynamic from "next/dynamic";
-import { Suspense } from "react";
-
-const Header = dynamic(() => import("./Header"), {
-  suspense: true,
-  ssr: false,
-});
+import Header from "./Header";
 
 export default function Layout({ children }) {
   return (
