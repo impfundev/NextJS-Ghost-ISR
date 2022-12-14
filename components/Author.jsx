@@ -1,10 +1,4 @@
-import dynamic from "next/dynamic";
-import { Suspense } from "react";
-
-const Share = dynamic(() => import("./Share"), {
-  suspense: true,
-  ssr: false,
-});
+import Share from "./Share";
 
 export default function Author({ author, siteUrl, title, slug }) {
   return (
