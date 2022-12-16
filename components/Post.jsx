@@ -9,7 +9,7 @@ import DateUpdate from "./DateUpdate";
 import DatePublish from "./DatePublish";
 import Content from "./Content";
 import Tags from "./Tags";
-// import Comment from "./Comment";
+import Comment from "./Comment";
 import MorePost from "./MorePost";
 
 export default function Post({ post, relatedPosts, thumbnail }) {
@@ -67,6 +67,7 @@ export default function Post({ post, relatedPosts, thumbnail }) {
           <Tags tags={tags} siteUrl={siteUrl} />
         </>
       ) : null}
+      <Comment url={`${siteUrl}/${slug}`} />
       <MorePost
         posts={relatedPosts}
       />
