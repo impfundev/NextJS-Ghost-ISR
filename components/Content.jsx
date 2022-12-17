@@ -1,9 +1,9 @@
+import parse from "html-react-parser";
+
 export default function Content({ content }) {
   return (
-    <div
-      dangerouslySetInnerHTML={{
-        __html: content
-      }}
-    />
+    <div>
+     {parse(content)}
+    </div>
   );
 }
