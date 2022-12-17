@@ -12,8 +12,11 @@ import DateUpdate from "./DateUpdate";
 import DatePublish from "./DatePublish";
 import Content from "./Content";
 import Tags from "./Tags";
-import MorePost from "./MorePost";
 
+const MorePost = dynamic(() => import("./MorePost"), {
+  suspense: true,
+  ssr: false,
+});
 const Comment = dynamic(() => import("./Comment"), {
   suspense: true,
   ssr: false,
@@ -79,6 +82,12 @@ export default function Post({ post, relatedPosts, thumbnail }) {
         posts={relatedPosts}
       />
     </Layout>
+    <div id="fb-root"></div>
+    <Script
+      src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0&appId=5628930273871755&autoLogAppEvents=1"
+      strategy="lazyOnload"
+      nonce="8IcioGBr"
+    />
     </>
   );
 }
