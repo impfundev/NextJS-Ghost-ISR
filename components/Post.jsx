@@ -1,3 +1,6 @@
+import { Suspense } from "react";
+import dynamic from "next/dynamic";
+
 import { siteName, siteUrl } from "../lib/config";
 import SeoArticle from "./SeoArticle";
 
@@ -9,8 +12,12 @@ import DateUpdate from "./DateUpdate";
 import DatePublish from "./DatePublish";
 import Content from "./Content";
 import Tags from "./Tags";
-import Comment from "./Comment";
 import MorePost from "./MorePost";
+
+const Comment = dynamic(() => import("./Comment"), {
+  suspense: true,
+  ssr: false,
+});
 
 export default function Post({ post, relatedPosts, thumbnail }) {
   const { title, excerpt, html, slug, tags, feature_image_caption, updated_at, published_at } = post;
