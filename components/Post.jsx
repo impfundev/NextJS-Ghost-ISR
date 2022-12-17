@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
+import Script from "next/script";
 
 import { siteName, siteUrl } from "../lib/config";
 import SeoArticle from "./SeoArticle";
