@@ -1,7 +1,7 @@
 import { siteUrl } from "../lib/config";
 import NextImage from "../components/NextImage";
 
-export default function PostsList({ posts, thumbnail }) {
+export default function PostsList({ posts }) {
   return (
     <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 py-5">
       {posts.map((post) => {
