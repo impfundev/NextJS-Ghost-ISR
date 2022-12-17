@@ -2,7 +2,7 @@ import { NextSeo } from "next-seo";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
-import { getPosts } from "../lib/api";
+import { getIndexPosts } from "../lib/api";
 import { siteName, siteUrl, siteDesc } from "../lib/config";
 
 const Layout = dynamic(() => import("../components/Layout"), {
@@ -14,7 +14,7 @@ const PostsList = dynamic(() => import("../components/PostsList"), {
 });
 
 export async function getStaticProps() {
-  const posts = await getPosts();
+  const posts = await getIndexPosts();
   
   if (!posts) {
     return {
@@ -59,7 +59,7 @@ export default function Home({ posts, thumbnail }) {
         />
       <Layout>
         <PostsList
-          posts={posts.slice(0,20)}
+          posts={posts}
         />
       </Layout>
     </>
