@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
-import Script from "next/script";
 
 import { siteName, siteUrl } from "../lib/config";
 import SeoArticle from "./SeoArticle";
@@ -83,12 +82,6 @@ export default function Post({ post, relatedPosts, thumbnail }) {
         posts={relatedPosts}
       />
     </Layout>
-    <div id="fb-root"></div>
-    <Script
-      src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0&appId=5628930273871755&autoLogAppEvents=1"
-      strategy="lazyOnload"
-      nonce="8IcioGBr"
-    />
     </>
   );
 }
