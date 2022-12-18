@@ -5,11 +5,11 @@ export default function NextImage({ image, title }) {
   return (
     <div style={{ position: 'relative', width: '384px', height: '240px' }}>
       <Image
-        className="object-cover"
+        className="object-cover w-full"
         src={image}
         alt={title}
         fill
-        sizes="100vw"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
     </div>
   );
