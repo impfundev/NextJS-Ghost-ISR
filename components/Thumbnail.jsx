@@ -12,11 +12,9 @@ export default function Thumbnail({ thumbnail, caption, title }) {
         quality={80}
         priority
         sizes={`
-          (max-width: 600px) 480px,
-          (max-width: 700px) 640px,
-          (max-width: 1000px) 760px,
-          (max-width: 1900px) 1080px,
-          (max-width: 2000px) 1200px, ${thumbnail.width}
+          (max-width: 640px) 480px,
+          (max-width: 1080px) 828px,
+          (max-width: 2048px) 1200px, ${thumbnail.width}
         `}
       />
       {caption ? (
