@@ -11,11 +11,7 @@ export default function Thumbnail({ thumbnail, caption, title }) {
         layout="responsive"
         quality={80}
         priority
-        sizes={`
-          (max-width: 640px) 480px,
-          (max-width: 1080px) 828px,
-          (max-width: 2048px) 1200px, ${thumbnail.width}px
-        `}
+        sizes={`(max-width: 640px) 480px, (max-width: 1080px) 828px, (max-width: 2048px) 1200px, ${thumbnail.width}px`}
       />
       {caption ? (
         <figcaption className="py-0">{caption}</figcaption>
