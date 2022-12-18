@@ -4,9 +4,11 @@ import probe from "probe-image-size";
 
 export default function NextImage({ image, title }) {
   useEffect(() => {
-    let thumbnail = await probe(image, { rejectUnauthorized: false });
-    return thumbnail;
-  });
+    (async () => {
+      let thumbnail = await probe(image, { rejectUnauthorized: false });
+    })();
+    return () => {thumbnail};
+  }, []);
 
   return (
     <Image
