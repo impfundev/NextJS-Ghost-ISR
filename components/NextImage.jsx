@@ -1,8 +1,12 @@
+import React, { useEffect } from "react";
 import Image from "next/image";
 import probe from "probe-image-size";
 
-async function NextImage({ image, title }) {
-  let thumbnail = await probe(image, { rejectUnauthorized: false });
+export default function NextImage({ image, title }) {
+  useEffect(() => {
+    let thumbnail = await probe(image, { rejectUnauthorized: false });
+    return thumbnail;
+  });
 
   return (
     <Image
@@ -17,5 +21,3 @@ async function NextImage({ image, title }) {
     />
   );
 };
-
-export default function NextImage;
