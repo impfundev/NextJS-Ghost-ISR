@@ -39,7 +39,7 @@ module.exports = {
         hostname: 'digitalpress.fra1.cdn.digitaloceanspaces.com',
       },
     ],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
+    deviceSizes: [480, 828, 1200],
     imageSizes: [480, 828, 1200],
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 31536000,
