@@ -5,14 +5,20 @@ import { siteName, siteUrl } from "../lib/config";
 import SeoArticle from "./SeoArticle";
 
 import Layout from "./Layout";
-import PrimaryTags from "./PrimaryTags";
 import Thumbnail from "./Thumbnail";
 import Author from "./Author";
 import DateUpdate from "./DateUpdate";
 import DatePublish from "./DatePublish";
 import Content from "./Content";
-import Tags from "./Tags";
 
+const PrimaryTags = dynamic(() => import("./PrimaryTags"), {
+  suspense: true,
+  ssr: false,
+});
+const Tags = dynamic(() => import("./Tags"), {
+  suspense: true,
+  ssr: false,
+});
 const MorePost = dynamic(() => import("./MorePost"), {
   suspense: true,
   ssr: false,
