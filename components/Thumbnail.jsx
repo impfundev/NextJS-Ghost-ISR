@@ -14,7 +14,7 @@ export default function Thumbnail({ thumbnail, caption, title }) {
         sizes={`
           (max-width: 640px) 480px,
           (max-width: 1080px) 828px,
-          (max-width: 2048px) 1200px, ${thumbnail.width}
+          (max-width: 2048px) 1200px, ${thumbnail.width}px
         `}
       />
       {caption ? (
