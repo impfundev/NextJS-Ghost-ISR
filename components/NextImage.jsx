@@ -8,7 +8,7 @@ export default function NextImage({ image, title }) {
         src={image}
         alt={title}
         fill
-        sizes="30vw"
+        sizes="10vw"
       />
     </figure>
   );
