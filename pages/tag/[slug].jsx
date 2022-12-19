@@ -6,13 +6,8 @@ import { Suspense } from "react";
 import { getAllTags, getSingleTag, getPostsByTag } from "../../lib/api";
 import { siteUrl } from "../../lib/config";
 
-const Layout = dynamic(() => import("../../components/Layout"), {
-  suspense: true,
-  ssr: false,
-});
-const PostsList = dynamic(() => import("../../components/PostsList"), {
-  suspense: true,
-});
+import Layout from "../../components/Layout";
+import PostsList from "../../components/PostsList";
 
 export default function SingleTag({ posts, tag, thumbnail }) {
 
