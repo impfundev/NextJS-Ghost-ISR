@@ -3,14 +3,14 @@ import Image from "next/image";
 export default function NextImage({ image, title }) {
 
   return (
-    <div className="w-full">
-      <figure style={{ position: 'relative', width: '384px', height: '240px' }}>
+    <div className="relative w-full h-auto">
+      <figure className="relative w-96 h-60">
         <Image
           className="object-cover"
           src={image}
           alt={title}
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          layout="responsive"
         />
       </figure>
     </div>
