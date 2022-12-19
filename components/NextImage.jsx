@@ -10,7 +10,7 @@ export default function NextImage({ image, title }) {
           src={image}
           alt={title}
           fill
-          layout="responsive"
+          sizes="80vw"
         />
       </figure>
     </div>
