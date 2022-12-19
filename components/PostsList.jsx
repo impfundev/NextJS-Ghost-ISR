@@ -3,12 +3,12 @@ import NextImage from "../components/NextImage";
 
 export default function PostsList({ posts }) {
   return (
-    <ul className="relative grid justify-items-center place-items-center md:grid-cols-2 lg:grid-cols-3 gap-6 py-5">
+    <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 py-5">
       {posts.map((post) => {
         const { id, title, excerpt, slug, feature_image } = post;
         return (
           <li key={id}><a href={`${siteUrl}/${slug}`}>
-            <article className="relative max-w-sm rounded-2xl shadow-lg overflow-hidden border border-black text-black hover:border-yellow-500 hover:text-yellow-500 transition-all duration-300">
+            <article className="max-w-sm rounded-2xl shadow-lg overflow-hidden border border-black text-black hover:border-yellow-500 hover:text-yellow-500 transition-all duration-300">
               {feature_image ? (
                 <NextImage
                   image={feature_image}
