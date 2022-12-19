@@ -19,7 +19,7 @@ const Tags = dynamic(() => import("./Tags"), {
   suspense: true,
   ssr: false,
 });
-const MorePost = dynamic(() => import("./MorePost"), {
+const PostsList = dynamic(() => import("./PostsList"), {
   suspense: true,
   ssr: false,
 });
@@ -84,8 +84,9 @@ export default function Post({ post, relatedPosts, thumbnail }) {
         </>
       ) : null}
       <Comment url={`${siteUrl}/${slug}`} />
-      <MorePost
-        posts={relatedPosts}
+      <h3 className="text-lg font-bold py-4">Artikel Terbaru</h3>
+      <PostsList
+        posts={posts}
       />
     </Layout>
     </>
