@@ -3,7 +3,7 @@ import NextImage from "../components/NextImage";
 
 export default function PostsList({ posts }) {
   return (
-    <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 py-5">
+    <ul className="relative grid justify-items-center place-items-center md:grid-cols-2 lg:grid-cols-3 gap-6 py-5">
       {posts.map((post) => {
         const { id, title, excerpt, slug, feature_image } = post;
         return (
