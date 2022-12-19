@@ -2,10 +2,11 @@ import { NextSeo } from "next-seo";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
-import PostsList from "../components/PostsList";
 import { getIndexPosts } from "../lib/api";
 import { siteName, siteUrl, siteDesc } from "../lib/config";
+
 import Layout from "../components/Layout";
+import PostsList from "../components/PostsList";
 
 export async function getStaticProps() {
   const posts = await getIndexPosts();
