@@ -8,7 +8,7 @@ export default function PostsList({ posts }) {
         const { id, title, excerpt, slug, feature_image } = post;
         return (
           <li key={id}><a href={`${siteUrl}/${slug}`}>
-            <article className="max-w-sm rounded-2xl shadow-lg overflow-hidden border border-black text-black hover:border-yellow-500 hover:text-yellow-500 transition-all duration-300">
+            <article className="relative max-w-sm rounded-2xl shadow-lg overflow-hidden border border-black text-black hover:border-yellow-500 hover:text-yellow-500 transition-all duration-300">
               {feature_image ? (
                 <NextImage
                   image={feature_image}
