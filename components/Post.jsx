@@ -86,7 +86,7 @@ export default function Post({ post, relatedPosts, thumbnail }) {
       <Comment url={`${siteUrl}/${slug}`} />
       <h3 className="text-lg font-bold py-4">Artikel Terbaru</h3>
       <PostsList
-        posts={posts}
+        posts={relatedPosts}
       />
     </Layout>
     </>
