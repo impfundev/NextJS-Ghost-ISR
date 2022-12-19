@@ -1,4 +1,5 @@
 import Header from "./Header";
+import googleScript from "./googleScript";
 
 export default function Layout({ children }) {
   return (
@@ -56,6 +57,7 @@ export default function Layout({ children }) {
           <span className="text-sm">© 2022 <a href="/">Fandomnesia</a>. All Rights Reserved.</span>
         </div>
       </footer>
+      <googleScript />
     </>
   );
 }
