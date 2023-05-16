@@ -1,3 +1,11 @@
+export const metadata = {
+
+  title: 'NextJs Ghost',
+
+  description: 'NextJs with Ghost as a headless CMS',
+
+};
+
 export default function RootLayout({
 
   // Layouts must accept a children prop.
